@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+
+body {
+  background: #f7f2ff;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.ant-table {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.jodit-workplace {
+  height: 400px !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  background: #b278fb;
+  border-color: transparent;
+}
+
+.ant-pagination .ant-pagination-item-active:hover {
+  background: #b278fb;
+  border-color: transparent;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: #fff;
+}
+
+.ant-pagination .ant-pagination-item-active a:hover {
+  color: #fff;
+}
