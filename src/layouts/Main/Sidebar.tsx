@@ -12,7 +12,7 @@ interface SideProps {
   open: boolean;
 }
 
-const Sidebar: React.FC<SideProps> = ({ open }) => {
+const Sidebar: React.FC<SideProps> = ({}) => {
   const { pathname } = useLocation();
 
   const linkItems = [
@@ -50,9 +50,7 @@ const Sidebar: React.FC<SideProps> = ({ open }) => {
 
   return (
     <div
-      className={`${
-        open ? "col-span-1" : "col-span-2"
-      } bg-white text-[##0071E3] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
+      className={`col-span-2 bg-white text-[##0071E3] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
@@ -66,17 +64,17 @@ const Sidebar: React.FC<SideProps> = ({ open }) => {
             } `}
           >
             <Link to={item.path} className="flex items-center gap-2">
-              <div className={`${open ? "mx-auto" : "m-0"}`}>{item.icon}</div>
-              <div className={`${open ? "hidden" : "block"}`}>{item.title}</div>
+              <div>{item.icon}</div>
+              <div>{item.title}</div>
             </Link>
           </li>
         ))}
         <li className="mt-auto mx-4 px-4 py-4 bg-white border border-[#0071E3] rounded-[8px]  cursor-pointer text-md">
           <Link to="/auth/login" className="flex items-center gap-2">
-            <div className={`${open ? "mx-auto" : "m-0"}`}>
+            <div className={`m-0`}>
               <HiLogout className="text-red-500" size={24} />
             </div>
-            <div className={`${open ? "hidden" : "block"} text-[#0071E3]`}>Logout</div>
+            <div className={`text-[#0071E3]`}>Logout</div>
           </Link>
         </li>
       </ul>
