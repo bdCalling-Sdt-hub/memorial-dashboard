@@ -1,6 +1,6 @@
-import img2 from "../assets/Approved transaction.png";
-import img1 from "../assets/Black.svg";
-import img3 from "../assets/Pending Transaction.png";
+import img2 from "../assets/hat.png";
+import img1 from "../assets/write.png";
+import img3 from "../assets/dog.png";
 
 const TransactionStatus = () => {
   const status = [
@@ -27,7 +27,7 @@ const TransactionStatus = () => {
           key={index}
           className="bg-white h-[79px] flex items-center justify-center p-5 rounded-lg gap-5 text-center"
         >
-          <img className="w-16 h-16" src={item.img} alt="" />
+          <img width={44} height={44} src={item.img} alt="" />
           <div>
             <p className="text-[14px] text-[#555555]">{item.title}</p>
             <h2 className="font-bold text-[30px]">{item.amount}</h2>

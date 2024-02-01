@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+// import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 const Main = () => {
@@ -13,8 +13,7 @@ const Main = () => {
         className={`${"col-span-9"
         } w-full  text-black rounded-md"`}
       >
-        {/* <Header setOpen={setOpen} open={open} /> */}
-        <div className="mt-5 h-[calc(100vh-108px)] overflow-hidden">
+        <div className="h-[calc(100vh-40px)] overflow-hidden">
           <Outlet />
         </div>
       </div>

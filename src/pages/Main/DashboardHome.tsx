@@ -29,7 +29,7 @@ const DashboardHome = () => {
               <Header/>
             </div>
           </div>
-          <div className="bg-white h-[518px] p-4 rounded-md">
+          <div className="bg-white h-[518px] p-4 rounded-md overflow-hidden">
             <div className="flex items-center justify-between mb-4">
               <HeadingText>Recent Users</HeadingText>
               <Link to="/users" className="text-[#0071E3] text-[16px] font-semibold">
@@ -37,10 +37,13 @@ const DashboardHome = () => {
               </Link>
             </div>
             <div className="bg-[#8ABEF2] h-[1px] w-full mb-4"></div>
-
-            {users.map((user, index) => (
-              <UserCard key={index} user={user} />
-            ))}
+            <div className="grid grid-cols-1 gap-4 ">
+              {
+                users.map((user, index) => (
+                <UserCard key={index} user={user} />
+                ))
+              }
+            </div>
         </div> 
         </div>
       </div>

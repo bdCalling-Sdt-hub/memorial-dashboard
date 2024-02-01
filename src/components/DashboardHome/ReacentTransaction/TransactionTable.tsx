@@ -1,14 +1,17 @@
 import { Modal, Table } from "antd";
 import { useState } from "react";
-import { ITransaction } from "../../../types/transaction.interface";
+// import { ITransaction } from "../../../types/transaction.interface";
 import ModelValue from "../../../util/ModelValue";
+import { LuEye } from "react-icons/lu";
 
 const TransactionTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const data = [
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Basic",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -17,7 +20,9 @@ const TransactionTable = () => {
     },
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Premium",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -26,7 +31,9 @@ const TransactionTable = () => {
     },
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Gold",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -35,7 +42,9 @@ const TransactionTable = () => {
     },
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Basic",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -44,7 +53,9 @@ const TransactionTable = () => {
     },
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Premium",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -53,7 +64,9 @@ const TransactionTable = () => {
     },
     {
       transactionId: "#ADB454845",
+      name: "Jane Cooper",
       date: "24-02-2023",
+      subscription: "Gold",
       recipientName: "10 Downing Street",
       phoneNo: 1564561202,
       country: "UK",
@@ -64,9 +77,14 @@ const TransactionTable = () => {
 
   const columns = [
     {
-      title: "Transaction ID",
+      title: "Trx.ID",
       dataIndex: "transactionId",
       key: "transactionId",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Date",
@@ -74,19 +92,15 @@ const TransactionTable = () => {
       key: "date",
     },
     {
-      title: "Recipient name",
-      dataIndex: "recipientName",
-      key: "recipientName",
-    },
-    {
-      title: "Phone no",
-      dataIndex: "phoneNo",
-      key: "phoneNo",
-    },
-    {
-      title: "Country",
-      dataIndex: "country",
-      key: "country",
+      title: "Subscription",
+      dataIndex: "subscription",
+      key: "subscription",
+      render: (subscription: string) => 
+        <p className={`
+          ${subscription === "Premium" && "text-[#0071E3]"}
+          ${subscription === "Gold" && "text-[#E8B40A]"}
+        `}
+      >{subscription}</p>
     },
     {
       title: "Amount",
@@ -94,33 +108,16 @@ const TransactionTable = () => {
       key: "amount",
     },
     {
-      title: "ACTIONS",
+      title: "Action",
       dataIndex: "actions",
       key: "actions",
-
-      render: (_: string, record: ITransaction) => (
-        <div>
-          <select
-            className="border border-primary rounded"
-            onChange={(e) => handleSelected(e, record)}
-          >
-            <option>Select</option>
-            <option className="text-green-500" value="Approve">
-              Approve
-            </option>
-            <option className="text-red-500" value="cancel">
-              Cancel
-            </option>
-            <option className="text-primary" value="viewDetail">
-              View Detail
-            </option>
-          </select>
-        </div>
+      render: () => (
+        <LuEye onClick={()=>setIsModalOpen(true)} className="text-[#0071E3] cursor-pointer" size={22} />
       ),
     },
   ];
 
-  const handleSelected = (
+  /* const handleSelected = (
     e: React.ChangeEvent<HTMLSelectElement>,
     value: ITransaction
   ) => {
@@ -134,11 +131,11 @@ const TransactionTable = () => {
       setIsModalOpen(true);
       console.log(value);
     }
-  };
+  }; */
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Table scroll={{y:135}} columns={columns} dataSource={data} pagination={false} />
       <Modal
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}

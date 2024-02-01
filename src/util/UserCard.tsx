@@ -9,11 +9,10 @@ interface IUser {
 const UserCard = ({ user }: { user: IUser }) => {
   const { name, email, image } = user;
   return (
-    <div className="flex items-center gap-5">
-      <img src={image} alt="" />
+    <div className="bg-[#E6F1FC] h-[57.5px] rounded-lg flex items-center gap-5 p-2">
+      <img width={40} height={40} src={image} alt="" />
       <div>
         <HeadingText>{name}</HeadingText>
-        <p>{email}</p>
       </div>
     </div>
   );
