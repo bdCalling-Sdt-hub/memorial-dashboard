@@ -12,7 +12,7 @@ interface SideProps {
   open: boolean;
 }
 
-const Sidebar: React.FC<SideProps> = ({}) => {
+const Sidebar: React.FC<SideProps> = () => {
   const { pathname } = useLocation();
 
   const linkItems = [
@@ -28,18 +28,18 @@ const Sidebar: React.FC<SideProps> = ({}) => {
     },
     {
       title: "Income",
-      path: "/income",
+      path: "/transactions",
       icon: <BiDollarCircle size={24} />,
     },
     {
-      title: "Subcription",
-      path: "/transactions",
-      icon: <TbCrown size={24} />,
+      title: "Subscription",
+      path: "/transaction-history",
+      icon: <TbCrown size={20} />,
     },
     {
       title: "Stories",
-      path: "/transaction-history",
-      icon: <PiBookOpenLight size={24} />,
+      path: "/workers",
+      icon: <PiBookOpenLight size={20} />,
     },
     {
       title: "Settings",
@@ -50,11 +50,12 @@ const Sidebar: React.FC<SideProps> = ({}) => {
 
   return (
     <div
-      className={`col-span-2 bg-white text-[##0071E3] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
+      className={`${"col-span-3"} bg-[white] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
           <img src={logo} alt="logo" />
+          <h2 className="text-white text-lg">Memorial</h2>
         </li>
         {linkItems.map((item, index) => (
           <li

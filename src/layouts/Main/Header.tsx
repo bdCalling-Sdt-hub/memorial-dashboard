@@ -1,4 +1,4 @@
-import { IconBellFilled, IconMenu2 } from "@tabler/icons-react";
+import { FiBell } from "react-icons/fi";
 import { Badge } from "antd";
 import { Link } from "react-router-dom";
 
@@ -7,23 +7,22 @@ interface HeaderProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<HeaderProps> = ({ setOpen, open }) => {
+const Header: React.FC<HeaderProps> = () => {
   return (
     <div className="flex items-center justify-between w-full">
-      <div onClick={() => setOpen(!open)} className="cursor-pointer">
-        <IconMenu2 size={40} />
-      </div>
       <div className="flex items-center gap-4">
         <Link to="/settings/notifications" className="cursor-pointer">
-          <Badge style={{ background: "#b278fb" }} count={5}>
-            <IconBellFilled size={40} />
-          </Badge>
+          <div className="relative w-[48px] flex items-center justify-center h-[48px] p-2 bg-white rounded-full">
+            <Badge style={{ background: "#0071E3", right: "-8px" }} count={5}>
+              <FiBell size={24} />
+            </Badge>
+          </div>
         </Link>
         <Link to="/settings/profile">
           <img
             src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
-            width={40}
-            height={40}
+            width={48}
+            height={48}
             className="rounded-full"
           />
         </Link>

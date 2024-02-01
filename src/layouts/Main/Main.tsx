@@ -10,8 +10,7 @@ const Main = () => {
     <div className="grid grid-cols-12 gap-4  p-5 container mx-auto overflow-hidden">
       <Sidebar open={open} />
       <div
-        className={`${
-          open ? "col-span-11" : "col-span-10"
+        className={`${"col-span-9"
         } w-full  text-black rounded-md"`}
       >
         <Header setOpen={setOpen} open={open} />
