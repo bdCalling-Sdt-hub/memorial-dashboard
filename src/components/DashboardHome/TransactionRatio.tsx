@@ -30,8 +30,9 @@ const TransactionRatio = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-5 mt-4 overflow-hidden h-[310px]">
-      <div className="bg-white rounded-md col-span-2 p-4">
+    // <div className="grid grid-cols-3 gap-5 mt-4 overflow-hidden h-[310px]">
+    <div className="overflow-hidden h-[310px] rounded-md">
+      <div className="bg-white col-span-2 p-4">
         <div className="flex items-center justify-between mb-2">
           <HeadingText>Transaction Ratio</HeadingText>
           <Dropdown
@@ -59,7 +60,7 @@ const TransactionRatio = () => {
         </Suspense>
       </div>
 
-      <div className="bg-white p-4 rounded-md">
+      {/* <div className="bg-white p-4 rounded-md">
         <div className="flex items-center justify-between mb-4">
           <HeadingText>User List</HeadingText>
           <Link to="/users" className="text-primary">
@@ -70,7 +71,7 @@ const TransactionRatio = () => {
         {users.map((user, index) => (
           <UserCard key={index} user={user} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

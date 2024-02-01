@@ -13,7 +13,7 @@ const Main = () => {
         className={`${"col-span-9"
         } w-full  text-black rounded-md"`}
       >
-        <Header setOpen={setOpen} open={open} />
+        {/* <Header setOpen={setOpen} open={open} /> */}
         <div className="mt-5 h-[calc(100vh-108px)] overflow-hidden">
           <Outlet />
         </div>

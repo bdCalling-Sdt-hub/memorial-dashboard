@@ -6,18 +6,18 @@ const TransactionStatus = () => {
   const status = [
     {
       img: img1,
-      title: "Total Transaction",
-      amount: 540,
+      title: "Individual Stories",
+      amount: 2440,
     },
     {
       img: img2,
-      title: "Approved",
-      amount: 200,
+      title: "Veteran Stories",
+      amount: 2440,
     },
     {
       img: img3,
-      title: "Pending",
-      amount: 300,
+      title: "Pets Stories",
+      amount: 2440,
     },
   ];
   return (
@@ -25,12 +25,12 @@ const TransactionStatus = () => {
       {status.map((item, index) => (
         <div
           key={index}
-          className="bg-white flex items-center justify-center p-10 rounded-lg gap-5 text-center"
+          className="bg-white h-[79px] flex items-center justify-center p-5 rounded-lg gap-5 text-center"
         >
           <img className="w-16 h-16" src={item.img} alt="" />
           <div>
-            <p className="text-lg">{item.title}</p>
-            <h2 className="font-bold text-2xl">{item.amount}</h2>
+            <p className="text-[14px] text-[#555555]">{item.title}</p>
+            <h2 className="font-bold text-[30px]">{item.amount}</h2>
           </div>
         </div>
       ))}

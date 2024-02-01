@@ -18,13 +18,17 @@ const Header: React.FC<HeaderProps> = () => {
             </Badge>
           </div>
         </Link>
-        <Link to="/settings/profile">
+        <Link className="flex items-center gap-3" to="/settings/profile">
           <img
             src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
             width={48}
             height={48}
             className="rounded-full"
           />
+          <div>
+            <h3 className="text-[#0071E3] font-medium text-[14px] text-center">Jane Cooper</h3>
+            <p className="text-right text-[14px]">Admin</p>
+          </div>
         </Link>
       </div>
     </div>
