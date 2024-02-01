@@ -8,7 +8,7 @@ import {
   IconUsersGroup,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/Logo.svg";
+import logo from "../../assets/Logo.png";
 
 interface SideProps {
   open: boolean;
@@ -29,17 +29,17 @@ const Sidebar: React.FC<SideProps> = ({ open }) => {
       icon: <IconUsers size={20} />,
     },
     {
-      title: "Transactions",
+      title: "Income",
       path: "/transactions",
       icon: <IconCash size={20} />,
     },
     {
-      title: "Transaction History",
+      title: "Subscription",
       path: "/transaction-history",
       icon: <IconClipboardList size={20} />,
     },
     {
-      title: "Workers",
+      title: "Stories",
       path: "/workers",
       icon: <IconUsersGroup size={20} />,
     },
@@ -52,14 +52,12 @@ const Sidebar: React.FC<SideProps> = ({ open }) => {
 
   return (
     <div
-      className={`${
-        open ? "col-span-1" : "col-span-2"
-      } bg-[#B278FB] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
+      className={`${"col-span-3"} bg-[white] h-[calc(100vh-40px)]  rounded-lg py-10 duration-300 transition-all`}
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
           <img src={logo} alt="logo" />
-          <h2 className="text-white text-lg">Russend</h2>
+          <h2 className="text-white text-lg">Memorial</h2>
         </li>
         {linkItems.map((item, index) => (
           <li

@@ -7,12 +7,9 @@ interface HeaderProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<HeaderProps> = ({ setOpen, open }) => {
+const Header: React.FC<HeaderProps> = ({}) => {
   return (
     <div className="flex items-center justify-between w-full">
-      <div onClick={() => setOpen(!open)} className="cursor-pointer">
-        <IconMenu2 size={40} />
-      </div>
       <div className="flex items-center gap-4">
         <Link to="/settings/notifications" className="cursor-pointer">
           <Badge style={{ background: "#b278fb" }} count={5}>

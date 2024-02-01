@@ -11,8 +11,8 @@ const UsersTable = () => {
   const data = [
     {
       no: 1,
-      username: "Fahim",
-      email: "fahim@gmail.com",
+      username: "Tushar",
+      email: "freelancerrtushar@gmail.om",
       phoneNo: 1564561202,
       actions: "button",
     },
