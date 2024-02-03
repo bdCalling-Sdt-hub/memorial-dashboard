@@ -3,6 +3,7 @@ import UsersTable from "../../components/Users/UsersTable";
 import HeadingText from "../../util/HeadingText";
 import SearchField from "../../util/SearchField";
 import { IoIosArrowDown } from "react-icons/io";
+import UserSubsciptionDetailsCard from "../../components/DashboardHome/UserSubsciptionDetailsCard";
 
 const Users = () => {
   const [searchText, setSearchText] = useState(""); 
@@ -13,6 +14,7 @@ const Users = () => {
         placeholder="Search by name/email/phone number"
         onChange={(e) => setSearchText(e.target.value)}
       />
+      <UserSubsciptionDetailsCard/>
       <div className="rounded-md p-4  bg-white">
         <div className="flex items-center gap-4">
           <HeadingText>User List</HeadingText>
