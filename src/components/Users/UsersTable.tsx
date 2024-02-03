@@ -2,6 +2,7 @@ import { Modal, Table } from "antd";
 import { useState } from "react";
 import { IUser } from "../../types/user.interface";
 import ModelValue from "../../util/ModelValue";
+import { LuEye } from "react-icons/lu";
 
 const UsersTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,6 +15,7 @@ const UsersTable = () => {
       username: "Tushar",
       email: "freelancerrtushar@gmail.om",
       phoneNo: 1564561202,
+      subcriptions: "Basic",
       actions: "button",
     },
     {
@@ -21,6 +23,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Premium",
       actions: "button",
     },
     {
@@ -28,6 +31,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Gold",
       actions: "button",
     },
     {
@@ -35,6 +39,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Basic",
       actions: "button",
     },
     {
@@ -42,6 +47,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Basic",
       actions: "button",
     },
     {
@@ -49,6 +55,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Basic",
       actions: "button",
     },
     {
@@ -56,6 +63,7 @@ const UsersTable = () => {
       username: "Fahim",
       email: "fahim@gmail.com",
       phoneNo: 1564561202,
+      subcriptions: "Basic",
       actions: "button",
     },
   ];
@@ -67,7 +75,7 @@ const UsersTable = () => {
       recipientName: "no",
     },
     {
-      title: "User name",
+      title: "Name",
       dataIndex: "username",
       key: "username",
     },
@@ -77,9 +85,20 @@ const UsersTable = () => {
       key: "email",
     },
     {
-      title: "Phone no",
+      title: "Phone number",
       dataIndex: "phoneNo",
       key: "phoneNo",
+    },
+    {
+      title: "Subcriptions",
+      dataIndex: "subcriptions",
+      key: "subcriptions",
+      render: (subscription: string) => 
+        <p className={`
+          ${subscription === "Premium" && "text-[#0071E3]"}
+          ${subscription === "Gold" && "text-[#E8B40A]"}
+        `}
+      >{subscription}</p>
     },
     {
       title: "ACTIONS",
@@ -87,9 +106,7 @@ const UsersTable = () => {
       key: "actions",
       render: (_: string, record: IUser) => (
         <div style={{ display: "flex", alignItems: "center" }}>
-          <button className="text-primary" onClick={() => handleView(record)}>
-            View Details
-          </button>
+          <LuEye onClick={() => handleView(record)} className="text-[#0071E3] cursor-pointer" size={22} />
         </div>
       ),
     },

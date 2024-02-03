@@ -113,8 +113,8 @@ const TransactionTable = () => {
       key: "actions",
       render: () => (
         <LuEye onClick={()=>setIsModalOpen(true)} className="text-[#0071E3] cursor-pointer" size={22} />
-      ),
-    },
+      )
+    }
   ];
 
   /* const handleSelected = (
