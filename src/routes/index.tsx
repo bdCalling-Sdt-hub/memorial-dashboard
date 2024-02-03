@@ -14,6 +14,7 @@ import Users from "../pages/Main/Users";
 import Workers from "../pages/Main/Workers";
 import Subscription from "../pages/Main/Subscription";
 import NotFound from "../pages/NotFound";
+import EditSubscription from "../pages/Main/EditSubscription";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/subscription",
         element: <Subscription />,
+      },
+      {
+        path: "/edit-subscription",
+        element: <EditSubscription />,
       },
       {
         path: "/workers",

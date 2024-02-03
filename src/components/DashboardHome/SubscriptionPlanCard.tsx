@@ -1,6 +1,7 @@
 import { FaCircleCheck } from "react-icons/fa6"
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { PiCrownSimpleFill } from "react-icons/pi"
+import { Link } from "react-router-dom";
 interface SubscriptionPlanCardProps{
     name: string;
     price: string;
@@ -43,24 +44,26 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                     )
                 }
                 <div className="flex items-center justify-center">
-                    <button 
-                        className="
-                            w-[200px] 
-                            h-[59px] 
-                            bg-[#0071E3] 
-                            text-[18px] 
-                            font-normal 
-                            flex 
-                            items-center 
-                            justify-center 
-                            gap-[10px] 
-                            text-white 
-                            rounded-md
-                        "
-                    > 
-                        Edit Plan
-                        <IoIosArrowRoundForward size={24} color="#FFFFFF" />
-                    </button>
+                    <Link to="/edit-subscription">
+                        <button 
+                            className="
+                                w-[200px] 
+                                h-[59px] 
+                                bg-[#0071E3] 
+                                text-[18px] 
+                                font-normal 
+                                flex 
+                                items-center 
+                                justify-center 
+                                gap-[10px] 
+                                text-white 
+                                rounded-md
+                            "
+                        > 
+                            Edit Plan
+                            <IoIosArrowRoundForward size={24} color="#FFFFFF" />
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

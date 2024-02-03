@@ -4,12 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Notifications from "../../components/Settings/Notifications";
 
-interface HeaderProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const Header: React.FC<HeaderProps> = () => {
+const Header = () => {
   const [open, setOpen] = useState(false)
   return (
     <div className="flex items-center justify-between w-fit">

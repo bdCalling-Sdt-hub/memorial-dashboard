@@ -10,6 +10,9 @@ const HeadingText: React.FC<IHeading> = ({ children, color }) => {
     className={`
     font-semibold 
     text-lg
+    flex
+    items-center
+    gap-[10px]
     ${color ? "text-[#0071E3]" : "text-gray-600"} 
 
 
