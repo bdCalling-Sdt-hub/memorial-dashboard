@@ -5,7 +5,7 @@ import Notifications from "./Notifications";
 import { Link } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 
-const TermsOfService = () => {
+const AboutUs = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false)
@@ -53,7 +53,7 @@ const TermsOfService = () => {
         </Link>
       </div>
     <div>
-      <h1 style={{fontSize:"25px",fontWeight:"bold",marginBottom:"10px"}}>Term of service</h1>
+      <h1 style={{fontSize:"25px",fontWeight:"bold",marginBottom:"10px"}}>About us</h1>
       <JoditEditor
         ref={editor}
         value={content}
@@ -78,4 +78,4 @@ const TermsOfService = () => {
   );
 };
 
-export default TermsOfService;
+export default AboutUs;

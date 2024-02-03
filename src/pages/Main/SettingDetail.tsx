@@ -11,6 +11,8 @@ import TermsOfMoneyTransfer from "../../components/Settings/TermsOfMoneyTransfer
 import TermsOfService from "../../components/Settings/TermsOfService";
 import SearchField from "../../util/SearchField";
 import EditProfile from "../../components/Settings/EditProfile";
+import PrivacyPolicy from "../../components/Settings/PrivacyPolicy";
+import AboutUs from "../../components/Settings/AboutUs";
 
 const SettingDetail = () => {
   const [searchText, setSearchText] = useState("");
@@ -73,12 +75,10 @@ const SettingDetail = () => {
             setIsPaymentEdit={setIsPaymentEdit}
           />
         )}
-        {settingType === "terms-of-money-transfer" && <TermsOfMoneyTransfer />}
-        {settingType === "personal-data-policy" && <PersonalDataPolicy />}
+        {settingType === "privacy-policy" && <PrivacyPolicy />}
+        {settingType === "about-us" && <AboutUs />}
         {settingType === "term-of-service" && <TermsOfService />}
-        {settingType === "refund-and-cancellation-policy" && (
-          <RefundAndCancellation />
-        )}
+        
       </div>
     </div>
   );
