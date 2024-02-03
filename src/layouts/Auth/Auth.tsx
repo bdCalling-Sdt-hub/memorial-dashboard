@@ -7,7 +7,7 @@ const Auth = () => {
       <div className="bg-[#b278fb] h-screen flex items-center justify-center">
         <div className="mx-auto space-y-2 mb-5">
           <img src={logo} className="w-20" alt="logo" />
-          <h2 className="text-white text-xl">Russend</h2>
+          <h2 className="text-white text-xl">Memorial</h2>
         </div>
       </div>
       <div className="bg-[#F7F2FF] h-screen flex items-center">
