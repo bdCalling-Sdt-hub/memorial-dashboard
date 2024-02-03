@@ -12,7 +12,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = () => {
   const [open, setOpen] = useState(false)
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">
         <div onClick={()=>setOpen(!open)} className="relative cursor-pointer w-[48px] flex items-center justify-center h-[48px] p-2 bg-white rounded-full">
           <Badge style={{ background: "#0071E3", right: "-8px" }} count={5}>

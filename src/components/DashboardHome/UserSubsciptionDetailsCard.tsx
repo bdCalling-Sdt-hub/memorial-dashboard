@@ -1,4 +1,3 @@
-import React from 'react'
 import { HiUserGroup } from "react-icons/hi";
 
 const UserSubsciptionDetailsCard = () => {
