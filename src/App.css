@@ -16,12 +16,12 @@ body {
 }
 
 .ant-pagination .ant-pagination-item-active {
-  background: #b278fb;
+  background: #0071E3;
   border-color: transparent;
 }
 
 .ant-pagination .ant-pagination-item-active:hover {
-  background: #b278fb;
+  background: #0071E3;
   border-color: transparent;
 }
 

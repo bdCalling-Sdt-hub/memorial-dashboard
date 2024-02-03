@@ -24,10 +24,8 @@ const DashboardHome = () => {
           <TransactionRatio />
         </div>
         <div className="w-[25%] grid grid-cols-1 gap-5">
-          <div className="relative h-[48px]">
-            <div className="absolute right-0">
+          <div className="flex items-end justify-end h-[48px]">
               <Header/>
-            </div>
           </div>
           <div className="bg-white h-[518px] p-4 rounded-md overflow-hidden">
             <div className="flex items-center justify-between mb-4">

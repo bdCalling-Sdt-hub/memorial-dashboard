@@ -120,7 +120,6 @@ const UsersTable = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
   return (
     <>
       <Table
