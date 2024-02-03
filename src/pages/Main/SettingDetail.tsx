@@ -10,6 +10,7 @@ import RefundAndCancellation from "../../components/Settings/RefundAndCancellati
 import TermsOfMoneyTransfer from "../../components/Settings/TermsOfMoneyTransfer";
 import TermsOfService from "../../components/Settings/TermsOfService";
 import SearchField from "../../util/SearchField";
+import EditProfile from "../../components/Settings/EditProfile";
 
 const SettingDetail = () => {
   const [searchText, setSearchText] = useState("");
@@ -56,6 +57,7 @@ const SettingDetail = () => {
 
       <div >
         {settingType === "notifications" && <Notifications />}
+        {settingType === "edit-profile" && <EditProfile />}
         {settingType === "profile" && (
           <Profile
             isProfileEdit={isProfileEdit}

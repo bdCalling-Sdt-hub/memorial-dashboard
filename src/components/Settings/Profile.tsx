@@ -15,6 +15,7 @@ import { CiUser } from "react-icons/ci";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 interface IProfile {
   isProfileEdit?: boolean;
@@ -37,20 +38,22 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
                 <h1 className="text-3xl font-medium ">Bruce Matthews</h1>
                 <p className="text-lg font-medium pt-[12px]">Admin</p>
 
-                <button 
-                  className="
-                    mt-4
-                    w-[200px] 
-                    text-base 
-                    font-semibold 
-                    h-[44px] 
-                    bg-white 
-                    text-[#0071E3] 
-                    rounded-lg
-                  "
-                >
-                  Edit Profile
-                </button>
+                <Link to="/settings/edit-profile">
+                  <button 
+                    className="
+                      mt-4
+                      w-[200px] 
+                      text-base 
+                      font-semibold 
+                      h-[44px] 
+                      bg-white 
+                      text-[#0071E3] 
+                      rounded-lg
+                    "
+                  >
+                    Edit Profile
+                  </button>
+                </Link>
               </div>
           </div>
         
