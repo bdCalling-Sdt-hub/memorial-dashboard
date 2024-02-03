@@ -18,7 +18,7 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     return (
         <div 
             className="
-                w-[381px] 
+                w-[370px] 
                 h-[500px] 
                 mt-11 
                 px-6 

@@ -51,7 +51,7 @@ const Subscription = () => {
             <div className="flex items-end justify-end mb-11">
                 <Header/>
             </div>
-            <div className="bg-white h-[780px] rounded-[16px] p-6 overflow-y-scroll">
+            <div className="bg-white h-[950px] rounded-[16px] p-6">
                 <HeadingText>Subscriptions</HeadingText>
 
                 {/* subscription card */}

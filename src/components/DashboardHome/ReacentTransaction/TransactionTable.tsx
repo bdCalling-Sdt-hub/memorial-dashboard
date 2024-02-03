@@ -135,7 +135,7 @@ const TransactionTable = () => {
 
   return (
     <div>
-      <Table scroll={{y:135}} columns={columns} dataSource={data} pagination={false} />
+      <Table scroll={{y:265}} columns={columns} dataSource={data} pagination={false} />
       <Modal
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
