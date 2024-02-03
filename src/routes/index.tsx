@@ -12,6 +12,7 @@ import TransactionHistory from "../pages/Main/TransactionHistory";
 import Transactions from "../pages/Main/Transactions";
 import Users from "../pages/Main/Users";
 import Workers from "../pages/Main/Workers";
+import Subscription from "../pages/Main/Subscription";
 import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
         element: <Transactions />,
       },
       {
-        path: "/transaction-history",
-        element: <TransactionHistory />,
+        path: "/subscription",
+        element: <Subscription />,
       },
       {
         path: "/workers",

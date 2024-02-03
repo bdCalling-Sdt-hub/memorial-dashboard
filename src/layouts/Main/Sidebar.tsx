@@ -33,7 +33,7 @@ const Sidebar: React.FC<SideProps> = () => {
     },
     {
       title: "Subscription",
-      path: "/transaction-history",
+      path: "/subscription",
       icon: <TbCrown size={20} />,
     },
     {
