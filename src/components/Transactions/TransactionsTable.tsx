@@ -2,6 +2,7 @@ import { Modal, Table } from "antd";
 import { useState } from "react";
 import { ITransaction } from "../../types/transaction.interface";
 import ModelValue from "../../util/ModelValue";
+import { LuEye } from "react-icons/lu";
 
 const TransactionsTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,8 +11,9 @@ const TransactionsTable = () => {
   const data = [
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -19,8 +21,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Premium",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -28,8 +31,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Gold",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -37,8 +41,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -46,8 +51,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -55,8 +61,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -64,8 +71,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -73,8 +81,9 @@ const TransactionsTable = () => {
     },
     {
       transactionId: "#ABD265654",
+      name: "10 Downing Street",
       date: "24-02-2024",
-      recipientName: "10 Downing Street",
+      subscription: "Basic",
       phoneNo: 1564561202,
       country: "UK",
       amount: "$1200",
@@ -84,9 +93,14 @@ const TransactionsTable = () => {
 
   const columns = [
     {
-      title: "Transaction ID",
+      title: "Trx.ID",
       dataIndex: "transactionId",
       key: "transactionId",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Date",
@@ -94,19 +108,15 @@ const TransactionsTable = () => {
       key: "date",
     },
     {
-      title: "Recipient name",
-      dataIndex: "recipientName",
-      key: "recipientName",
-    },
-    {
-      title: "Phone no",
-      dataIndex: "phoneNo",
-      key: "phoneNo",
-    },
-    {
-      title: "Country",
-      dataIndex: "country",
-      key: "country",
+      title: "Subscription",
+      dataIndex: "subscription",
+      key: "subscription",
+      render: (subscription: string) => 
+        <p className={`
+          ${subscription === "Premium" && "text-[#0071E3]"}
+          ${subscription === "Gold" && "text-[#E8B40A]"}
+        `}
+      >{subscription}</p>
     },
     {
       title: "Amount",
@@ -117,29 +127,13 @@ const TransactionsTable = () => {
       title: "ACTIONS",
       dataIndex: "actions",
       key: "actions",
-      render: (_: string, record: ITransaction) => (
-        <div>
-          <select
-            className="border border-primary rounded"
-            onChange={(e) => handleSelected(e, record)}
-          >
-            <option>Select</option>
-            <option className="text-green-500" value="Approve">
-              Approve
-            </option>
-            <option className="text-red-500" value="cancel">
-              Cancel
-            </option>
-            <option className="text-primary" value="viewDetail">
-              View Detail
-            </option>
-          </select>
-        </div>
-      ),
+      render: () => (
+        <LuEye onClick={()=>setIsModalOpen(true)} className="text-[#0071E3] cursor-pointer" size={22} />
+      )
     },
   ];
 
-  const handleSelected = (
+  /* const handleSelected = (
     e: React.ChangeEvent<HTMLSelectElement>,
     value: ITransaction
   ) => {
@@ -153,7 +147,7 @@ const TransactionsTable = () => {
       setIsModalOpen(true);
       console.log(value);
     }
-  };
+  }; */
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
