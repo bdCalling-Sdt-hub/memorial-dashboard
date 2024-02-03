@@ -2,13 +2,16 @@ import { Badge, Button } from "antd";
 import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import Notifications from "./Notifications";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 
 const AboutUs = () => {
+    const navigate = useNavigate();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modelTitle, setModelTitle] = useState("");
   const handleNavigate = (value: string) => {
     if (value === "notification") {
       return;
@@ -66,7 +69,7 @@ const AboutUs = () => {
         block
         style={{
           marginTop: "30px",
-          backgroundColor: "#b278fb",
+          backgroundColor: "#0071e3",
           color: "#fff",
           height: "50px",
         }}
