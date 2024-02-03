@@ -15,7 +15,7 @@ const EditSubscription = () => {
                 <Header/>
             </div>
             <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Edit Subscriptions</HeadingText>
-            <div className="bg-white rounded-2xl p-6 mt-6 h-full">
+            <div className="bg-white rounded-2xl p-6 mt-6 h-[680px] overflow-y-scroll">
 
                 {/* package information start */}
                 <div className="grid grid-cols-1 gap-6">

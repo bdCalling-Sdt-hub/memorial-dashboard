@@ -7,82 +7,85 @@ import {
 } from "@tabler/icons-react";
 import InputField from "../../util/InputField";
 import ModelValue from "../../util/ModelValue";
+import Header from "../../layouts/Main/Header";
+import HeadingText from "../../util/HeadingText";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import person from "../../assets/Ellipse 610.png"
+import { CiUser } from "react-icons/ci";
+import { HiOutlineMail } from "react-icons/hi";
+import { IoCallOutline } from "react-icons/io5";
+import { CiLocationOn } from "react-icons/ci";
 
 interface IProfile {
-  isProfileEdit: boolean;
-  setIsProfileEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  isProfileEdit?: boolean;
+  setIsProfileEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
   return (
-    <div className="my-8">
-      <div className="flex items-center justify-between">
-        <div className="text-center">
-          <img
-            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg"
-            alt=""
-            className="w-32 h-32 border border-primary rounded-full"
-          />
-          {isProfileEdit && (
-            <div>
-              <label
-                htmlFor="img"
-                className="text-primary cursor-pointer mt-4 font-bold block"
-              >
-                Change Image
-              </label>
-              <input type="file" className="hidden" name="" id="img" />
-            </div>
-          )}
-        </div>
-        <div>
-          {!isProfileEdit && (
-            <button
-              onClick={() => setIsProfileEdit(true)}
-              className="bg-primary text-white py-2 px-2 rounded-md flex items-center gap-2 mx-auto hover:bg-[#956ada] duration-100"
-            >
-              <IconEdit />
-              Edit Profile
-            </button>
-          )}
-        </div>
+    <div>
+      <div className="flex items-end justify-end mb-11">
+        <Header/>
       </div>
-      <div className="mt-5">
-        {!isProfileEdit && (
-          <ModelValue
-            keys={["Name", "Email", "Phone no", "Country"]}
-            values={["Fahim", "fahim@gmail.com", "0162387665", "Bangladesh"]}
-          />
-        )}
-        {isProfileEdit && (
-          <form className="w-full">
-            <InputField
-              placeholder="Name"
-              iconType={<IconUser color="#333333" size={20} />}
-            />
-            <InputField
-              placeholder="Email"
-              iconType={<IconMail color="#333333" size={20} />}
-            />
-            <InputField
-              placeholder="Phone number"
-              iconType={<IconPhone color="#333333" size={20} />}
-            />
-            <InputField
-              placeholder="Country"
-              iconType={<IconMapPin color="#333333" size={20} />}
-            />
+      <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Profile</HeadingText>
+      <div className="mt-6 bg-white rounded-xl w-[838px] h-[669px] px-[104px] py-[84px] border">
+        
+          {/* Banner */}
+          <div className="h-[208px] bg-[#0071E3] rounded-xl py-8 px-6 mb-6 flex items-center gap-[54px]">
+              <img src={person} width={144} height={144} alt="" />
+              <div className="text-[#FFFFFF]">
+                <h1 className="text-3xl font-medium ">Bruce Matthews</h1>
+                <p className="text-lg font-medium pt-[12px]">Admin</p>
 
-            <button
-              type="submit"
-              className="bg-[#b278fb]
-         text-white mt-8 py-3 rounded-full w-full hover:bg-white hover:outline hover:text-[#b278fb] duration-200"
-            >
-              Save changes
-            </button>
-          </form>
-        )}
+                <button 
+                  className="
+                    mt-4
+                    w-[200px] 
+                    text-base 
+                    font-semibold 
+                    h-[44px] 
+                    bg-white 
+                    text-[#0071E3] 
+                    rounded-lg
+                  "
+                >
+                  Edit Profile
+                </button>
+              </div>
+          </div>
+        
+        {/* information section */}
+        <HeadingText> Personal Information</HeadingText>
+        <div className="grid grid-cols-1 gap-4 mt-[15px]">
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
+              <CiUser size={24} color="#0071E3" />
+            </div>
+            <p className="text-xl font-normal">Bruce Matthews</p>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
+              <HiOutlineMail size={24} color="#0071E3" />
+            </div>
+            <p className="text-xl font-normal">bruce.07@gmail.com</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
+              <IoCallOutline size={24} color="#0071E3" />
+            </div>
+            <p className="text-xl font-normal">(480) 555-0103</p>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
+              <CiLocationOn size={24} color="#0071E3" />
+            </div>
+            <p className="text-xl font-normal">3517 W. Gray St. Utica, Pennsylvania 57867</p>
+          </div>
+        </div>
       </div>
+      
     </div>
   );
 };

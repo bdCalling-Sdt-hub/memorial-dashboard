@@ -16,12 +16,12 @@ const SettingDetail = () => {
   const { settingType } = useParams();
   const title = settingType?.split("-").join(" ");
   const firstLetter = title?.charAt(0).toUpperCase();
-  const [isProfileEdit, setIsProfileEdit] = useState(false);
+  const [isProfileEdit, setIsProfileEdit] = useState(true);
   const [isPaymentEdit, setIsPaymentEdit] = useState(false);
 
   return (
     <div>
-      {isProfileEdit ? (
+      {/* {isProfileEdit ? (
         <button
           onClick={() => setIsProfileEdit(false)}
           className="flex items-center  gap-1 text-md "
@@ -42,7 +42,7 @@ const SettingDetail = () => {
           {" "}
           <IconChevronLeft /> <span>{firstLetter + "" + title?.slice(1)}</span>
         </Link>
-      )}
+      )} */}
 
       {/* //blocked accounts search bar*/}
       {settingType === "block-accounts" && (
@@ -54,7 +54,7 @@ const SettingDetail = () => {
         </div>
       )}
 
-      <div className="rounded-md p-4 mt-4  bg-white">
+      <div >
         {settingType === "notifications" && <Notifications />}
         {settingType === "profile" && (
           <Profile
