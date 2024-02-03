@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ITransaction } from "../../types/transaction.interface";
 import ModelValue from "../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
+import photo from "../../assets/Rectangle 14.jpg"
 
 const TransactionsTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -173,11 +174,27 @@ const TransactionsTable = () => {
         footer={[]}
       >
         <ModelValue
-          title={"Transaction Details"}
-          keys={["Transaction ID", "Date", "Amount"]}
-          values={["#transactionID", "20-3-2023", 2888]}
+          title={"User details"}
+          img={photo}
+          keys={[
+            "User Name",
+            "email",
+            "phone no",
+            "Subscription",
+          ]}
+          values={[
+            "Jane Cooper",
+            "jane123@gmail.com",
+            "(480) 555-0103",
+            "Premium",
+          ]}
         />
         <ModelValue
+          title={"Transaction Details"}
+          keys={["Transaction ID", "Date", "Amount", "Transaction time ", "Transaction amount "]}
+          values={["#transactionID", "20-3-2023", 2888, "08.00 PM", "$240"]}
+        />
+        {/* <ModelValue
           title={"Sender details"}
           keys={[
             "Sender name",
@@ -210,15 +227,15 @@ const TransactionsTable = () => {
             "Country",
             "Recipient Currency",
           ]}
-        />
+        /> */}
         <div className="flex  items-center mx-auto gap-2 mt-10">
-          {["Approve", "Reject"].map((item) => (
+          {["Download", "Print"].map((item) => (
             <button
               key={item}
-              className={`py-3 rounded-full w-full ${
-                item === "Approve"
-                  ? "bg-primary text-white"
-                  : "border border-primary text-primary"
+              className={`py-3 rounded-lg w-full ${
+                item === "Download"
+                  ? "bg-[#0071E3] text-white"
+                  : "border border-[#0071E3] text-[#0071E3]"
               } `}
             >
               {item}
