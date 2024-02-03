@@ -138,6 +138,7 @@ const UsersTable = () => {
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
         footer={[]}
+        closeIcon
       >
         <ModelValue
           title={"User Details"}
@@ -157,13 +158,13 @@ const UsersTable = () => {
           ]}
         />
         <div className="flex  items-center mx-auto gap-2 mt-10">
-          {["Download", "Block"].map((item) => (
+          {["Download", "Print"].map((item) => (
             <button
               key={item}
-              className={`py-3 rounded-full w-full ${
+              className={`py-3 text-[18px] font-semibold rounded-lg w-full ${
                 item === "Download"
-                  ? "bg-primary text-white"
-                  : "border border-primary text-primary"
+                  ? "bg-[#0071E3] text-white"
+                  : "border border-[#0071E3] text-[#0071E3]"
               } `}
             >
               {item}
