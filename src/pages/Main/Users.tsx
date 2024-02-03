@@ -9,7 +9,6 @@ import Header from "../../layouts/Main/Header";
 const Users = () => {
   const [searchText, setSearchText] = useState("");
   const [openDropdown, setOpenDropdown] = useState(false) 
-  console.log(searchText);
   return (
     <>
       <div className="flex items-end justify-end gap-4 mb-6">
