@@ -10,27 +10,28 @@ const ForgetPassword = () => {
     navigate("/auth/verify");
   };
   return (
-    <div className="text-center">
+    <div className=" w-[342px] mx-auto">
       <Link
         to="/auth/login"
-        className="flex items-center justify-center gap-1 mb-2 text-lg font-bold"
+        className="flex items-center text-[#0071E3] justify-start gap-4 mb-5 text-2xl font-medium"
       >
         {" "}
-        <IconChevronLeft /> Forget Password
+        <IconChevronLeft size={28} /> Forget Password
       </Link>
 
-      <p className="mb-12">
+      <p className="mb-[38px] text-base font-normal">
         Please enter your email address to recover your account.
       </p>
       <form onSubmit={handleSubmit} className="w-full space-y-5">
         <Input
           size="large"
           placeholder="Enter your password"
-          prefix={<IconMail size={20} />}
+          prefix={<IconMail className="mr-2" color="#0071E3" size={24} />}
           style={{
-            borderBottom: "1px solid #b278fb",
-            background: "transparent",
-            borderRadius: "0",
+            border: "1px solid #ffff",
+            height: "52px",
+            background: "white",
+            borderRadius: "8px",
             outline: "none",
             marginBottom: "20px",
           }}
@@ -38,8 +39,8 @@ const ForgetPassword = () => {
         />
         <button
           type="submit"
-          className="bg-[#b278fb]
-         text-white  py-3 rounded-full w-full hover:bg-white hover:text-[#b278fb] duration-200"
+          className="bg-[#0071E3]
+         text-white  h-[56px] rounded-lg w-full hover:bg-white hover:text-[#0071E3] duration-200"
         >
           Send OTP
         </button>

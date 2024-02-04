@@ -11,16 +11,16 @@ const Verify = () => {
     navigate("/auth/reset-password");
   };
   return (
-    <div className="text-center">
+    <div className=" w-[342px] mx-auto">
       <Link
         to="/auth/forget-password"
-        className="flex items-center justify-center gap-1 mb-2 text-lg font-bold"
+        className="flex items-center text-[#0071E3] justify-start gap-4 mb-5 text-2xl font-medium"
       >
         {" "}
-        <IconChevronLeft /> Verify OTP
+        <IconChevronLeft size={38} /> Verify OTP
       </Link>
 
-      <p className="mb-12">
+      <p className="mb-[38px] text-base font-normal">
         Please enter the otp we have sent you in your email.
       </p>
 
@@ -29,26 +29,27 @@ const Verify = () => {
         onChange={setOtp}
         numInputs={6}
         inputStyle={{
-          height: "80px",
-          width: "90px",
-          borderRadius: "5px",
-          marginRight: "20px",
+          height: "57px",
+          width: "44px",
+          borderRadius: "8px",
+          marginRight: "16px",
           fontSize: "20px",
-          border: "1px solid #b278fb",
-          color: "#b278fb",
+          border: "1px solid #0071E3",
+          color: "#2B2A2A",
+          outline: "none"
         }}
         renderInput={(props) => <input {...props} />}
       />
-      <p className="flex items-center justify-between mt-2 ">
+      <p className="flex items-center justify-between text-[#0071E3] mt-4 text-[18px] font-normal ">
         Didn’t receive code?
-        <Link to="/auth/forget-password" className="font-medium text-[#b278fb]">
+        <Link to="/auth/forget-password" className="font-semibold text-[#0071E3]">
           Resend
         </Link>
       </p>
       <button
         onClick={handleMatchOtp}
-        className="bg-[#b278fb]
-         text-white  py-3 rounded-full w-full mt-10 hover:bg-white hover:text-[#b278fb] duration-200"
+        className="bg-[#0071E3]
+         text-white  h-[56px] rounded-lg text-lg font-semibold w-full mt-10 hover:bg-white hover:text-[#0071E3] duration-200"
       >
         Verify
       </button>
