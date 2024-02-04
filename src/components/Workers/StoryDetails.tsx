@@ -4,6 +4,7 @@ import HeadingText from '../../util/HeadingText'
 import { RiArrowLeftSLine } from 'react-icons/ri'
 import { HiVolumeUp } from "react-icons/hi";
 import photo from "../../assets/Rectangle 178.png"
+import { Link } from 'react-router-dom';
 
 const StoryDetails = () => {
     return (
@@ -11,7 +12,9 @@ const StoryDetails = () => {
             <div className="flex items-end justify-end mb-11">
                 <Header/>
             </div>
-            <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Details</HeadingText>
+            <Link to="/workers">
+                <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Details</HeadingText>
+            </Link>
 
             <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6'>
                 <div className='flex items-center justify-between'>

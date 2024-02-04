@@ -6,6 +6,7 @@ import { Input } from "antd";
 import { HiOutlineMail, HiOutlineUser  } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const EditProfile = () => {
     return (
@@ -13,7 +14,9 @@ const EditProfile = () => {
             <div className="flex items-end justify-end mb-11">
                 <Header/>
             </div>
-            <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} />Edit Profile</HeadingText>
+            <Link to="/settings/profile">
+                <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} />Edit Profile</HeadingText>
+            </Link>
             <div className="mt-6 bg-white rounded-xl  h-[728px] py-[84px]">
                 <div className="w-[350px]  mx-auto">
                     <img className="mx-auto" src={person} width={144} height={144} alt="" />

@@ -28,7 +28,9 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
       <div className="flex items-end justify-end mb-11">
         <Header/>
       </div>
-      <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Profile</HeadingText>
+      <Link to="/">
+        <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Profile</HeadingText>
+      </Link>
       <div className="mt-6 bg-white rounded-xl  h-[728px] px-[104px] py-[84px] border">
         
           {/* Banner */}

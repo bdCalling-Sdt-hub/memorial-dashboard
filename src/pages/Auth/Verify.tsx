@@ -42,7 +42,7 @@ const Verify = () => {
       />
       <p className="flex items-center justify-between text-[#0071E3] mt-4 text-[18px] font-normal ">
         Didn’t receive code?
-        <Link to="/auth/forget-password" className="font-semibold text-[#0071E3]">
+        <Link to="/auth/verify" className="font-semibold text-[#0071E3]">
           Resend
         </Link>
       </p>
