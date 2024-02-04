@@ -7,7 +7,7 @@ const Main = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="grid grid-cols-12 gap-4  p-5 container mx-auto overflow-hidden">
+    <div className="grid grid-cols-12 gap-4  p-5 container mx-auto overflow-hidden" style={{backgroundColor:"#D9EDFC"}}>
       <Sidebar open={open} />
       <div
         className={`${"col-span-9"
