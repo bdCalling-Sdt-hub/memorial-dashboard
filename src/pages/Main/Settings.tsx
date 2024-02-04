@@ -49,12 +49,6 @@ const Settings = () => {
       path: "change-password",
     },
     
-    
-    
-    {
-      title: "Personal data policy",
-      path: "personal-data-policy",
-    },
     {
       title: "Terms of service",
       path: "term-of-service",
@@ -104,7 +98,7 @@ const Settings = () => {
         {settingsItem.map((setting, index) => (
           <div
             key={index}
-            className="border border-[#d2aefd] py-4 mb-2 px-4 text-sm rounded-lg bg-white flex items-center justify-between cursor-pointer hover:bg-[#ac6ef8a2] hover:text-white"
+            className="border border-[#0071e3] py-4 mb-2 px-4 text-sm rounded-lg bg-white flex items-center justify-between cursor-pointer hover:bg-[#e6f1fc] hover:textblack"
             onClick={() => handleNavigate(setting.path)}
           >
             <h2>{setting.title}</h2>
@@ -114,7 +108,7 @@ const Settings = () => {
                 <Switch
                   defaultChecked
                   onChange={onChange}
-                  style={{ background: "#b278fb" }}
+                  style={{ background: "#0071e3" }}
                 />
               ) : (
                 <IconChevronRight />
