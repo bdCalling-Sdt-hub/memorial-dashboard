@@ -256,25 +256,39 @@ const Settings = () => {
                 <p className="text-center mb-5">
                   Set a new password and it should be 8-10 characters long.
                 </p>
-                <input
-                  type="text"
-                  className="w-full bg-transparent border-b py-3 px-2 mb-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter new password"
-                  name=""
-                  id=""
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                  }}
+                  bordered={false}
                 />
-                <input
-                  type="text"
-                  className="w-full bg-transparent mb-2 border-b py-3 px-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter confirm password"
-                  name=""
-                  id=""
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                  }}
+                  bordered={false}
                 />
 
                 <button
                   type="submit"
-                  className="bg-[#b278fb]
-            text-white mt-5 py-3 rounded-full w-full hover:bg-white hover:text-[#b278fb] duration-200"
+                  className="bg-[#0071E3]
+            text-white mt-5 py-3 rounded-lg text-[16px] font-medium w-full hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
                 >
                   Reset password
                 </button>
