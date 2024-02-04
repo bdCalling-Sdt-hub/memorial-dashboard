@@ -29,7 +29,7 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
         <Header/>
       </div>
       <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Profile</HeadingText>
-      <div className="mt-6 bg-white rounded-xl  h-[calc(100vh-40px)] px-[104px] py-[84px] border">
+      <div className="mt-6 bg-white rounded-xl  w-[838px] h-[669px] px-[104px] py-[84px] border">
         
           {/* Banner */}
           <div className="h-[208px] bg-[#0071E3] rounded-xl py-8 px-6 mb-6 flex items-center gap-[54px]">
