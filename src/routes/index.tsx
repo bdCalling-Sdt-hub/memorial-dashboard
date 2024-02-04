@@ -15,6 +15,7 @@ import Workers from "../pages/Main/Workers";
 import Subscription from "../pages/Main/Subscription";
 import NotFound from "../pages/NotFound";
 import EditSubscription from "../pages/Main/EditSubscription";
+import StoryDetails from "../components/Workers/StoryDetails";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/workers",
         element: <Workers />,
+      },
+      {
+        path: "/workers/:workerType",
+        element: <StoryDetails />,
       },
 
       {

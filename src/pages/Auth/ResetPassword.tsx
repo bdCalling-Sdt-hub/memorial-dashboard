@@ -8,16 +8,16 @@ const ResetPassword = () => {
     navigate("/auth/login");
   };
   return (
-    <div className="text-center">
+    <div className=" w-[342px] mx-auto">
       <Link
         to="/auth/forget-password"
-        className="flex items-center justify-center gap-1 mb-2 text-lg font-bold"
+        className="flex items-center text-[#0071E3] justify-start gap-4 mb-5 text-2xl font-medium"
       >
         {" "}
-        <IconChevronLeft /> Reset Password
+        <IconChevronLeft size={38} /> Reset Password
       </Link>
 
-      <p className="mb-12">
+      <p className="mb-[38px] text-base font-normal">
         Set a new password and it should be 8-10 characters long.
       </p>
 
@@ -25,11 +25,12 @@ const ResetPassword = () => {
         <Input.Password
           size="large"
           placeholder="Enter your password"
-          prefix={<IconLock size={20} />}
+          prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
           style={{
-            borderBottom: "1px solid #b278fb",
-            background: "transparent",
-            borderRadius: "0",
+            border: "1px solid #ffff",
+            height: "52px",
+            background: "white",
+            borderRadius: "8px",
             outline: "none",
             marginBottom: "20px",
           }}
@@ -38,12 +39,14 @@ const ResetPassword = () => {
         <Input.Password
           size="large"
           placeholder="Enter your password"
-          prefix={<IconLock size={20} />}
+          prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
           style={{
-            borderBottom: "1px solid #b278fb",
-            background: "transparent",
-            borderRadius: "0",
+            border: "1px solid #ffff",
+            height: "52px",
+            background: "white",
+            borderRadius: "8px",
             outline: "none",
+            marginBottom: "20px",
           }}
           bordered={false}
         />
@@ -51,8 +54,8 @@ const ResetPassword = () => {
 
       <button
         onClick={handleResetPassword}
-        className="bg-[#b278fb]
-         text-white  py-3 rounded-full w-full mt-10 hover:bg-white hover:text-[#b278fb] duration-200"
+        className="bg-[#0071E3]
+        text-white  h-[56px] rounded-lg text-lg font-semibold w-full mt-10 hover:bg-white hover:text-[#0071E3] duration-200"
       >
         Reset password
       </button>
