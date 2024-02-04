@@ -16,12 +16,7 @@ const Auth = () => {
         }}
         className="border h-screen flex items-center justify-center">
         <div className="mx-auto space-y-2 mb-5">
-<<<<<<< HEAD
-          <img src={logo} className="w-20" alt="logo" />
-          <h2 className="text-white text-xl">Memorial</h2>
-=======
           <img src={logo} width={522} height={246}  alt="logo" />
->>>>>>> 61e375e64813e880a4750e6ce0fdab3080edae0c
         </div>
       </div>
       <div className="bg-[#E6F1FC] h-screen flex items-center">
