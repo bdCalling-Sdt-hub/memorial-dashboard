@@ -1,10 +1,7 @@
-import { useParams } from "react-router-dom";
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Header from "../../layouts/Main/Header";
 const Notifications = () => {
-  const { settingType } = useParams();
-  console.log(settingType)
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
