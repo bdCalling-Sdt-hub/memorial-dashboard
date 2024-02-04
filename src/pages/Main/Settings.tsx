@@ -1,4 +1,4 @@
-import { IconChevronLeft, IconChevronRight, IconLock } from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight, IconLock, IconMail } from "@tabler/icons-react";
 import {  Input, Modal, Switch } from "antd";
 import { useState } from "react";
 import OTPInput from "react-otp-input";
@@ -189,19 +189,27 @@ const Settings = () => {
                 <p className="text-center">
                   Please enter your email address to recover your account.
                 </p>
-                <input
-                  type="text"
-                  className="my-4 w-full bg-transparent border-b py-3 px-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter your email"
-                  name=""
-                  id=""
+                <Input
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconMail className="mr-2" color="#0071E3" size={24} />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                    marginTop: "20px",
+                  }}
+                  bordered={false}
                 />
 
                 <button
                   onClick={() => setModelTitle("Verify OTP")}
                   type="submit"
-                  className="bg-[#b278fb]
-            text-white mt-5 py-3 rounded-full w-full hover:bg-white hover:text-[#b278fb] duration-200"
+                  className="bg-[#0071E3]
+            text-white mt-5 py-3 rounded-lg w-full hover:bg-white border hover:text-[#0071E3] duration-200"
                 >
                   Send OTP
                 </button>
