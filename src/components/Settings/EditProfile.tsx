@@ -14,7 +14,7 @@ const EditProfile = () => {
                 <Header/>
             </div>
             <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} />Edit Profile</HeadingText>
-            <div className="mt-6 bg-white rounded-xl  h-[728px] py-[84px]">
+            <div className="mt-6 bg-white rounded-xl  h-[760px] py-[84px]">
                 <div className="w-[350px]  mx-auto">
                     <img className="mx-auto" src={person} width={144} height={144} alt="" />
                     <p className="text-[16px] text-center font-medium text-[#0071E3] pt-3 pb-6">Change Picture</p>
