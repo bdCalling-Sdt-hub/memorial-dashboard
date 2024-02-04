@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IUser } from "../../types/user.interface";
 import ModelValue from "../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
+import photo from "../../assets/Rectangle 14.jpg"
 
 const UsersTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -142,6 +143,7 @@ const UsersTable = () => {
       >
         <ModelValue
           title={"User Details"}
+          img={photo}
           keys={[
             "User name",
             "User email ",

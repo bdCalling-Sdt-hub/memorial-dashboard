@@ -13,7 +13,7 @@ const StoryDetails = () => {
             </div>
             <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Details</HeadingText>
 
-            <div className='bg-white rounded-[16px] h-full p-6 mt-6'>
+            <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6'>
                 <div className='flex items-center justify-between'>
                     <h1 className='text-6 font-semibold text-[#0071E3] mb-6'>We helped our father write his last story</h1>
                     <div className='w-10 h-10 rounded-lg bg-[#0071E3] flex items-center justify-center'>
