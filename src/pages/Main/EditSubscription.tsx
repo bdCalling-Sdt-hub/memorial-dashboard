@@ -3,6 +3,7 @@ import HeadingText from "../../util/HeadingText"
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const EditSubscription = () => {
     const [count, setCount] = useState(4);
@@ -14,7 +15,9 @@ const EditSubscription = () => {
             <div className="flex items-end justify-end mb-11">
                 <Header/>
             </div>
-            <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Edit Subscriptions</HeadingText>
+            <Link to="/subscription">
+                <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Edit Subscriptions</HeadingText>
+            </Link>
             <div className="bg-white rounded-2xl p-6 mt-6 h-[680px] overflow-y-scroll">
 
                 {/* package information start */}
