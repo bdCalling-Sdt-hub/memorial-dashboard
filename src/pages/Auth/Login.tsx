@@ -6,7 +6,7 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 const Login = () => {
   const navigate = useNavigate();
   return (
-    <div className="text-center">
+    <div className=" w-[342px] mx-auto">
       <h2 className="mb-12 text-2xl font-semibold text-[#0071E3]">Sign in to continue</h2>
       <form className="w-full space-y-2">
         <Input
