@@ -1,10 +1,8 @@
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { Badge, Modal, Switch } from "antd";
+import {  Modal, Switch } from "antd";
 import { useState } from "react";
 import OTPInput from "react-otp-input";
-import { Link, useNavigate } from "react-router-dom";
-import Notifications from "../../components/Settings/Notifications";
-import { FiBell } from "react-icons/fi";
+import {  useNavigate } from "react-router-dom";
 import Header from "../../layouts/Main/Header";
 
 const Settings = () => {
@@ -12,7 +10,6 @@ const Settings = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modelTitle, setModelTitle] = useState("");
   const [otp, setOtp] = useState("");
-  const [open, setOpen] = useState(false)
 
   const handleNavigate = (value: string) => {
     if (value === "notification") {
