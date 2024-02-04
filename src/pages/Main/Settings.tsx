@@ -231,21 +231,21 @@ const Settings = () => {
                     marginRight: "20px",
                     fontSize: "20px",
                     marginTop: "40px",
-                    border: "1px solid #b278fb",
+                    border: "1px solid #0071E3",
                     color: "#b278fb",
                   }}
                   renderInput={(props) => <input {...props} />}
                 />
-                <p className="flex items-center justify-between mt-2 mb-8">
+                <p className="flex items-center justify-between mt-2 mb-6">
                   Didn’t receive code?
-                  <button className="font-medium text-[#b278fb]">Resend</button>
+                  <button className="font-medium text-[#0071E3]">Resend</button>
                 </p>
 
                 <button
                   onClick={() => setModelTitle("Reset Password")}
                   type="submit"
-                  className="bg-[#b278fb]
-            text-white mt-5 py-3 rounded-full w-full hover:bg-white hover:text-[#b278fb] duration-200"
+                  className="bg-[#0071E3]
+            text-white mt-5 py-3 rounded-lg w-full hover:bg-white hover:text-[#0071E3] duration-200"
                 >
                   Verify
                 </button>
