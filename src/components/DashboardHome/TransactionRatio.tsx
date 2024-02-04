@@ -31,10 +31,10 @@ const TransactionRatio = () => {
 
   return (
     // <div className="grid grid-cols-3 gap-5 mt-4 overflow-hidden h-[310px]">
-    <div className="overflow-hidden h-[310px] rounded-md">
+    <div className="overflow-hidden h-[325px] rounded-md">
       <div className="bg-white col-span-2 p-4">
         <div className="flex items-center justify-between mb-2">
-          <HeadingText>Transaction Ratio</HeadingText>
+          <HeadingText>Income Ratio</HeadingText>
           <Dropdown
             menu={{
               items,
@@ -54,6 +54,16 @@ const TransactionRatio = () => {
               </Space>
             </a>
           </Dropdown>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-[14px] h-[14px] rounded-full border-[2px] border-[#0071E3]"></div>
+            <p className="text-[14px] font-normal text-[#717070]">This month</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-[14px] h-[14px] rounded-full  border-[2px] border-[#8ABEF2]"></div>
+            <p className="text-[14px] font-normal text-[#717070]">Last month</p>
+          </div>
         </div>
         <Suspense fallback={<p className="text-center">Loading...</p>}>
           <Chart />

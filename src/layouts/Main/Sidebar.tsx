@@ -70,7 +70,7 @@ const Sidebar: React.FC<SideProps> = () => {
             </Link>
           </li>
         ))}
-        <li className="mt-auto mx-4 px-4 py-4 bg-white border border-[#0071E3] rounded-[8px]  cursor-pointer text-md">
+        <li className="mt-auto mx-4 px-6 py-4 bg-white border border-[#0071E3] rounded-[8px]  cursor-pointer text-md">
           <Link to="/auth/login" className="flex items-center gap-2">
             <div className={`m-0`}>
               <HiLogout className="text-red-500" size={24} />
