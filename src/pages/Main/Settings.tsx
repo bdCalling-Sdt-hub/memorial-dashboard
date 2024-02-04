@@ -1,5 +1,5 @@
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import {  Modal, Switch } from "antd";
+import { IconChevronLeft, IconChevronRight, IconLock } from "@tabler/icons-react";
+import {  Input, Modal, Switch } from "antd";
 import { useState } from "react";
 import OTPInput from "react-otp-input";
 import {  useNavigate } from "react-router-dom";
@@ -94,7 +94,7 @@ const Settings = () => {
             title={
               <div
                 onClick={() => setIsModalOpen(false)}
-                className="flex items-center cursor-pointer justify-center"
+                className="flex items-center cursor-pointer justify-start gap-4 text-[#0071E3] mb-4"
               >
                 <IconChevronLeft />
                 <p>{modelTitle}</p>
@@ -126,28 +126,50 @@ const Settings = () => {
             )}
             {modelTitle === "Change password" && (
               <form className="w-full">
-                <input
-                  type="text"
-                  className="w-full bg-transparent border-b py-3 px-2 mb-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter current password"
-                  name=""
-                  id=""
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                  }}
+                  bordered={false}
                 />
-                <input
-                  type="text"
-                  className="w-full bg-transparent mb-2 border-b py-3 px-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter new password"
-                  name=""
-                  id=""
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                  }}
+                  bordered={false}
                 />
-                <input
-                  type="text"
-                  className="w-full bg-transparent mb-2 border-b py-3 px-2 outline-none focus:border-[#b278fb] duration-100"
-                  placeholder="Enter confirm password"
-                  name=""
-                  id=""
+
+                <Input.Password
+                  size="large"
+                  placeholder="Enter your password"
+                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                  style={{
+                    border: "1px solid #0071E3",
+                    height: "52px",
+                    background: "white",
+                    borderRadius: "8px",
+                    outline: "none",
+                    marginBottom: "20px",
+                  }}
+                  bordered={false}
                 />
-                <p className="text-end text-[#b278fb] font-medium">
+                <p className="text-end text-[#0071E3] font-medium">
                   <button onClick={() => setModelTitle("Forget password")}>
                     Forget Password
                   </button>
@@ -155,8 +177,8 @@ const Settings = () => {
 
                 <button
                   type="submit"
-                  className="bg-[#b278fb]
-            text-white mt-5 py-3 rounded-full w-full hover:bg-white hover:text-[#b278fb] duration-200"
+                  className="bg-[#0071E3]
+                  text-white mt-5 py-3 rounded-lg w-full font-medium text-lg hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
                 >
                   Change password
                 </button>
