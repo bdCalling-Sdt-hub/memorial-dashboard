@@ -1,13 +1,19 @@
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Header from "../../layouts/Main/Header";
+import { Link } from "react-router-dom";
 const Notifications = () => {
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
         <Header/>
       </div>
-      <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Edit Subscriptions</HeadingText>
+      <Link to="/settings">
+        <div className="flex items-center gap-4 mb-4">
+          <RiArrowLeftSLine size={28} color="#0071E3" />
+          <h1 className="text-[#0071E3] text-[25px] font-bold">Notifications</h1>
+        </div>
+      </Link>
       
       {[...Array(4)].map((index) => (
         <div
