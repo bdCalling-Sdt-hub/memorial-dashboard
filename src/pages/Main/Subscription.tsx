@@ -52,7 +52,7 @@ const Subscription = () => {
                 <Header/>
             </div>
             <div className="bg-white h-[950px] rounded-[16px] p-6">
-                <HeadingText>Subscriptions</HeadingText>
+            <HeadingText color="#0071E3"> Subscriptions</HeadingText>
 
                 {/* subscription card */}
                 <div className="flex flex-wrap gap-4">
