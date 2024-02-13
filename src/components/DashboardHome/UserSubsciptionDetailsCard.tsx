@@ -1,6 +1,11 @@
 import { HiUserGroup } from "react-icons/hi";
 
-const UserSubsciptionDetailsCard = () => {
+interface UserSubsciptionDetailsCard {
+    users: []
+} 
+
+const UserSubsciptionDetailsCard: React.FC<UserSubsciptionDetailsCard> = ({users}) => {
+    const totalUsers = users.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     const subscription = [
         {
             name: "Total",

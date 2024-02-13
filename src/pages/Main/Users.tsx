@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UsersTable from "../../components/Users/UsersTable";
 import HeadingText from "../../util/HeadingText";
 import SearchField from "../../util/SearchField";
 import { IoIosArrowDown } from "react-icons/io";
 import UserSubsciptionDetailsCard from "../../components/DashboardHome/UserSubsciptionDetailsCard";
 import Header from "../../layouts/Main/Header";
+import { AllUser } from "../../redux/apiSlices/allUserSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 
 const Users = () => {
+  const dispatch = useAppDispatch();
+  const {users} = useAppSelector(state => state.allUser);
+
   const [searchText, setSearchText] = useState("");
-  const [openDropdown, setOpenDropdown] = useState(false) 
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  console.log(users)
+
+  useEffect(()=> {
+    dispatch(AllUser())
+  },[])
+
   return (
     <>
       <div className="flex items-end justify-end gap-4 mb-6">
@@ -18,7 +30,7 @@ const Users = () => {
         />
         <Header/>
       </div>
-      <UserSubsciptionDetailsCard/>
+      <UserSubsciptionDetailsCard users={users} />
       <div className="rounded-md p-4  bg-white">
         <div className="flex items-center gap-4">
           <HeadingText>User List</HeadingText>

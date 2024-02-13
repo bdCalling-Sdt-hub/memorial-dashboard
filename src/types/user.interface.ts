@@ -1,7 +1,8 @@
 export interface IUser {
-  no: number;
-  username: string;
+  id: number;
+  name: string;
   email: string;
   phoneNo: string | number;
+  package: string,
   actions: string;
 }
