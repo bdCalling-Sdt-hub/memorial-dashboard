@@ -6,15 +6,16 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    users: [],
+    subscription: {},
   };
 
-export const searchUser = createAsyncThunk(
+export const editSubscription = createAsyncThunk(
     'searchUser',
-    async (keyword: string, thunkApi) => {
+    async (keyword: number, thunkApi) => {
         try{
-            const response = await baseURL.get(`/search/subscrib/user?name=${keyword}`);
-            return response?.data?.data;
+            const response = await baseURL.get(`/edit/subscription/${keyword}`);
+            console.log(response?.data?.data)
+            return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError.message;
@@ -26,30 +27,31 @@ export const searchUser = createAsyncThunk(
 
 
 
-export const searchUserSlice = createSlice({
-    name: 'user',
+export const editSubscriptionSlice = createSlice({
+    name: 'editSubscription',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(searchUser.pending, (state)=> {
+        builder.addCase(editSubscription.pending, (state)=> {
             state.loading= true
         }),
-        builder.addCase(searchUser.fulfilled, (state, action)=> {
+        builder.addCase(editSubscription.fulfilled, (state, action)=> {
+            console.log(action.payload.data)
             state.error= false,
             state.success= true,
             state.loading= false
-            state.users= action.payload
+            state.subscription= action.payload.data
         }),
-        builder.addCase(searchUser.rejected, (state)=> {
+        builder.addCase(editSubscription.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.users= []
+            state.subscription= {}
         })
-    }
+    } 
 })
 
 // Action creators are generated for each case reducer function
 //export const { } = userSlice.actions
 
-export default searchUserSlice.reducer
+export default editSubscriptionSlice.reducer;

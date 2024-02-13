@@ -5,7 +5,8 @@ import SubscriptionPlanCard from "../../components/DashboardHome/SubscriptionPla
 
 const Subscription = () => {
     const plan = [
-        {
+        {   
+            id: 1,
             name: "Basic",
             price: "4.99",
             featureValue: "01 Photo Stories",
@@ -18,7 +19,8 @@ const Subscription = () => {
                 "Post 10 stories at a time"
             ]
         },
-        {
+        {   
+            id: 2,
             name: "Premium",
             price: "9.99",
             featureValue: "02 Photo Stories",
@@ -31,6 +33,7 @@ const Subscription = () => {
                 "Post 10 stories at a time"
             ]
         },{
+            id: 3,
             name: "Gold",
             price: "14.99",
             featureValue: "Unlimited Photo Stories",
@@ -59,6 +62,7 @@ const Subscription = () => {
                     {
                         plan.map((item, index)=>(
                             <SubscriptionPlanCard
+                                id={item?.id}
                                 key={index}
                                 name={item.name}
                                 price={item.price}

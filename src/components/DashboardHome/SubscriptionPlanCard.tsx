@@ -7,13 +7,15 @@ interface SubscriptionPlanCardProps{
     price: string;
     featureValue: string;
     feature: string[];
+    id: number;
 
 } 
 const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     name,
     price,
     featureValue,
-    feature
+    feature,
+    id
 }) => {
     return (
         <div 
@@ -44,7 +46,7 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                     )
                 }
                 <div className="flex items-center justify-center">
-                    <Link to="/edit-subscription">
+                    <Link to={`/edit-subscription/${id}`} >
                         <button 
                             className="
                                 w-[200px] 

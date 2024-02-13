@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Subscription />,
       },
       {
-        path: "/edit-subscription",
+        path: "/edit-subscription/:id",
         element: <EditSubscription />,
       },
       {

@@ -32,7 +32,7 @@ export const allUserSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(AllUser.pending, (state, action)=> {
+        builder.addCase(AllUser.pending, (state)=> {
             state.loading= true
         }),
         builder.addCase(AllUser.fulfilled, (state, action)=> {
@@ -41,7 +41,7 @@ export const allUserSlice = createSlice({
             state.loading= false
             state.users= action.payload.data.data
         }),
-        builder.addCase(AllUser.rejected, (state, action)=> {
+        builder.addCase(AllUser.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
