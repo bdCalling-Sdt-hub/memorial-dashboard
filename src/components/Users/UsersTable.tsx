@@ -10,10 +10,11 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 const UsersTable = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
+  const [user, setUser] = useState<IUser>()
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(user);
   
   const columns = [
     {
@@ -29,7 +30,7 @@ const UsersTable = () => {
       dataIndex: "username",
       key: "username",
       render: (_: string, record: IUser) => (
-        <p>{record?.name}</p>
+        <p>{record?.user?.fullName}</p>
       )
     },
     {
@@ -37,7 +38,7 @@ const UsersTable = () => {
       dataIndex: "email",
       key: "email",
       render: (_: string, record: IUser) => (
-        <p>{record?.email}</p>
+        <p>{record?.user?.email}</p>
       )
     },
     {
@@ -45,7 +46,7 @@ const UsersTable = () => {
       dataIndex: "phoneNo",
       key: "phoneNo",
       render: (_: string, record: IUser) => (
-        <p>{record?.phoneNo}</p>
+        <p>{record?.user?.mobile ? record?.user?.mobile : "01756953936"}</p>
       )
     },
     {
@@ -69,7 +70,8 @@ const UsersTable = () => {
   ];
 
   const handleView = (value: IUser) => {
-    console.log(value);
+    setUser(value);
+    console.log(value)
     setIsModalOpen(true);
   };
 
@@ -106,7 +108,13 @@ const UsersTable = () => {
             "Address",
             "Joining Date",
           ]}
-          values={users?.user}
+          values={[
+            user?.user?.fullName as string,
+            user?.user?.email as string,
+            user?.user?.mobile ? user?.user?.mobile : "01756953936",
+            "Bangladesh",
+            user?.user?.currency as string,
+          ]}
         />
         <div className="flex  items-center mx-auto gap-2 mt-10">
           {["Download", "Print"].map((item) => (

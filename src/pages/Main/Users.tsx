@@ -7,30 +7,42 @@ import UserSubsciptionDetailsCard from "../../components/DashboardHome/UserSubsc
 import Header from "../../layouts/Main/Header";
 import { AllUser } from "../../redux/apiSlices/allUserSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { searchUser } from "../../redux/apiSlices/searchUserSlice";
 
 const Users = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
+  const {users: search} = useAppSelector(state => state.searchUser);
 
-  const [searchText, setSearchText] = useState("");
+  
+
+  const [searchText, setSearchText] = useState('');
   const [openDropdown, setOpenDropdown] = useState(false);
 
   console.log(users)
+  console.log(search)
 
   useEffect(()=> {
     dispatch(AllUser())
-  },[])
+  },[dispatch]);
 
+  useEffect(()=>{
+    if(searchText !== ''){
+      dispatch(searchUser(searchText))
+    }
+  },[dispatch, searchText])
+  
   return (
     <>
       <div className="flex items-end justify-end gap-4 mb-6">
+        
         <SearchField
           placeholder="Search users"
           onChange={(e) => setSearchText(e.target.value)}
         />
         <Header/>
       </div>
-      <UserSubsciptionDetailsCard users={users} />
+      <UserSubsciptionDetailsCard />
       <div className="rounded-md p-4  bg-white">
         <div className="flex items-center gap-4">
           <HeadingText>User List</HeadingText>

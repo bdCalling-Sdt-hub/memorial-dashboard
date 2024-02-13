@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import allUserReducer from "./apiSlices/allUserSlice";
+import searchUserSlice from "./apiSlices/searchUserSlice";
 
 
 export const store = configureStore({
     reducer: {
-       allUser: allUserReducer
+       allUser: allUserReducer,
+       searchUser : searchUserSlice,
     }
 })
 

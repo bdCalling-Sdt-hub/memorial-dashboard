@@ -3,6 +3,14 @@ export interface IUser {
   name: string;
   email: string;
   phoneNo: string | number;
-  package: string,
   actions: string;
+  user : {
+    fullName?: string;
+    email?: string;
+    mobile?: string;
+    currency : string;
+  };
+  package : {
+    package_name : string
+  }
 }

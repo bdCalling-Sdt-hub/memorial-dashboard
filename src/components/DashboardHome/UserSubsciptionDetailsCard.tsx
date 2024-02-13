@@ -1,27 +1,30 @@
 import { HiUserGroup } from "react-icons/hi";
+import { IUser } from "../../types/user.interface";
+import { useAppSelector } from "../../redux/hook";
 
-interface UserSubsciptionDetailsCard {
-    users: []
-} 
 
-const UserSubsciptionDetailsCard: React.FC<UserSubsciptionDetailsCard> = ({users}) => {
-    const totalUsers = users.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+const UserSubsciptionDetailsCard= () => {
+    const {users} = useAppSelector(state => state.allUser);
+    const basic = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Quater Page");
+    const premium = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Half Page");
+    const gold = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Full Page");
     const subscription = [
         {
             name: "Total",
-            total : 2520,
+            total : users?.length,
         },
         {
             name: "Basic",
-            total : 2520,
+            total : basic?.length,
         },
         {
             name: "Premium",
-            total : 1824,
+            total : premium?.length,
         },
         {
             name: "Golden",
-            total : 1023,
+            total : gold?.length,
         }
     ]
     return (
