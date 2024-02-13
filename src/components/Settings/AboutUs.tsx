@@ -1,15 +1,20 @@
 import { Badge, Button } from "antd";
 import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Notifications from "./Notifications";
 import { Link, useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import Header from "../../layouts/Main/Header";
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
+import { getAbout } from "../../redux/apiSlices/getAboutSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 
 const AboutUs = () => {
-    const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const {about} = useAppSelector(state => state.getAbout);
+  console.log(about)
+  const navigate = useNavigate();
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
@@ -30,6 +35,10 @@ const AboutUs = () => {
       navigate(`/settings/${value}`);
     }
   };
+
+  useEffect(()=>{
+    dispatch(getAbout())
+  }, [dispatch])
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
