@@ -1,5 +1,8 @@
 export interface IStory {
-    data: [];
+    data: [
+        length : number
+    ]
+    id: number
     description: string;
     death_date: string;
     total : number;

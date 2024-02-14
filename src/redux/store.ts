@@ -13,6 +13,8 @@ import getTermsConditionSlice from "./apiSlices/term&condition/getTermsCondition
 import updateTermsConditionSlice from "./apiSlices/term&condition/updateTermsConditionSlice";
 import getStoriesSlice from "./apiSlices/story/getStoriesSlice";
 import getStoryDetailsSlice from "./apiSlices/story/getStoryDetailsSlice";
+import storyRequestSlice from "./apiSlices/story/storyRequestSlice";
+import storyStatusSlice from "./apiSlices/story/storyStatusSlice";
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +31,9 @@ export const store = configureStore({
     getTermsCondition: getTermsConditionSlice,
     updateTermsCondition : updateTermsConditionSlice,
     getStories : getStoriesSlice,
-    getStoryDetails : getStoryDetailsSlice
+    getStoryDetails : getStoryDetailsSlice,
+    storyRequest: storyRequestSlice,
+    storyStatus: storyStatusSlice
   },
 });
 
