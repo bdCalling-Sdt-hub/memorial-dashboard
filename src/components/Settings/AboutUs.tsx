@@ -7,7 +7,7 @@ import { FiBell } from "react-icons/fi";
 import Header from "../../layouts/Main/Header";
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
-import { getAbout } from "../../redux/apiSlices/getAboutSlice";
+import { getAbout } from "../../redux/apiSlices/about/getAboutSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 
 const AboutUs = () => {

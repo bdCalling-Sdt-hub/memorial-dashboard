@@ -5,7 +5,8 @@ import editSubscriptionSlice from "./apiSlices/editSubscriptionSlice";
 import StoryDetails from "./apiSlices/StoryDetails";
 import storyRequest from "./apiSlices/storyRequest";
 import userStorySlice from "./apiSlices/userStorySlice";
-import getAboutSlice from "./apiSlices/getAboutSlice";
+import getAboutSlice from "./apiSlices/about/getAboutSlice";
+import updateAboutSlice from "./apiSlices/about/updateAboutSlice";
 export const store = configureStore({
   reducer: {
     allUser: allUserReducer,
@@ -14,7 +15,8 @@ export const store = configureStore({
     storyDetails : StoryDetails,
     storyRequest : storyRequest,
     userStory : userStorySlice,
-    getAbout: getAboutSlice
+    getAbout: getAboutSlice,
+    updateAbout : updateAboutSlice
   },
 });
 

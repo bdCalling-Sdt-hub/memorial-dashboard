@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import baseURL from "../../Config";
+import baseURL from "../../../Config";
 
 
 const initialState = {
@@ -10,11 +10,11 @@ const initialState = {
     about: {}
   };
 
-export const getAbout = createAsyncThunk(
-    'getAbout',
+export const UpdateAbout = createAsyncThunk(
+    'UpdateAbout',
     async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/edit/about/1`);
+            const response = await baseURL.post(`/edit/about/1`, value);
             console.log(response?.data);
             return response?.data;
         }catch(error){
@@ -28,21 +28,21 @@ export const getAbout = createAsyncThunk(
 
 
 
-export const getAboutSlice = createSlice({
+export const UpdateAboutSlice = createSlice({
     name: 'about',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(getAbout.pending, (state)=> {
+        builder.addCase(UpdateAbout.pending, (state)=> {
             state.loading= true
         }),
-        builder.addCase(getAbout.fulfilled, (state, action)=> {
+        builder.addCase(UpdateAbout.fulfilled, (state, action)=> {
             state.error= false,
             state.success= true,
             state.loading= false
             state.about= action.payload.data.data
         }),
-        builder.addCase(getAbout.rejected, (state)=> {
+        builder.addCase(UpdateAbout.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
@@ -54,4 +54,4 @@ export const getAboutSlice = createSlice({
 // Action creators are generated for each case reducer function
 //export const { } = userSlice.actions
 
-export default getAboutSlice.reducer
+export default UpdateAboutSlice.reducer
