@@ -1,43 +1,21 @@
-import { Badge, Button } from "antd";
+import { Button } from "antd";
 import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
-import Notifications from "./Notifications";
-import { Link, useNavigate } from "react-router-dom";
-import { FiBell } from "react-icons/fi";
+import { Link} from "react-router-dom";
 import Header from "../../layouts/Main/Header";
-import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { getAbout } from "../../redux/apiSlices/about/getAboutSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import updateAboutSlice from "../../redux/apiSlices/about/updateAboutSlice";
+// import updateAboutSlice from "../../redux/apiSlices/about/updateAboutSlice";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
 const AboutUs = () => {
   const dispatch = useAppDispatch();
   const {about} = useAppSelector(state => state.getAbout);
-  // const navigate = useNavigate();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  console.log(content);
-  /* const [open, setOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modelTitle, setModelTitle] = useState("");
-  const handleNavigate = (value: string) => {
-    if (value === "notification") {
-      return;
-    } else if (value === "hidden-fee") {
-      return;
-    } else if (value === "hidden-fee-percentage") {
-      setModelTitle("Set hidden fee percentage");
-      setIsModalOpen(true);
-    } else if (value === "change-password") {
-      setModelTitle("Change password");
-      setIsModalOpen(true);
-    } else {
-      navigate(`/settings/${value}`);
-    }
-  }; */
+  
 
   const handleUpdate = ()=>{
     // dispatch(updateAboutSlice(content))
