@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
   const [content, setContent] = useState("");
 
   const handleUpdate = ()=>{
-    dispatch(UpdatePrivacy({ id: privacy?.id, description: content}))
+    dispatch(UpdatePrivacy({ id: privacy?.id, description: content}));
     /* axios.post("http://192.168.10.121:4000/api/update/privacy/",{ id: 1, description: content})
     .then(res=>{
       Swal.fire(

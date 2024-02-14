@@ -9,6 +9,8 @@ import getAboutSlice from "./apiSlices/about/getAboutSlice";
 import updateAboutSlice from "./apiSlices/about/updateAboutSlice";
 import getPrivacySlice from "./apiSlices/privacyPolicy/getPrivacySlice";
 import updatePrivacySlice from "./apiSlices/privacyPolicy/updatePrivacySlice";
+import getTermsConditionSlice from "./apiSlices/term&condition/getTermsConditionSlice";
+import updateTermsConditionSlice from "./apiSlices/term&condition/updateTermsConditionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +23,9 @@ export const store = configureStore({
     getAbout: getAboutSlice,
     updateAbout : updateAboutSlice,
     getPrivacy: getPrivacySlice,
-    updatePrivacy : updatePrivacySlice
+    updatePrivacy : updatePrivacySlice,
+    getTermsCondition: getTermsConditionSlice,
+    updateTermsCondition : updateTermsConditionSlice
   },
 });
 

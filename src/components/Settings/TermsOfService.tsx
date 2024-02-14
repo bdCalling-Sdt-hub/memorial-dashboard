@@ -1,34 +1,31 @@
-import { Badge, Button } from "antd";
+import { Button } from "antd";
 import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
-import Notifications from "./Notifications";
-import { Link, useNavigate } from "react-router-dom";
-import { FiBell } from "react-icons/fi";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Header from "../../layouts/Main/Header";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getTermsCondition } from "../../redux/apiSlices/term&condition/getTermsConditionSlice";
+import { UpdateTermsCondition } from "../../redux/apiSlices/term&condition/updateTermsConditionSlice";
 
 const TermsOfService = () => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { term, } = useAppSelector(state=> state.getTermsCondition);
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const [open, setOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modelTitle, setModelTitle] = useState("");
-  const handleNavigate = (value: string) => {
-    if (value === "notification") {
-      return;
-    } else if (value === "hidden-fee") {
-      return;
-    } else if (value === "hidden-fee-percentage") {
-      setModelTitle("Set hidden fee percentage");
-      setIsModalOpen(true);
-    } else if (value === "change-password") {
-      setModelTitle("Change password");
-      setIsModalOpen(true);
-    } else {
-      navigate(`/settings/${value}`);
-    }
+  const handleUpdate = () => {
+    dispatch(UpdateTermsCondition({ id: term?.id, description: content}));
+    dispatch(getTermsCondition())
   };
+  
+
+  useEffect(()=>{
+    dispatch(getTermsCondition())
+  }, [dispatch]);
+
+  useEffect(()=>{
+    setContent(term?.description);
+  }, [term]);
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
@@ -50,6 +47,7 @@ const TermsOfService = () => {
       />
 
       <Button
+        onClick={handleUpdate}
         block
         style={{
           marginTop: "30px",
