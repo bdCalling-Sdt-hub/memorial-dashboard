@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import allUserReducer from "./apiSlices/allUserSlice";
 import searchUserSlice from "./apiSlices/searchUserSlice";
-import editSubscriptionSlice from "./apiSlices/editSubscriptionSlice";
+import editSubscriptionSlice from "./apiSlices/term&condition/editSubscriptionSlice";
 import getAboutSlice from "./apiSlices/about/getAboutSlice";
 import updateAboutSlice from "./apiSlices/about/updateAboutSlice";
 import getPrivacySlice from "./apiSlices/privacyPolicy/getPrivacySlice";

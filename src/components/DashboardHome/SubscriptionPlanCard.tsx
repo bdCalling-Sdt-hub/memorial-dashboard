@@ -15,7 +15,6 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     feature,
     id
 }) => {
-    console.log(feature);
     return (
         <div 
             className="

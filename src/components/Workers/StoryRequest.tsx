@@ -31,13 +31,13 @@ const StoryRequest = () => {
                                 <img src={photo} width={100} height={100} alt="" />
                                 <div>
                                     <h3 className="text-[18px] mb-[4px] font-medium">{story?.story_title}</h3>
-                                    <h4 className="text-[14px] font-normal">{moment(story.created_at).format('LT')}</h4>
-                                    <h4 className="text-[14px] font-normal">{story.death_date}</h4>
+                                    <h4 className="text-[14px] font-normal">{moment(story?.created_at).format('LT')}</h4>
+                                    <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 <button className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
-                                <button onClick={()=>handleStoryStatus(story.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
+                                <button onClick={()=>handleStoryStatus(story?.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
                             </div>
                         </div>
                     ))

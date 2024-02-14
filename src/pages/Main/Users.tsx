@@ -13,9 +13,6 @@ const Users = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
   const {users: search} = useAppSelector(state => state.searchUser);
-
-  
-
   const [searchText, setSearchText] = useState('');
   const [openDropdown, setOpenDropdown] = useState(false);
 

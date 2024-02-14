@@ -8,7 +8,7 @@ import Verify from "../pages/Auth/Verify";
 import DashboardHome from "../pages/Main/DashboardHome";
 import SettingDetail from "../pages/Main/SettingDetail";
 import Settings from "../pages/Main/Settings";
-import TransactionHistory from "../pages/Main/TransactionHistory";
+// import TransactionHistory from "../pages/Main/TransactionHistory";
 import Transactions from "../pages/Main/Transactions";
 import Users from "../pages/Main/Users";
 import Workers from "../pages/Main/Workers";

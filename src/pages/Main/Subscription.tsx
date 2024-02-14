@@ -8,8 +8,7 @@ import { ISubscription } from "../../types/subscription.interface";
 
 const Subscription = () => {
     const dispatch = useAppDispatch();
-    const { packages } : {packages: ISubscription} = useAppSelector(state=> state.getPackage);
-    console.log(packages)
+    const { packages } = useAppSelector(state=> state.getPackage);
     useEffect(()=>{
         dispatch(allPackage());
     }, [dispatch]);

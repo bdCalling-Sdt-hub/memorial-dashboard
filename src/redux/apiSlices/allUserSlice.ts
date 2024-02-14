@@ -15,6 +15,7 @@ export const AllUser = createAsyncThunk(
     async (value, thunkApi) => {
         try{
             const response = await baseURL.get(`/user/list`);
+            console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
