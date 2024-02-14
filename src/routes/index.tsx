@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <Workers />,
       },
       {
-        path: "/workers/:workerType",
+        path: "/workers/:workerType/:id",
         element: <StoryDetails />,
       },
 

@@ -1,28 +1,33 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import photo from "../../assets/Rectangle.png";
 import { Pagination } from 'antd';
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getStories } from "../../redux/apiSlices/story/getStoriesSlice";
+import { IStory } from "../../types/story.interface";
+
+
 const UserStory = () => {
-    const itemRender = (_, type, originalElement) => {
-        if (type === 'prev') {
-          return <a>Previous</a>;
-        }
-        if (type === 'next') {
-          return <a>Next</a>;
-        }
-        return originalElement;
-    };
+  const dispatch = useAppDispatch();
+  const [catId, setCatId] = useState(1);
+  const [page, setPage] = useState(1)
+  const {stories} = useAppSelector(state => state.getStories);
+  console.log(stories?.data)
+  useEffect(()=>{
+    dispatch(getStories({catId, page}));
+  },[dispatch, catId, page])
     return (
         <div>
             <div className="grid grid-cols-2 gap-4 my-6">
         {
-          [...Array(10)].map((index)=>(
-            <Link key={index} to="/workers/story-details">
+          stories?.data?.map((story: IStory, index:number)=>(
+            <Link key={index} to={`/workers/story-details/1`}>
               <div  className="flex items-center gap-6 w-full bg-white rounded-lg p-2">
                   <img src={photo} width={100} height={100} alt="" />
                   <div>
-                    <h3 className="text-[18px] font-medium">We helped our father write his last story</h3>
+                    <h3 className="text-[18px] font-medium">{story?.description}</h3>
                     <h4 className="text-[14px] font-normal">5:25 pm</h4>
-                    <h4 className="text-[14px] font-normal">24 Dec, 2023</h4>
+                    <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
                   </div>
               </div>
             </Link>
@@ -30,7 +35,12 @@ const UserStory = () => {
         }
       </div>
       <div className="flex items-center justify-center">
-        <Pagination total={500} itemRender={itemRender} /> 
+        <Pagination 
+          total={stories?.total} 
+          pageSize={stories?.per_page}
+          current={stories?.current_page}
+          onChange={(page)=> setPage(page)}
+        /> 
       </div>
         </div>
     )

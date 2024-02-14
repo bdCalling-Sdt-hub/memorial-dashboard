@@ -6,7 +6,7 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WorkersTable from "../../components/Workers/WorkersTable";
 import HeadingText from "../../util/HeadingText";
 import InputField from "../../util/InputField";
@@ -17,7 +17,6 @@ import photo from "../../assets/Rectangle.png";
 import { Pagination } from 'antd';
 import UserStory from "../../components/Workers/UserStory";
 import StoryRequest from "../../components/Workers/StoryRequest";
-
 const Workers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
