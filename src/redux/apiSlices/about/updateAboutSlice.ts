@@ -12,11 +12,12 @@ const initialState = {
 
 export const UpdateAbout = createAsyncThunk(
     'UpdateAbout',
-    async (value, thunkApi) => {
+    async (value:string, thunkApi) => {
         try{
-            const response = await baseURL.post(`/edit/about/1`, value);
+            console.log(value);
+            const response = await baseURL.post(`/update/about`, value);
             console.log(response?.data);
-            return response?.data;
+            return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -40,7 +41,7 @@ export const UpdateAboutSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.about= action.payload.data.data
+            state.about= action.payload;
         }),
         builder.addCase(UpdateAbout.rejected, (state)=> {
             state.error= true,

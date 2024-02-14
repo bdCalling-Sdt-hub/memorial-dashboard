@@ -16,7 +16,7 @@ export const getAbout = createAsyncThunk(
         try{
             const response = await baseURL.get(`/edit/about/1`);
             console.log(response?.data);
-            return response?.data;
+            return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -40,7 +40,7 @@ export const getAboutSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.about= action.payload.data.data
+            state.about= action.payload
         }),
         builder.addCase(getAbout.rejected, (state)=> {
             state.error= true,

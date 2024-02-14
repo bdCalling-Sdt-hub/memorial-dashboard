@@ -9,15 +9,18 @@ import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { getAbout } from "../../redux/apiSlices/about/getAboutSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import updateAboutSlice from "../../redux/apiSlices/about/updateAboutSlice";
+import axios from "axios";
+import Swal from 'sweetalert2';
 
 const AboutUs = () => {
   const dispatch = useAppDispatch();
   const {about} = useAppSelector(state => state.getAbout);
-  console.log(about)
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const [open, setOpen] = useState(false);
+  console.log(content);
+  /* const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modelTitle, setModelTitle] = useState("");
   const handleNavigate = (value: string) => {
@@ -34,11 +37,36 @@ const AboutUs = () => {
     } else {
       navigate(`/settings/${value}`);
     }
-  };
+  }; */
+
+  const handleUpdate = ()=>{
+    // dispatch(updateAboutSlice(content))
+    axios.post("http://192.168.10.121:4000/api/update/about",{ id: about?.id , description : content})
+    .then(res=>{
+      Swal.fire(
+        'Good job!',
+        res.data.message,
+        'success'
+      )
+    }).catch(err=>{
+      Swal.fire(
+        'Oops!',
+         err.response.data.message,
+        'error'
+      )
+    });
+  } 
+
+    
+  
 
   useEffect(()=>{
     dispatch(getAbout())
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(()=>{
+    setContent(about?.description);
+  }, [about]);
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
@@ -61,6 +89,7 @@ const AboutUs = () => {
       />
 
       <Button
+        onClick={handleUpdate}
         block
         style={{
           marginTop: "30px",
