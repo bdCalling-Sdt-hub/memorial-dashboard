@@ -5,6 +5,7 @@ import { Pagination } from 'antd';
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { getStories } from "../../redux/apiSlices/story/getStoriesSlice";
 import { IStory } from "../../types/story.interface";
+import moment from "moment";
 
 
 const UserStory = () => {
@@ -26,7 +27,7 @@ const UserStory = () => {
                   <img src={photo} width={100} height={100} alt="" />
                   <div>
                     <h3 className="text-[18px] font-medium">{story?.description}</h3>
-                    <h4 className="text-[14px] font-normal">5:25 pm</h4>
+                    <h4 className="text-[14px] font-normal">{moment(story.created_at).format('LT')}</h4>
                     <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
                   </div>
               </div>

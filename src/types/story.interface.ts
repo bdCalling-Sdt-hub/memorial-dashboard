@@ -5,6 +5,8 @@ export interface IStory {
     id: number
     description: string;
     death_date: string;
+    created_at: string;
+    story_title: string;
     total : number;
     story : {
         story_title: string;
