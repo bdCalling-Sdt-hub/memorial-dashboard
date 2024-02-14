@@ -15,7 +15,6 @@ export const storyStatus = createAsyncThunk(
         try{
             console.log(value)
             const response = await baseURL.post(`/story/status`, value);
-            console.log(response?.data?.data)
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
@@ -37,7 +36,6 @@ export const storyStatusSlice = createSlice({
             state.loading= true
         }),
         builder.addCase(storyStatus.fulfilled, (state, action)=> {
-            console.log(action.payload.data)
             state.error= false;
             state.success= true;
             state.loading= false;

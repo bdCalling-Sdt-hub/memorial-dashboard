@@ -13,7 +13,6 @@ const UserStory = () => {
   const [catId, setCatId] = useState(1);
   const [page, setPage] = useState(1)
   const {stories} = useAppSelector(state => state.getStories);
-  console.log(stories?.data)
   useEffect(()=>{
     dispatch(getStories({catId, page}));
   },[dispatch, catId, page])

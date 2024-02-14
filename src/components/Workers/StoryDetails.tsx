@@ -13,15 +13,13 @@ import IStory from "../../types/story.interface"
 const StoryDetails = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
-    const { story} = useAppSelector(state=> state.getStoryDetails);
+    const { story }: { story: IStory } = useAppSelector(state=> state.getStoryDetails);
     useEffect(()=>{
         if (id && !isNaN(parseInt(id))) {
             dispatch(getStory(parseInt(id)));
         }
-    }, [dispatch, id])
-    console.log(story);
-    // const timestamp = "2024-02-13T06:31:44.000000Z";
-    const time = moment(story?.created_at).format('LT');
+    }, [dispatch, id]);
+
     return (
         <div>
             <div className="flex items-end justify-end mb-11">
@@ -38,7 +36,7 @@ const StoryDetails = () => {
                         <HiVolumeUp size={24} color='#FFFFFF' />
                     </div>
                 </div>
-                <p className='text-[#2B2A2A] text-[18px] font-normal'>{time}, {story?.death_date}</p>
+                <p className='text-[#2B2A2A] text-[18px] font-normal'>{moment(story?.created_at).format('LT')}, {story?.death_date}</p>
                 <button className='w-[94px] h-[29px] rounded-[4px] bg-[#0071E3] text-white'>Indivisual</button>
             
 

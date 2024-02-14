@@ -10,6 +10,7 @@ export interface IStory {
     total : number;
     story : {
         story_title: string;
+        description: string
     };
     stories :{
         current_page: number;

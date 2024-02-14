@@ -1,53 +1,19 @@
 import Header from "../../layouts/Main/Header"
 import HeadingText from "../../util/HeadingText";
-
 import SubscriptionPlanCard from "../../components/DashboardHome/SubscriptionPlanCard";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useEffect } from "react";
+import { allPackage } from "../../redux/apiSlices/subscription/getPackageSlice";
+import { ISubscription } from "../../types/subscription.interface";
 
 const Subscription = () => {
-    const plan = [
-        {   
-            id: 1,
-            name: "Basic",
-            price: "4.99",
-            featureValue: "01 Photo Stories",
-            feature : [
-                "All People Stories",
-                "Uniformed Personal Stories  ",
-                "Pets Stories",
-                "Upload one photo on one story",
-                "Post story in between 1000 words",
-                "Post 10 stories at a time"
-            ]
-        },
-        {   
-            id: 2,
-            name: "Premium",
-            price: "9.99",
-            featureValue: "02 Photo Stories",
-            feature : [
-                "All People Stories",
-                "Uniformed Personal Stories  ",
-                "Pets Stories",
-                "Upload one photo on one story",
-                "Post story in between 1000 words",
-                "Post 10 stories at a time"
-            ]
-        },{
-            id: 3,
-            name: "Gold",
-            price: "14.99",
-            featureValue: "Unlimited Photo Stories",
-            feature : [
-                "All People Stories",
-                "Uniformed Personal Stories  ",
-                "Pets Stories",
-                "Upload one photo on one story",
-                "Post story in between 1000 words",
-                "Post 10 stories at a time"
-            ]
-        }
-
-    ]
+    const dispatch = useAppDispatch();
+    const { packages } : {packages: ISubscription} = useAppSelector(state=> state.getPackage);
+    console.log(packages)
+    useEffect(()=>{
+        dispatch(allPackage());
+    }, [dispatch]);
+    
     return (
         <div className="">
             {/* user menu */}
@@ -60,13 +26,12 @@ const Subscription = () => {
                 {/* subscription card */}
                 <div className="flex flex-wrap gap-4">
                     {
-                        plan.map((item, index)=>(
+                        packages?.map((item: ISubscription, index)=>(
                             <SubscriptionPlanCard
                                 id={item?.id}
                                 key={index}
-                                name={item.name}
-                                price={item.price}
-                                featureValue={item.featureValue}
+                                name={item.package_name}
+                                price={item.amount}
                                 feature={item.feature}
                             />
                         ))

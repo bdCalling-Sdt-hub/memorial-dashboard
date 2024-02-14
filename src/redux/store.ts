@@ -2,9 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import allUserReducer from "./apiSlices/allUserSlice";
 import searchUserSlice from "./apiSlices/searchUserSlice";
 import editSubscriptionSlice from "./apiSlices/editSubscriptionSlice";
-/* import StoryDetails from "./apiSlices/StoryDetails";
-import storyRequest from "./apiSlices/storyRequest";
-import userStorySlice from "./apiSlices/userStorySlice"; */
 import getAboutSlice from "./apiSlices/about/getAboutSlice";
 import updateAboutSlice from "./apiSlices/about/updateAboutSlice";
 import getPrivacySlice from "./apiSlices/privacyPolicy/getPrivacySlice";
@@ -15,15 +12,13 @@ import getStoriesSlice from "./apiSlices/story/getStoriesSlice";
 import getStoryDetailsSlice from "./apiSlices/story/getStoryDetailsSlice";
 import storyRequestSlice from "./apiSlices/story/storyRequestSlice";
 import storyStatusSlice from "./apiSlices/story/storyStatusSlice";
+import getPackageSlice from "./apiSlices/subscription/getPackageSlice";
 
 export const store = configureStore({
   reducer: {
     allUser: allUserReducer,
     searchUser: searchUserSlice,
     editSubscription: editSubscriptionSlice,
-    /* storyDetails : StoryDetails,
-    storyRequest : storyRequest,
-    userStory : userStorySlice, */
     getAbout: getAboutSlice,
     updateAbout : updateAboutSlice,
     getPrivacy: getPrivacySlice,
@@ -33,7 +28,8 @@ export const store = configureStore({
     getStories : getStoriesSlice,
     getStoryDetails : getStoryDetailsSlice,
     storyRequest: storyRequestSlice,
-    storyStatus: storyStatusSlice
+    storyStatus: storyStatusSlice,
+    getPackage: getPackageSlice
   },
 });
 

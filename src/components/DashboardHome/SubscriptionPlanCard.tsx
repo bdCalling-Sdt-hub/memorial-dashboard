@@ -5,18 +5,17 @@ import { Link } from "react-router-dom";
 interface SubscriptionPlanCardProps{
     name: string;
     price: string;
-    featureValue: string;
-    feature: string[];
+    feature?: string[];
     id: number;
 
 } 
 const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     name,
     price,
-    featureValue,
     feature,
     id
 }) => {
+    console.log(feature);
     return (
         <div 
             className="
@@ -35,13 +34,13 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                 <PiCrownSimpleFill size={32} color="#FFC60B" /> <span className="text-[34px] font-semibold">{name}</span>
             </div>
             <h1 className="text-[#0071E3] text-center text-6 font-semibold">${price}/Month</h1>
-            <h1 className="text-[#0071E3] text-center text-6 font-semibold">{featureValue}</h1>
+            {/* <h1 className="text-[#0071E3] text-center text-6 font-semibold">{featureValue}</h1> */}
             <div className="mt-[23px]">
                 {
-                    feature?.map((item, index)=>
+                    JSON.parse(feature)?.map((item, index)=>
                     <div key={index} className="flex items-center gap-[10px] mb-4">
                         <FaCircleCheck size={24} color="#0071E3"/>
-                        <p className="text-[#0071E3]">{item}</p>
+                        <p className="text-[#0071E3]">{item?.feature}</p>
                     </div>
                     )
                 }
