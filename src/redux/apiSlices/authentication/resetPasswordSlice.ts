@@ -7,16 +7,16 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    profile: {},
+    message: null,
   };
 
 export const resetPassword = createAsyncThunk(
     'resetPassword',
     async (value, thunkApi) => {
         try{
-            const response = await baseURL.post(`/reset-pass`);
-            console.log(response);
-            return response?.data;
+            console.log(value);
+            const response = await baseURL.post(`/reset-pass`, value);
+            return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -37,16 +37,16 @@ export const resetPasswordSlice = createSlice({
             state.loading= true
         }),
         builder.addCase(resetPassword.fulfilled, (state, action)=> {
-            state.error= false,
-            state.success= true,
-            state.loading= false
-            state.profile= action.payload.data.data
+            state.error= false;
+            state.success= true;
+            state.loading= false;
+            state.message= action.payload;
         }),
         builder.addCase(resetPassword.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.profile= {}
+            state.message= null
         })
     }
 })

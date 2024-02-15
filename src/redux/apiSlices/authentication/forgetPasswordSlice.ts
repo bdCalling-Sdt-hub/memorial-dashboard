@@ -7,16 +7,19 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    profile: {},
+    message: null,
   };
 
+interface IEmail{
+    email: string
+}
 export const forgetPassword = createAsyncThunk(
     'forgetPassword',
-    async (value, thunkApi) => {
+    async (email: IEmail, thunkApi) => {
         try{
-            const response = await baseURL.post(`/forget-pass`);
-            console.log(response);
-            return response?.data;
+            const response = await baseURL.post(`/forget-pass`, email);
+            console.log(response?.data?.message);
+            return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -29,7 +32,7 @@ export const forgetPassword = createAsyncThunk(
 
 
 export const forgetPasswordSlice = createSlice({
-    name: 'profile',
+    name: 'forget password',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
@@ -40,13 +43,13 @@ export const forgetPasswordSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.profile= action.payload.data.data
+            state.message= action.payload
         }),
         builder.addCase(forgetPassword.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.profile= {}
+            state.message= null
         })
     }
 })

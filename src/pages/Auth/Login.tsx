@@ -9,20 +9,23 @@ import Swal from "sweetalert2";
 const Login = () => {
   const dispatch = useAppDispatch();
   const {isSuccess, user} = useAppSelector(state=> state.login);
-  console.log(isSuccess, user)
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  if (isSuccess) {
+  if(isSuccess){
     Swal.fire({
-      text: "Login Successfully",
-    });
-    setTimeout(()=>{
+      position: "center",
+      icon: "success",
+      title: "Login Successfully",
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
       navigate("/")
-    }, 2000)
+    });
   }
+  
   const handleLogin=()=>{
     if(email && password){
       dispatch(login({email:email, password: password}))

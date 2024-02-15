@@ -1,22 +1,24 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
-
+const emails = localStorage.getItem("resetEmail");
+console.log(emails)
 
 const initialState = {
     error: false,
     success: false,
     loading: false,
-    profile: {},
+    message: null,
   };
 
 export const verifiedOtpReset = createAsyncThunk(
     'verifiedOtpReset',
     async (value, thunkApi) => {
+        console.log(value, emails)
         try{
-            const response = await baseURL.post(`/profile/edit/1?_method=PUT`);
-            console.log(response);
-            return response?.data;
+            const response = await baseURL.post(`/verified-checker`, {email: emails, otp: value});
+            console.log(response.data.message);
+            return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -29,7 +31,7 @@ export const verifiedOtpReset = createAsyncThunk(
 
 
 export const verifiedOtpResetSlice = createSlice({
-    name: 'profile',
+    name: 'message',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
@@ -40,13 +42,13 @@ export const verifiedOtpResetSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.profile= action.payload.data.data
+            state.message= action.payload;
         }),
         builder.addCase(verifiedOtpReset.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.profile= {}
+            state.message= null
         })
     }
 })

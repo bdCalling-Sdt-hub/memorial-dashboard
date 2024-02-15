@@ -1,8 +1,7 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xMC4zNTo4MDAwL2FwaS9sb2dpbiIsImlhdCI6MTcwNzk2ODIxNiwiZXhwIjoxNzA3OTcxODE2LCJuYmYiOjE3MDc5NjgyMTYsImp0aSI6InpiZEVjVmJEMTdLODk0UnUiLCJzdWIiOiIxNSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.gIHagu4PayTXB3gNlCB6vK4p4CyTkAt1jFx_1S4G31Y"
-
+const token = localStorage.getItem('token');
 
 const initialState = {
     error: false,

@@ -1,14 +1,39 @@
 import { IconChevronLeft, IconMail } from "@tabler/icons-react";
 import { Input } from "antd";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { forgetPassword } from "../../redux/apiSlices/authentication/forgetPasswordSlice";
+import Swal from "sweetalert2";
+
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { message} = useAppSelector(state=> state.forgetPassword);
+  const [email, setEmail] = useState('')
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    localStorage.setItem("resetEmail", email)
     e.preventDefault();
-
-    navigate("/auth/verify");
+    console.log(email);
+    dispatch(forgetPassword({email : email}))
   };
+
+  useEffect(()=>{
+    if(message){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: message,
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        navigate("/auth/verify")
+      });
+    }
+  }, [message, navigate]);
+  
+
   return (
     <div className=" w-[342px] mx-auto">
       <Link
@@ -25,7 +50,8 @@ const ForgetPassword = () => {
       <form onSubmit={handleSubmit} className="w-full space-y-5">
         <Input
           size="large"
-          placeholder="Enter your password"
+          placeholder="Enter your Email"
+          onChange={(e)=>setEmail(e.target.value)}
           prefix={<IconMail className="mr-2" color="#0071E3" size={24} />}
           style={{
             border: "1px solid #ffff",

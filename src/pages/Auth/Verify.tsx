@@ -1,15 +1,57 @@
 import { IconChevronLeft } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { verifiedOtpReset } from "../../redux/apiSlices/authentication/verifiedOtpResetSlice";
+import Swal from "sweetalert2";
+import { forgetPassword } from "../../redux/apiSlices/authentication/forgetPasswordSlice";
 
 const Verify = () => {
+  const dispatch = useAppDispatch();
+  const { message } = useAppSelector(state=> state.verifiedOtp);
+  const {message: sms} = useAppSelector(state=> state.forgetPassword)
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
 
   const handleMatchOtp = () => {
-    navigate("/auth/reset-password");
+    // navigate("/auth/reset-password");
+    dispatch(verifiedOtpReset(otp));
   };
+
+  useEffect(()=>{
+    if(message){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: message,
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        navigate("/auth/reset-password")
+      });
+    }
+  }, [message, navigate]);
+
+  const handleReset = ()=>{
+    const email= localStorage.getItem("resetEmail");
+    if(email){
+      dispatch(forgetPassword({email : email}));
+    }
+  }
+
+
+  useEffect(()=>{
+    if(sms){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: sms,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }, [sms]);
   return (
     <div className=" w-[342px] mx-auto">
       <Link
@@ -42,9 +84,9 @@ const Verify = () => {
       />
       <p className="flex items-center justify-between text-[#0071E3] mt-4 text-[18px] font-normal ">
         Didn’t receive code?
-        <Link to="/auth/verify" className="font-semibold text-[#0071E3]">
+        <p onClick={handleReset} className="font-semibold cursor-pointer text-[#0071E3]">
           Resend
-        </Link>
+        </p>
       </p>
       <button
         onClick={handleMatchOtp}

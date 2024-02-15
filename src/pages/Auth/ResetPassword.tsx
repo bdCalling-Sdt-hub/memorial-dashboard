@@ -1,12 +1,44 @@
 import { IconChevronLeft, IconLock } from "@tabler/icons-react";
 import { Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { resetPassword } from "../../redux/apiSlices/authentication/resetPasswordSlice";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ResetPassword = () => {
+  const [passwords, setPassword] = useState("")
+  const [currentPassword, setCurrentPassword] = useState("")
+  const dispatch = useAppDispatch();
+  const { message } = useAppSelector(state=> state.resetPassword)
+  const emails= localStorage.getItem("resetEmail");
   const navigate = useNavigate();
   const handleResetPassword = () => {
-    navigate("/auth/login");
+
+    const value = {
+      email : emails as string,
+      password: passwords as string,
+      password_confirmation: currentPassword as string
+
+    }
+
+    dispatch(resetPassword(value))
+      .then(response => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: response.payload,
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            navigate("/auth/login")
+          });
+      })
+      .catch(error => {
+        console.log(error)
+      });
   };
+
   return (
     <div className=" w-[342px] mx-auto">
       <Link
@@ -24,6 +56,7 @@ const ResetPassword = () => {
       <form className="w-full space-y-2">
         <Input.Password
           size="large"
+          onChange={(e)=>setPassword(e.target.value)}
           placeholder="Enter your password"
           prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
           style={{
@@ -38,7 +71,8 @@ const ResetPassword = () => {
         />
         <Input.Password
           size="large"
-          placeholder="Enter your password"
+          onChange={(e)=>setCurrentPassword(e.target.value)}
+          placeholder="Re-Enter your password"
           prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
           style={{
             border: "1px solid #ffff",
