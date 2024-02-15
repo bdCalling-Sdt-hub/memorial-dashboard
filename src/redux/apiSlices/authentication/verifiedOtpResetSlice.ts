@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
 const emails = localStorage.getItem("resetEmail");
-console.log(emails)
 
 const initialState = {
     error: false,
@@ -14,10 +13,8 @@ const initialState = {
 export const verifiedOtpReset = createAsyncThunk(
     'verifiedOtpReset',
     async (value, thunkApi) => {
-        console.log(value, emails)
         try{
             const response = await baseURL.post(`/verified-checker`, {email: emails, otp: value});
-            console.log(response.data.message);
             return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;

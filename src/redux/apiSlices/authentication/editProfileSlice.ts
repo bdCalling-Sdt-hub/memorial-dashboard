@@ -19,11 +19,9 @@ export const editProfile = createAsyncThunk(
             const response = await baseURL.post(`/profile/edit/1?_method=PUT`, value, {
                 headers: {
                   "Content-Type": "application/json",
-                  "adminToken": `Bearer ${token}`,
+                  authorization: `Bearer ${token}`,
                 }
             });
-            console.log(token, value)
-            // console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
@@ -48,7 +46,7 @@ export const editProfileSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.profile= action.payload.data.data
+            state.profile= action.payload.data
         }),
         builder.addCase(editProfile.rejected, (state)=> {
             state.error= true,

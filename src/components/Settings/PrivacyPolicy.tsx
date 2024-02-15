@@ -20,23 +20,19 @@ const PrivacyPolicy = () => {
   const [content, setContent] = useState("");
 
   const handleUpdate = ()=>{
-    dispatch(UpdatePrivacy({ id: privacy?.id, description: content}));
-    /* axios.post("http://192.168.10.121:4000/api/update/privacy/",{ id: 1, description: content})
-    .then(res=>{
-      Swal.fire(
-        'Good job!',
-        res.data.message,
-        
-        'success'
-      )
-      dispatch(getPrivacy())
-    }).catch(err=>{
-      Swal.fire(
-        'Oops!',
-         err.response.data.message,
-        'error'
-      )
-    }); */
+    dispatch(UpdatePrivacy({ id: privacy?.id, description: content}))
+    .then(response => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Update Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      })
+      })
+      .catch(error => {
+        console.log(error)
+    });
   } 
 
   useEffect(()=>{

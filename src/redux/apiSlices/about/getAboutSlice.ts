@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
-
+const token = localStorage.getItem('token');
 
 const initialState = {
     error: false,
@@ -14,8 +14,12 @@ export const getAbout = createAsyncThunk(
     'getAbout',
     async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/edit/about/1`);
-            console.log(response?.data);
+            const response = await baseURL.get(`/edit/about/1`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`,
+                }
+            });
             return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;

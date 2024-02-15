@@ -3,7 +3,7 @@ import HeadingText from "../../util/HeadingText"
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { editSubscription } from "../../redux/apiSlices/term&condition/editSubscriptionSlice";
+import { editSubscription } from "../../redux/apiSlices/subscription/editSubscriptionSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useParams } from "react-router-dom"
 import React from 'react';

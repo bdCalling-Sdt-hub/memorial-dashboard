@@ -1,20 +1,34 @@
 import { Button } from "antd";
 import JoditEditor from "jodit-react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Header from "../../layouts/Main/Header";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { getTermsCondition } from "../../redux/apiSlices/term&condition/getTermsConditionSlice";
 import { UpdateTermsCondition } from "../../redux/apiSlices/term&condition/updateTermsConditionSlice";
+import Swal from "sweetalert2";
 
 const TermsOfService = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const { term, } = useAppSelector(state=> state.getTermsCondition);
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const handleUpdate = () => {
-    dispatch(UpdateTermsCondition({ id: term?.id, description: content}));
+    dispatch(UpdateTermsCondition({ id: term?.id, description: content})).then(response => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Update Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      })
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
     dispatch(getTermsCondition())
   };
   

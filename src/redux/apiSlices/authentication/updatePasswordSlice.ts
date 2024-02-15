@@ -13,8 +13,14 @@ const initialState = {
 export const updatePassword = createAsyncThunk(
     'updatePassword',
     async (value, thunkApi) => {
+        console.log(value)
         try{
-            const response = await baseURL.post(`/profile/edit/1?_method=PUT`);
+            const response = await baseURL.post(`/update-pass`, value, {
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            });
             console.log(response);
             return response?.data;
         }catch(error){

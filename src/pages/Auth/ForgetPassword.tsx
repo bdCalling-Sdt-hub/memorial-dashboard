@@ -15,7 +15,6 @@ const ForgetPassword = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     localStorage.setItem("resetEmail", email)
     e.preventDefault();
-    console.log(email);
     dispatch(forgetPassword({email : email}))
   };
 

@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
             const response = await baseURL.post(`/login`, {email: value.email, password: value.password}, {
                 headers: {
                     "Content-Type": "application/json",
-                    "adminToken": `Bearer ${localStorage.getItem('token')}`,
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             });
             localStorage.setItem('token', response.data.access_token);

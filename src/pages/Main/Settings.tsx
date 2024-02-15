@@ -4,12 +4,33 @@ import { useState } from "react";
 import OTPInput from "react-otp-input";
 import {  useNavigate } from "react-router-dom";
 import Header from "../../layouts/Main/Header";
+import { useAppDispatch } from "../../redux/hook";
+import { updatePassword } from "../../redux/apiSlices/authentication/updatePasswordSlice";
+import { forgetPassword } from "../../redux/apiSlices/authentication/forgetPasswordSlice";
+import Swal from "sweetalert2";
+import { verifiedOtpReset } from "../../redux/apiSlices/authentication/verifiedOtpResetSlice";
+import { resetPassword } from "../../redux/apiSlices/authentication/resetPasswordSlice";
+const resetEmail= localStorage.getItem("resetEmail");
+
 
 const Settings = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modelTitle, setModelTitle] = useState("");
   const [otp, setOtp] = useState("");
+  const [changeAuth, setChangeAuth] = useState('');
+  const [emails, setEmail] = useState('');
+  const [resetAuth, setResetAuth] = useState('');
+  console.log(resetAuth)
+
+  const handleChange = (e:any) => {
+    setChangeAuth(prev=>({...prev, [e.target.name]:e.target.value}))
+  }
+  
+  const handleReset = (e:any) => {
+    setResetAuth(prev=>({...prev, [e.target.name]:e.target.value}))
+  }
 
   const handleNavigate = (value: string) => {
     if (value === "notification") {
@@ -26,6 +47,7 @@ const Settings = () => {
       navigate(`/settings/${value}`);
     }
   };
+
 
   const onChange = (checked: boolean) => {
     console.log(`switch to ${checked}`);
@@ -60,6 +82,78 @@ const Settings = () => {
     },
     
   ];
+
+  const handleChangePassword=(e:any)=>{
+    e.preventDefault();
+    const value = {
+      current_password: changeAuth.current_password,
+      new_password: changeAuth.new_password,
+      confirm_password: changeAuth.confirm_password,
+    }
+    dispatch(updatePassword(value));
+  }
+  const handleForgetPassword=(e)=>{
+    e.preventDefault();
+    if(emails){
+      dispatch(forgetPassword({email: emails})).then(response => {
+        console.log()
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: response.payload,
+            showConfirmButton: false,
+            timer: 1500
+          }).then(()=>{
+            setModelTitle("Verify OTP")
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        });
+    }
+  }
+
+  const handleVerifyOtp=(e:any)=>{
+    e.preventDefault();
+    dispatch(verifiedOtpReset(otp)).then(response => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: response.payload,
+          showConfirmButton: false,
+          timer: 1500
+        }).then(()=>{
+          setModelTitle("Reset Password")
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+  const handleResetPassword=(e:any)=>{
+    e.preventDefault();
+    const value = {
+      email : resetEmail as string,
+      password: resetAuth.password as string,
+      password_confirmation: resetAuth.confirmation_password as string
+
+    }
+    dispatch(resetPassword(value)).then(response => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: response.payload,
+          showConfirmButton: false,
+          timer: 1500
+        }).then(()=>{
+          setModelTitle("Reset Password")
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+
 
   return (
   <div>
@@ -124,11 +218,14 @@ const Settings = () => {
                 </button>
               </form>
             )}
+
             {modelTitle === "Change password" && (
-              <form className="w-full">
+              <form className="w-full" onSubmit={handleChangePassword}>
                 <Input.Password
                   size="large"
+                  onChange={handleChange}
                   placeholder="Enter your password"
+                  name="current_password"
                   prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
                   style={{
                     border: "1px solid #0071E3",
@@ -142,6 +239,8 @@ const Settings = () => {
                 />
                 <Input.Password
                   size="large"
+                  name="new_password"
+                  onChange={handleChange}
                   placeholder="Enter your password"
                   prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
                   style={{
@@ -157,6 +256,8 @@ const Settings = () => {
 
                 <Input.Password
                   size="large"
+                  name="confirm_password"
+                  onChange={handleChange}
                   placeholder="Enter your password"
                   prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
                   style={{
@@ -184,14 +285,18 @@ const Settings = () => {
                 </button>
               </form>
             )}
+
+
+
             {modelTitle === "Forget password" && (
-              <form>
+              <form onSubmit={handleForgetPassword}>
                 <p className="text-center">
                   Please enter your email address to recover your account.
                 </p>
                 <Input
                   size="large"
-                  placeholder="Enter your password"
+                  placeholder="Enter your Email"
+                  onChange={(e)=>setEmail(e.target.value)}
                   prefix={<IconMail className="mr-2" color="#0071E3" size={24} />}
                   style={{
                     border: "1px solid #0071E3",
@@ -206,7 +311,7 @@ const Settings = () => {
                 />
 
                 <button
-                  onClick={() => setModelTitle("Verify OTP")}
+                  // onClick={() => setModelTitle("Verify OTP")}
                   type="submit"
                   className="bg-[#0071E3]
             text-white mt-5 py-3 rounded-lg w-full hover:bg-white border hover:text-[#0071E3] duration-200"
@@ -215,8 +320,10 @@ const Settings = () => {
                 </button>
               </form>
             )}
+
+
             {modelTitle === "Verify OTP" && (
-              <form>
+              <form onSubmit={handleVerifyOtp}>
                 <p className="text-center">
                   Please enter your email address to recover your account.
                 </p>
@@ -242,7 +349,6 @@ const Settings = () => {
                 </p>
 
                 <button
-                  onClick={() => setModelTitle("Reset Password")}
                   type="submit"
                   className="bg-[#0071E3]
             text-white mt-5 py-3 rounded-lg w-full hover:bg-white hover:text-[#0071E3] duration-200"
@@ -251,14 +357,20 @@ const Settings = () => {
                 </button>
               </form>
             )}
+
+
+
+
             {modelTitle === "Reset Password" && (
-              <form className="w-full">
+              <form className="w-full" onSubmit={handleResetPassword}>
                 <p className="text-center mb-5">
                   Set a new password and it should be 8-10 characters long.
                 </p>
                 <Input.Password
                   size="large"
                   placeholder="Enter your password"
+                  name="password"
+                  onChange={handleReset}
                   prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
                   style={{
                     border: "1px solid #0071E3",
@@ -272,7 +384,9 @@ const Settings = () => {
                 />
                 <Input.Password
                   size="large"
-                  placeholder="Enter your password"
+                  name="confirmation_password"
+                  onChange={handleReset}
+                  placeholder="Re-Enter your password"
                   prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
                   style={{
                     border: "1px solid #0071E3",

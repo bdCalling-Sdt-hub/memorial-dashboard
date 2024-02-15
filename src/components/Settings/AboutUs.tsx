@@ -6,8 +6,7 @@ import Header from "../../layouts/Main/Header";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { getAbout } from "../../redux/apiSlices/about/getAboutSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-// import updateAboutSlice from "../../redux/apiSlices/about/updateAboutSlice";
-import axios from "axios";
+import { UpdateAbout } from "../../redux/apiSlices/about/updateAboutSlice";
 import Swal from 'sweetalert2';
 
 const AboutUs = () => {
@@ -18,21 +17,19 @@ const AboutUs = () => {
   
 
   const handleUpdate = ()=>{
-    // dispatch(updateAboutSlice(content))
-    axios.post("http://192.168.10.121:4000/api/update/about",{ id: about?.id , description : content})
-    .then(res=>{
-      Swal.fire(
-        'Good job!',
-        res.data.message,
-        'success'
-      )
-    }).catch(err=>{
-      Swal.fire(
-        'Oops!',
-         err.response.data.message,
-        'error'
-      )
-    });
+    dispatch(UpdateAbout({ id: about?.id , description : content}))
+    .then(response => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Update Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      })
+      })
+      .catch(error => {
+        console.log(error)
+      });
   } 
 
     
