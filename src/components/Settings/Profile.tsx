@@ -19,9 +19,9 @@ interface IProfile {
 const Profile: React.FC<IProfile> = () => {
   const dispatch = useAppDispatch();
   const {profile} = useAppSelector(state=> state.getProfile);
-  console.log(profile);
+  
   useEffect(()=>{
-    dispatch(getProfile)
+    dispatch(getProfile())
   },[dispatch]);
   return (
     <div>
@@ -35,10 +35,11 @@ const Profile: React.FC<IProfile> = () => {
         
           {/* Banner */}
           <div className="h-[208px] bg-[#0071E3] rounded-xl py-8 px-6 mb-6 flex items-center gap-[54px]">
-              <img src={person} width={144} height={144} alt="" />
+              <img src={profile?.image ? profile?.image : person} width={144} height={144} alt="" />
               <div className="text-[#FFFFFF]">
-                <h1 className="text-3xl font-medium ">Bruce Matthews</h1>
-                <p className="text-lg font-medium pt-[12px]">Admin</p>
+                {/* user name */}
+                <h1 className="text-3xl font-medium ">{profile?.fullName}</h1>
+                <p className="text-lg font-medium pt-[12px]">{profile?.userType}</p>
 
                 <Link to="/settings/edit-profile">
                   <button 
@@ -68,7 +69,7 @@ const Profile: React.FC<IProfile> = () => {
             </div>
 
             {/* user name */}
-            <p className="text-xl font-normal">Bruce Matthews</p>
+            <p className="text-xl font-normal">{profile?.fullName}</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -77,7 +78,7 @@ const Profile: React.FC<IProfile> = () => {
             </div>
 
             {/* user email */}
-            <p className="text-xl font-normal">bruce.07@gmail.com</p>
+            <p className="text-xl font-normal">{profile?.email}</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
@@ -85,7 +86,7 @@ const Profile: React.FC<IProfile> = () => {
             </div>
 
             {/* user phone number */}
-            <p className="text-xl font-normal">(480) 555-0103</p>
+            <p className="text-xl font-normal">{profile?.mobile ? profile?.mobile : "017569845"}</p>
           </div>
           
           <div className="flex items-center gap-4">
@@ -94,7 +95,7 @@ const Profile: React.FC<IProfile> = () => {
             </div>
 
             {/* user address */}
-            <p className="text-xl font-normal">3517 W. Gray St. Utica, Pennsylvania 57867</p>
+            <p className="text-xl font-normal">{profile?.address ? profile?.address : "3517 W. Gray St. Utica, Pennsylvania 57867"}</p>
           </div>
         </div>
       </div>

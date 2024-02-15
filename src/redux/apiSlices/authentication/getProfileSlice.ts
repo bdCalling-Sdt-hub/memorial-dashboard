@@ -21,8 +21,7 @@ export const getProfile = createAsyncThunk(
                   authorization: `Bearer ${token}`,
                 }
             });
-            console.log(response);
-            return response?.data;
+            return response?.data?.user;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -46,7 +45,7 @@ export const getProfileSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.profile= action.payload.data.data
+            state.profile= action.payload;
         }),
         builder.addCase(getProfile.rejected, (state)=> {
             state.error= true,
