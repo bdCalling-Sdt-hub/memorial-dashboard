@@ -6,16 +6,26 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    profile: {},
-  };
+    isSuccess: false,
+    user: {},
+};
+interface IValue {
+    email: string;
+    password: string;
+}
 
 export const login = createAsyncThunk(
     'login',
-    async (value, thunkApi) => {
+    async (value: IValue, thunkApi) => {
         try{
-            const response = await baseURL.post(`/login`);
-            console.log(response);
-            return response?.data;
+            const response = await baseURL.post(`/login`, {email: value.email, password: value.password}, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "adminToken": `Bearer ${localStorage.getItem('token')}`,
+                }
+            });
+            localStorage.setItem('token', response.data.access_token);
+            return response?.data.user;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -33,19 +43,22 @@ export const loginSlice = createSlice({
     reducers: {},
     extraReducers: (builder) =>{
         builder.addCase(login.pending, (state)=> {
-            state.loading= true
+            state.loading= true;
+            state.isSuccess= false 
         }),
         builder.addCase(login.fulfilled, (state, action)=> {
-            state.error= false,
-            state.success= true,
-            state.loading= false
-            state.profile= action.payload.data.data
+            state.error= false;
+            state.success= true;
+            state.loading= false;
+            state.isSuccess = true;
+            state.user= action.payload;
         }),
         builder.addCase(login.rejected, (state)=> {
-            state.error= true,
-            state.success= false,
-            state.loading= false
-            state.profile= {}
+            state.error= true;
+            state.success= false;
+            state.loading= false;
+            state.isSuccess = false;
+            state.user= {}
         })
     }
 })

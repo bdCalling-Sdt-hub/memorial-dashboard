@@ -1,17 +1,42 @@
 import { IconLock, IconMail } from "@tabler/icons-react";
 import { Input } from "antd";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { login } from "../../redux/apiSlices/authentication/loginSlice";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const {isSuccess, user} = useAppSelector(state=> state.login);
+  console.log(isSuccess, user)
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  if (isSuccess) {
+    Swal.fire({
+      text: "Login Successfully",
+    });
+    setTimeout(()=>{
+      navigate("/")
+    }, 2000)
+  }
+  const handleLogin=()=>{
+    if(email && password){
+      dispatch(login({email:email, password: password}))
+    }
+  }
   return (
     <div className=" w-[342px] mx-auto">
       <h2 className="mb-12 text-2xl font-semibold text-[#0071E3]">Sign in to continue</h2>
       <form className="w-full space-y-2">
         <Input
+          name="email"
+          onChange={(e)=>setEmail(e.target.value)}
           size="large"
-          placeholder="Enter your password"
+          placeholder="Enter your Email"
           prefix={<IconMail className="mr-2" color="#0071E3" size={24} />}
           style={{
             border: "1px solid #ffff",
@@ -24,7 +49,9 @@ const Login = () => {
           bordered={false}
         />
         <Input.Password
+          name="password"
           size="large"
+          onChange={(e)=>setPassword(e.target.value)}
           placeholder="Enter your password"
           prefix={<IconLock className="mr-2" color="#0071E3" size={24} />}
           style={{
@@ -44,9 +71,7 @@ const Login = () => {
       </form>
 
       <button
-        onClick={() => {
-          navigate("/");
-        }}
+        onClick={handleLogin}
         className="bg-[#0071E3] text-white text-[18px] font-normal w-full h-[56px] rounded-md mt-10"
       >
         Sign In
