@@ -1,12 +1,3 @@
-import {
-  IconEdit,
-  IconMail,
-  IconMapPin,
-  IconPhone,
-  IconUser,
-} from "@tabler/icons-react";
-import InputField from "../../util/InputField";
-import ModelValue from "../../util/ModelValue";
 import Header from "../../layouts/Main/Header";
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
@@ -16,13 +7,22 @@ import { HiOutlineMail } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useEffect } from "react";
+import { getProfile } from "../../redux/apiSlices/authentication/getProfileSlice";
 
 interface IProfile {
   isProfileEdit?: boolean;
   setIsProfileEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
+const Profile: React.FC<IProfile> = () => {
+  const dispatch = useAppDispatch();
+  const {profile} = useAppSelector(state=> state.getProfile);
+  console.log(profile);
+  useEffect(()=>{
+    dispatch(getProfile)
+  },[dispatch]);
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
@@ -66,6 +66,8 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
               <CiUser size={24} color="#0071E3" />
             </div>
+
+            {/* user name */}
             <p className="text-xl font-normal">Bruce Matthews</p>
           </div>
 
@@ -73,12 +75,16 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
               <HiOutlineMail size={24} color="#0071E3" />
             </div>
+
+            {/* user email */}
             <p className="text-xl font-normal">bruce.07@gmail.com</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
               <IoCallOutline size={24} color="#0071E3" />
             </div>
+
+            {/* user phone number */}
             <p className="text-xl font-normal">(480) 555-0103</p>
           </div>
           
@@ -86,6 +92,8 @@ const Profile: React.FC<IProfile> = ({ isProfileEdit, setIsProfileEdit }) => {
             <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#E6F1FC]">
               <CiLocationOn size={24} color="#0071E3" />
             </div>
+
+            {/* user address */}
             <p className="text-xl font-normal">3517 W. Gray St. Utica, Pennsylvania 57867</p>
           </div>
         </div>

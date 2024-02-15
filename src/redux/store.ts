@@ -13,23 +13,51 @@ import getStoryDetailsSlice from "./apiSlices/story/getStoryDetailsSlice";
 import storyRequestSlice from "./apiSlices/story/storyRequestSlice";
 import storyStatusSlice from "./apiSlices/story/storyStatusSlice";
 import getPackageSlice from "./apiSlices/subscription/getPackageSlice";
+import getProfileSlice from "./apiSlices/authentication/getProfileSlice";
+import registerSlice from "./apiSlices/authentication/registerSlice";
+import loginSlice from "./apiSlices/authentication/loginSlice";
+import editProfileSlice from "./apiSlices/authentication/editProfileSlice";
+import emailVerificationSlice from "./apiSlices/authentication/emailVerificationSlice";
+import forgetPasswordSlice from "./apiSlices/authentication/forgetPasswordSlice";
+import resetPasswordSlice from "./apiSlices/authentication/resetPasswordSlice";
+import updatePasswordSlice from "./apiSlices/authentication/updatePasswordSlice";
+import verifiedOtpResetSlice from "./apiSlices/authentication/verifiedOtpResetSlice";
 
 export const store = configureStore({
   reducer: {
     allUser: allUserReducer,
     searchUser: searchUserSlice,
+    getPackage: getPackageSlice,
     editSubscription: editSubscriptionSlice,
+
+    // settings state start here
     getAbout: getAboutSlice,
     updateAbout : updateAboutSlice,
     getPrivacy: getPrivacySlice,
     updatePrivacy : updatePrivacySlice,
     getTermsCondition: getTermsConditionSlice,
     updateTermsCondition : updateTermsConditionSlice,
+    // settings state end here
+
+    // story state start here
     getStories : getStoriesSlice,
     getStoryDetails : getStoryDetailsSlice,
     storyRequest: storyRequestSlice,
     storyStatus: storyStatusSlice,
-    getPackage: getPackageSlice
+    // story state end here
+
+    // authentication start here
+    getProfile: getProfileSlice, // start here
+    register: registerSlice,
+    login: loginSlice,
+    editProfile: editProfileSlice,
+    emailVerification: emailVerificationSlice,
+    forgetPassword: forgetPasswordSlice,
+    resetPassword: resetPasswordSlice,
+    updatePassword: updatePasswordSlice,
+    verifiedOtp: verifiedOtpResetSlice,
+    // authentication end here
+
   },
 });
 
