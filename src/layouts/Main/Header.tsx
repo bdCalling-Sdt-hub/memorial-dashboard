@@ -1,7 +1,9 @@
 import { FiBell } from "react-icons/fi";
 import { Badge } from "antd";
 import { Link, useNavigate  } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { getProfile } from "../../redux/apiSlices/authentication/getProfileSlice";
 
 
 const Header = () => {
@@ -11,6 +13,13 @@ const Header = () => {
     e.stopPropagation()
     navigate('/settings/notifications')
   }
+
+  const dispatch = useAppDispatch();
+  const {profile} = useAppSelector(state=> state.getProfile);
+  
+  useEffect(()=>{
+    dispatch(getProfile())
+  },[dispatch]);
   return (
     <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">
@@ -48,14 +57,14 @@ const Header = () => {
         </div>
         <Link className="flex items-center gap-3" to="/settings/profile">
           <img
-            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+            src={profile?.image !== null ? profile?.image : "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"}
             width={48}
             height={48}
             className="rounded-full"
           />
           <div>
-            <h3 className="text-[#0071E3] font-medium text-[14px] text-center">Jane Cooper</h3>
-            <p className="text-right font-semibold text-[14px]">Admin</p>
+            <h3 className="text-[#0071E3] font-medium text-[14px] text-center">{profile?.fullName}</h3>
+            <p className="text-right font-semibold text-[14px]">{profile?.userType}</p>
           </div>
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xMC4zNTo4MDAwL2FwaS9sb2dpbiIsImlhdCI6MTcwNzk3Njc5NywiZXhwIjoxNzA4MjM1OTk3LCJuYmYiOjE3MDc5NzY3OTcsImp0aSI6Img3d0RKVm5mVWd1MFk1UVciLCJzdWIiOiIxNSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.KWwbGyozy_OJV1HmY3dvfY0f2is0K62lGuOzwfRoepU"
+const token =  localStorage.getItem('token');
 
 
 const initialState = {
@@ -15,13 +15,15 @@ export const editProfile = createAsyncThunk(
     'editProfile',
     async (value, thunkApi) => {
         try{
+            console.log(token, value)
             const response = await baseURL.post(`/profile/edit/1?_method=PUT`, value, {
                 headers: {
                   "Content-Type": "application/json",
                   "adminToken": `Bearer ${token}`,
                 }
             });
-            console.log(response);
+            console.log(token, value)
+            // console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;

@@ -1,5 +1,5 @@
 import { Modal, Table } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IUser } from "../../types/user.interface";
 import ModelValue from "../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
@@ -10,11 +10,14 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 const UsersTable = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
+  const {users: search} = useAppSelector(state => state.searchUser);
   const [user, setUser] = useState<IUser>()
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 6;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(user);
+  
+  useEffect(()=> {
+    dispatch(AllUser(currentPage))
+  },[dispatch, currentPage]);
   
   const columns = [
     {
@@ -78,16 +81,17 @@ const UsersTable = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  
   return (
     <>
       <Table
         columns={columns}
-        dataSource={users}
+        dataSource={users?.data}
         pagination={{
-          pageSize,
+          pageSize: users?.per_page,
           showSizeChanger: false,
-          total: 7,
-          current: currentPage,
+          total: users?.total,
+          current: users?.current_page,
           onChange: handlePageChange,
         }}
       />

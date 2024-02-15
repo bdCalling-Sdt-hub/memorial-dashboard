@@ -5,32 +5,11 @@ import { useAppSelector } from "../../redux/hook";
 
 
 const UserSubsciptionDetailsCard= () => {
-    const {users} = useAppSelector(state => state.allUser);
-    const basic = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Quater Page");
-    const premium = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Half Page");
-    const gold = (users as unknown as IUser[]).filter((p:IUser) => p?.package?.package_name === "Full Page");
-    const subscription = [
-        {
-            name: "Total",
-            total : users?.length,
-        },
-        {
-            name: "Basic",
-            total : basic?.length,
-        },
-        {
-            name: "Premium",
-            total : premium?.length,
-        },
-        {
-            name: "Golden",
-            total : gold?.length,
-        }
-    ]
+    const {users, packeages} = useAppSelector(state => state.allUser);
     return (
         <div className='flex items-center justify-between'>
             {
-                subscription.map((item, index)=>
+                packeages.slice().reverse().map((item, index)=>
                     <div 
                         key={index} 
                         className='
@@ -58,8 +37,8 @@ const UserSubsciptionDetailsCard= () => {
                                 <HiUserGroup className='text-[#0071E3]' size={36} />
                             </div>
                             <div className=''>
-                                <h3 className='text-[#0071E3] font-medium text-[16px]'>{item.name} Users</h3>
-                                <h1 className='font-medium text-[30px]'>{item.total}</h1>
+                                <h3 className='text-[#0071E3] font-medium text-[16px]'>{item?.package_name}</h3>
+                                <h1 className='font-medium text-[30px]'>{item?.story_count}</h1>
                             </div>
                         </div>
                     </div>

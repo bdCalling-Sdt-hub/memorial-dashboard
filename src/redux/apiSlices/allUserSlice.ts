@@ -1,21 +1,27 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../Config";
-
+const token =  localStorage.getItem('token');
 
 const initialState = {
     error: false,
     success: false,
     loading: false,
     users: [],
+    packeages: []
   };
 
 export const AllUser = createAsyncThunk(
     'AllUser',
-    async (value, thunkApi) => {
+    async (value: number, thunkApi) => {
         try{
-            const response = await baseURL.get(`/user/list`);
-            console.log(response);
+            const response = await baseURL.get(`/user/list?page=${value}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`,
+                }
+            });
+            // console.log(response.data.data);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
@@ -37,16 +43,19 @@ export const allUserSlice = createSlice({
             state.loading= true
         }),
         builder.addCase(AllUser.fulfilled, (state, action)=> {
+            console.log(action.payload.data)
             state.error= false,
             state.success= true,
             state.loading= false
-            state.users= action.payload.data.data
+            state.users= action.payload.data;
+            state.packeages=action.payload.subscribe_packag.original;
         }),
         builder.addCase(AllUser.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
             state.users= []
+            state.packeages= []
         })
     }
 })
