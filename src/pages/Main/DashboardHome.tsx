@@ -7,8 +7,16 @@ import users from "../../../public/db/users.json";
 import HeadingText from "../../util/HeadingText";
 import { Link } from "react-router-dom";
 import UserCard from "../../util/UserCard";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useEffect } from "react";
+import { AllUser } from "../../redux/apiSlices/allUserSlice";
 
 const DashboardHome = () => {
+  const dispatch = useAppDispatch();
+  const {users} = useAppSelector(state=> state.allUser);
+  useEffect(()=>{
+    dispatch(AllUser(1));
+  },[dispatch])
   return (
     <div>
       <div className="flex gap-5 w-full">
@@ -37,7 +45,7 @@ const DashboardHome = () => {
             <div className="bg-[#8ABEF2] h-[1px] w-full mb-4"></div>
             <div className="grid grid-cols-1 gap-4 ">
               {
-                users.map((user, index) => (
+                users?.data?.slice(0, 6).map((user, index) => (
                 <UserCard key={index} user={user} />
                 ))
               }

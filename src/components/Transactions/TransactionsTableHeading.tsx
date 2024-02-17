@@ -1,14 +1,27 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IoIosArrowDown } from "react-icons/io"
 import HeadingText from "../../util/HeadingText"
+interface  TransactionsTableHeadingProps{
+  setChange : ()=> void;
+}
 
-
-const TransactionsTableHeading = () => {
+const TransactionsTableHeading:React.FC<TransactionsTableHeadingProps> = ({
+  setChange
+}) => {
     const [openDropdown, setOpenDropdown] = useState(false);
     const [Switch, setSwitch] = useState("Daily") ;
     const handleChange=(e:string)=>{
-        setSwitch(e)
+      setChange(e)
+      setSwitch(e);
     }
+
+    useEffect(()=>{
+      window.history.pushState(
+        null,
+        "",
+        `?${Switch}`
+      )
+    }, [Switch]);
     return (
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">

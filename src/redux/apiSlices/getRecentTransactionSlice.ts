@@ -7,21 +7,20 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    users: [],
-    packeages: []
+    transactions: []
   };
 
-export const AllUser = createAsyncThunk(
-    'AllUser',
-    async (value: number, thunkApi) => {
+export const getRecentTransaction = createAsyncThunk(
+    'getRecentTransaction',
+    async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/user/list?page=${value}`, {
+            const response = await baseURL.get(`/recent/transection`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
                 }
             });
-            return response?.data;
+            return response.data.data.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;
@@ -33,27 +32,25 @@ export const AllUser = createAsyncThunk(
 
 
 
-export const allUserSlice = createSlice({
+export const getRecentTransactionSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(AllUser.pending, (state)=> {
+        builder.addCase(getRecentTransaction.pending, (state)=> {
             state.loading= true
         }),
-        builder.addCase(AllUser.fulfilled, (state, action)=> {
+        builder.addCase(getRecentTransaction.fulfilled, (state, action)=> {
             state.error= false,
             state.success= true,
             state.loading= false
-            state.users= action.payload.data;
-            state.packeages=action.payload.subscribe_packag.original;
+            state.transactions=action.payload;
         }),
-        builder.addCase(AllUser.rejected, (state)=> {
+        builder.addCase(getRecentTransaction.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.users= []
-            state.packeages= []
+            state.transactions= []
         })
     }
 })
@@ -61,4 +58,4 @@ export const allUserSlice = createSlice({
 // Action creators are generated for each case reducer function
 //export const { } = userSlice.actions
 
-export default allUserSlice.reducer
+export default getRecentTransactionSlice.reducer

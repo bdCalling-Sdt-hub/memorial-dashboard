@@ -26,6 +26,8 @@ import getIncomeSlice from "./apiSlices/income/getIncomeSlice";
 import dailyIncomeSlice from "./apiSlices/income/dailyIncomeSlice";
 import weeklyIncomeSlice from "./apiSlices/income/weeklyIncomeSlice";
 import monthlyIncomeSlice from "./apiSlices/income/monthlyIncomeSlice";
+import getDashboardSlice from "./apiSlices/getDashboardSlice";
+import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -66,9 +68,11 @@ export const store = configureStore({
     getIncome : getIncomeSlice,
     getDailyIncome: dailyIncomeSlice,
     getWeeklyIncome: weeklyIncomeSlice,
-    getMonthlyIncome: monthlyIncomeSlice
+    getMonthlyIncome: monthlyIncomeSlice,
     // income end here
 
+    getDashboard : getDashboardSlice,
+    getRecentTransaction: getRecentTransactionSlice
   },
 });
 

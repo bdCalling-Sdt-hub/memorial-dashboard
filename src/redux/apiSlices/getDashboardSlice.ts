@@ -7,15 +7,14 @@ const initialState = {
     error: false,
     success: false,
     loading: false,
-    users: [],
     packeages: []
   };
 
-export const AllUser = createAsyncThunk(
-    'AllUser',
-    async (value: number, thunkApi) => {
+export const getDashboard = createAsyncThunk(
+    'getDashboard',
+    async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/user/list?page=${value}`, {
+            const response = await baseURL.get(`/dashboard`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
@@ -33,26 +32,24 @@ export const AllUser = createAsyncThunk(
 
 
 
-export const allUserSlice = createSlice({
+export const getDashboardSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(AllUser.pending, (state)=> {
+        builder.addCase(getDashboard.pending, (state)=> {
             state.loading= true
         }),
-        builder.addCase(AllUser.fulfilled, (state, action)=> {
+        builder.addCase(getDashboard.fulfilled, (state, action)=> {
             state.error= false,
             state.success= true,
             state.loading= false
-            state.users= action.payload.data;
-            state.packeages=action.payload.subscribe_packag.original;
+            state.packeages=action.payload;
         }),
-        builder.addCase(AllUser.rejected, (state)=> {
+        builder.addCase(getDashboard.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.users= []
             state.packeages= []
         })
     }
@@ -61,4 +58,4 @@ export const allUserSlice = createSlice({
 // Action creators are generated for each case reducer function
 //export const { } = userSlice.actions
 
-export default allUserSlice.reducer
+export default getDashboardSlice.reducer
