@@ -22,7 +22,6 @@ const Settings = () => {
   const [changeAuth, setChangeAuth] = useState('');
   const [emails, setEmail] = useState('');
   const [resetAuth, setResetAuth] = useState('');
-  console.log(resetAuth)
 
   const handleChange = (e:any) => {
     setChangeAuth(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -145,6 +144,7 @@ const Settings = () => {
         console.log(error)
       });
   }
+
   const handleResetPassword=(e:any)=>{
     e.preventDefault();
     const value = {
@@ -161,7 +161,7 @@ const Settings = () => {
           showConfirmButton: false,
           timer: 1500
         }).then(()=>{
-          setModelTitle("Reset Password")
+          setIsModalOpen(false)
         })
       })
       .catch(error => {
