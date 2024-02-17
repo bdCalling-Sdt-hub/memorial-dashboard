@@ -5,7 +5,6 @@ const token = localStorage.getItem('token');
 
 
 interface ValueProps{
-    packagId : number;
     page: number;
 }
 
@@ -21,14 +20,15 @@ export const getDailyIncome = createAsyncThunk(
     'getDailyIncome',
     async (value: ValueProps, thunkApi) => {
         try{
-            const {packagId, page} = value;
-            const response = await baseURL.get(`/daily/income?packagId=${packagId}&page=${page}`, {
+            const {page} = value;
+            const response = await baseURL.get(`/daily/income?packagId=1&page=${page}`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
                 }
             })
-            return response.data.data;
+            
+            return response.data.daily_transection;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

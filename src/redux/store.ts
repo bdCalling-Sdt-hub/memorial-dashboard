@@ -22,6 +22,10 @@ import forgetPasswordSlice from "./apiSlices/authentication/forgetPasswordSlice"
 import resetPasswordSlice from "./apiSlices/authentication/resetPasswordSlice";
 import updatePasswordSlice from "./apiSlices/authentication/updatePasswordSlice";
 import verifiedOtpResetSlice from "./apiSlices/authentication/verifiedOtpResetSlice";
+import getIncomeSlice from "./apiSlices/income/getIncomeSlice";
+import dailyIncomeSlice from "./apiSlices/income/dailyIncomeSlice";
+import weeklyIncomeSlice from "./apiSlices/income/weeklyIncomeSlice";
+import monthlyIncomeSlice from "./apiSlices/income/monthlyIncomeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -57,6 +61,13 @@ export const store = configureStore({
     updatePassword: updatePasswordSlice,
     verifiedOtp: verifiedOtpResetSlice,
     // authentication end here
+
+    // income start here 
+    getIncome : getIncomeSlice,
+    getDailyIncome: dailyIncomeSlice,
+    getWeeklyIncome: weeklyIncomeSlice,
+    getMonthlyIncome: monthlyIncomeSlice
+    // income end here
 
   },
 });

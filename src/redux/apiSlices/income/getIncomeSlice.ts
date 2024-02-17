@@ -3,12 +3,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
 const token = localStorage.getItem('token');
 
-
-interface ValueProps{
-    packagId : number;
-    page: number;
-}
-
 const initialState = {
     error: false,
     success: false,
@@ -19,10 +13,9 @@ const initialState = {
 
 export const getIncome = createAsyncThunk(
     'getIncome',
-    async (value: ValueProps, thunkApi) => {
+    async (value, thunkApi) => {
         try{
-            const {packagId, page} = value;
-            const response = await baseURL.get(`/income?packagId=${packagId}&page=${page}`, {
+            const response = await baseURL.get(`/income?packagId=1`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,

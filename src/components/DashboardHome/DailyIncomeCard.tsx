@@ -1,27 +1,38 @@
 import { HiUserGroup } from "react-icons/hi"
 import { CiWallet } from "react-icons/ci";
 import { BsCashStack } from "react-icons/bs";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useEffect } from "react";
+import { getIncome } from "../../redux/apiSlices/income/getIncomeSlice";
+
+
 
 const DailyIncomeCard = () => {
+    const dispatch = useAppDispatch();
+    const {income} = useAppSelector(state=> state.getIncome);
+    useEffect(()=>{
+        dispatch(getIncome())
+    }, [dispatch])
+    
     const subscription = [
         {
             name: "Total",
-            total : 2520,
+            total : income?.total_income,
             icon: <CiWallet color="#0071E3" size={36}/>
         },
         {
             name: "Daily",
-            total : 2520,
+            total : income?.daily_income,
             icon: <BsCashStack color="#0071E3" size={36}/>
         },
         {
             name: "Weekly",
-            total : 1824,
+            total : income?.weekly_income,
             icon: <BsCashStack color="#0071E3" size={36}/>
         },
         {
             name: "Monthly",
-            total : 1023,
+            total : income?.monthly_income,
             icon: <BsCashStack color="#0071E3" size={36}/>
         }
     ]
