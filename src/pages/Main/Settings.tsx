@@ -90,7 +90,22 @@ const Settings = () => {
       new_password: changeAuth.new_password,
       confirm_password: changeAuth.confirm_password,
     }
-    dispatch(updatePassword(value));
+    dispatch(updatePassword(value)).then(response => {
+      if(response.payload.message){
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: response.payload.message,
+          showConfirmButton: false,
+          timer: 1500
+        }).then(()=>{
+          setIsModalOpen(false)
+        })
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    });
   }
   const handleForgetPassword=(e)=>{
     e.preventDefault();

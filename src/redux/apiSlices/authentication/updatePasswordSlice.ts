@@ -46,7 +46,7 @@ export const updatePasswordSlice = createSlice({
             state.error= false,
             state.success= true,
             state.loading= false
-            state.profile= action.payload.data.data
+            state.profile= action.payload;
         }),
         builder.addCase(updatePassword.rejected, (state)=> {
             state.error= true,
