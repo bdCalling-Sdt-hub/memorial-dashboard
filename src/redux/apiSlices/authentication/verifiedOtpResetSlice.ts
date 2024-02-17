@@ -8,11 +8,15 @@ const initialState = {
     success: false,
     loading: false,
     message: null,
-  };
+};
+interface valueProps{
+    email: string;
+    value: string;
+}
 
 export const verifiedOtpReset = createAsyncThunk(
     'verifiedOtpReset',
-    async (value, thunkApi) => {
+    async (value: valueProps, thunkApi) => {
         try{
             const response = await baseURL.post(`/verified-checker`, {email: emails, otp: value});
             return response?.data?.message;

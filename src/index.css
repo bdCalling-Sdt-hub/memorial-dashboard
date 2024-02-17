@@ -18,3 +18,9 @@
     margin-top: 8px !important;
     cursor: pointer !important;
 }
+
+.custom-input::placeholder{
+    color: #2B2A2A !important;
+    font-size: 18px;
+    font-weight: 400;
+}

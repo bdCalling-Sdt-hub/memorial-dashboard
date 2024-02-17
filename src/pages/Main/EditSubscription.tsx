@@ -15,13 +15,19 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 const EditSubscription = () => {
     const dispatch = useAppDispatch();
     const { id } = useParams();
-    console.log(id);
     const { subscription } = useAppSelector(state=> state.editSubscription);
-    console.log(subscription)
-    const [count, setCount] = useState(4);
-    const handleAddCount=()=>{
-        setCount(count + 1)
+    const [add, setAdd] = useState(false);
+    const [feature, setFeature] = useState('');
+    console.log(feature);
+
+
+    const handleSaveFeature=()=>{
+        if(feature === ""){
+            alert("Input Correct Feature Name")
+        }
     }
+
+
     useEffect(()=>{
         if(id){
             dispatch(editSubscription(id));
@@ -31,9 +37,6 @@ const EditSubscription = () => {
     const handleDelete = (data:any)=>{
         console.log(data);
     }
-    const onFinish = (values) => {
-        console.log('Received values of form:', values);
-    };
       
     return (
         <div>
@@ -43,7 +46,7 @@ const EditSubscription = () => {
             <Link to="/subscription">
                 <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Edit Subscriptions</HeadingText>
             </Link>
-            <div className="bg-white rounded-2xl p-6 mt-6 h-[680px] overflow-y-scroll">
+            <div className="bg-white rounded-2xl p-6 mt-6 h-[730px] overflow-y-scroll">
 
                 {/* package information start */}
                 <div className="grid grid-cols-1 gap-6">
@@ -76,7 +79,99 @@ const EditSubscription = () => {
 
                 {/* package feature */}
                 <p className="text-lg font-normal text-[#0071E3] mb-4">Package Name</p>
+                <div className="grid grid-cols-1 gap-4">
+                    {
+                        subscription?.feature?.map((name:string, index: number)=>(
+                            <div key={index} className="flex items-center gap-6 w-full">
+                                {/* <div className="pl-4 flex items-center h-[56px] border outline-none rounded-lg border-[#8ABEF2] w-full">
+                                    <p className="text-[#2B2A2A] text-[18px] font-normal">{name?.feature} Month</p>
+                                </div> */}
+                                <Input
+                                    name='feature'
+                                    placeholder="Enter Feature" 
+                                    prefix={false}
+                                    defaultValue={name?.feature}
+                                    style={{
+                                        border: "1px solid #8ABEF2",
+                                        height: "56px",
+                                        background: "white",
+                                        borderRadius: "8px",
+                                        outline: "none",
+                                        color: "black",
+                                        fontSize: "18px"
+                                    }}
+                                />
+                                <AiOutlineMinusCircle onClick={()=>handleDelete(index)}  size={33} color="#D7263D" />
+                            </div>
+                        ))
+                    }
+                    {
+                        add 
+                        &&
+                        <div className="flex items-center gap-6 w-full">
+                            <Input
+                                name='feature'
+                                onChange={(e)=>setFeature(e.target.value)} 
+                                placeholder="Enter Feature" 
+                                prefix={false}
+                                className="custom-input" 
+                                style={{
+                                    border: "1px solid #8ABEF2",
+                                    height: "56px",
+                                    background: "white",
+                                    borderRadius: "8px",
+                                    outline: "none",
+                                    color: "black",
+                                    fontSize: "18px"
+                                }}
+                            />
+                            <AiOutlineMinusCircle className="cursor-pointer" onClick={()=>setAdd(false)}  size={33} color="#D7263D" />
+                        </div> 
+                    }
+                    
+                </div>
 
+                {
+                    add 
+                    ?
+                    <div onClick={handleSaveFeature} 
+                        className="
+                            h-[56px] 
+                            cursor-pointer 
+                            mt-4 
+                            w-[95.5%] 
+                            bg-[#0071E3]
+                            text-white 
+                            rounded-lg 
+                            flex 
+                            items-center 
+                            justify-center 
+                            text-lg 
+                            font-semibold
+                        "
+                    >
+                        Save Feature
+                    </div>
+                    :
+                    <div onClick={()=>setAdd(true)} 
+                        className="
+                            h-[56px] 
+                            cursor-pointer 
+                            mt-4 
+                            w-[95.5%] 
+                            bg-[#0071E3]
+                            text-white 
+                            rounded-lg 
+                            flex 
+                            items-center 
+                            justify-center 
+                            text-lg 
+                            font-semibold
+                        "
+                    >
+                        Add Feature
+                    </div>
+                }
                 
             </div>
         </div>
