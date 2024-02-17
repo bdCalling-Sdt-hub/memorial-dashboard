@@ -5,29 +5,33 @@ import users from "../../../public/db/users.json";
 import HeadingText from "../../util/HeadingText";
 import UserCard from "../../util/UserCard";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 
 const TransactionRatio = () => {
+  const [year, setYear] = useState(2024)
   const Chart = React.lazy(() => import("./TransactionChart"));
 
   const items = [
     {
       label: <a href="#">2023</a>,
-      key: "0",
+      key: "2023",
     },
     {
       label: <a href="#">2024</a>,
-      key: "1",
+      key: "2024",
     },
     {
       label: <a href="#">2025</a>,
-      key: "0",
+      key: "2025",
     },
     {
       label: <a href="#">2026</a>,
-      key: "1",
+      key: "2026",
     },
   ];
+  const onClick = ({ key }) => {
+    setYear(key)
+  };
 
   return (
     // <div className="grid grid-cols-3 gap-5 mt-4 overflow-hidden h-[310px]">
@@ -38,15 +42,15 @@ const TransactionRatio = () => {
           <Dropdown
             menu={{
               items,
+              onClick
             }}
-            trigger={["click"]}
           >
             <a onClick={(e) => e.preventDefault()}>
               <Space>
-                2024
+                {year}
                 <DownOutlined
                   style={{
-                    color: "#b278fb",
+                    color: "#0071E3",
                     fontWeight: "bold",
                     cursor: "pointer",
                   }}
@@ -66,7 +70,7 @@ const TransactionRatio = () => {
           </div>
         </div>
         <Suspense fallback={<p className="text-center">Loading...</p>}>
-          <Chart />
+          <Chart  year={year}/>
         </Suspense>
       </div>
 

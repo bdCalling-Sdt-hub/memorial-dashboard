@@ -13,8 +13,7 @@ const TransactionTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('')
-  const {transactions} = useAppSelector(state=> state.getRecentTransaction)
-  console.log(transactions);
+  const {transactions} = useAppSelector(state=> state.getRecentTransaction);
 
   useEffect(()=>{
     dispatch(getRecentTransaction())
