@@ -14,6 +14,8 @@ import { AllUser } from "../../redux/apiSlices/allUserSlice";
 const DashboardHome = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state=> state.allUser);
+  const {profile} = useAppSelector(state=> state.getProfile)
+  console.log(profile)
   useEffect(()=>{
     dispatch(AllUser(1));
   },[dispatch])
@@ -23,7 +25,7 @@ const DashboardHome = () => {
         <div className="w-[75%] grid grid-cols-1 gap-5">
           <div className="w-full px-5 flex items-center justify-between bg-white rounded-[16px] h-[138px]">
             <div>
-              <h1 className="p-0 font-medium m-0 text-[#0071E3] text-[30px]">Welcome, Bruce</h1>
+              <h1 className="p-0 font-medium m-0 text-[#0071E3] text-[30px]">Welcome, {profile?.fullName?.split(' ')[0]}</h1>
               <p className="text-[#555555] text-[18px]">Have a nice day at work</p>
             </div>
             <img src={Layer} alt="" />
