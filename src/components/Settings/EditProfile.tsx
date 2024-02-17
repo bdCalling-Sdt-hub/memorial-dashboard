@@ -6,15 +6,16 @@ import { Input, Form, Upload } from "antd";
 import { HiOutlineMail, HiOutlineUser  } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useState } from "react";
 import { editProfile } from "../../redux/apiSlices/authentication/editProfileSlice";
+import Swal from "sweetalert2";
 
 const EditProfile = () => {
     const [img, setImg] = useState();
     const dispatch = useAppDispatch();
-
+    const navigate = useNavigate();
     const {profile} = useAppSelector(state=> state.editProfile);
     console.log(profile)
 
@@ -29,7 +30,18 @@ const EditProfile = () => {
         formData.append("mobile", values.mobile);
         formData.append("email", values.email);
         formData.append("image", img);
-        dispatch(editProfile(formData));
+        dispatch(editProfile(formData)).then((response) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Profile Update Successfully",
+              showConfirmButton: false,
+              timer: 1500
+            })
+        })
+        .catch(error => {
+          console.log(error)
+        });
     }
     return (
         <div>
