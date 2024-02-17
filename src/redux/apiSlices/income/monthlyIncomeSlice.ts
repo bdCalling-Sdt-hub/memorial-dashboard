@@ -19,16 +19,15 @@ const initialState = {
 
 export const getMonthlyIncome = createAsyncThunk(
     'getMonthlyIncome',
-    async (value: ValueProps, thunkApi) => {
+    async (value, thunkApi) => {
         try{
-            const {packagId, page} = value;
-            const response = await baseURL.get(`/monthly/income?packagId=${packagId}&page=${page}`, {
+            const response = await baseURL.get(`/month/income`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
                 }
             })
-            return response.data.data;
+            return response?.data?.monthly_income;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

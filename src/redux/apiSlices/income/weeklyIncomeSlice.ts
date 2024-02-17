@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
 const token = localStorage.getItem('token');
-
+console.log(token);
 
 interface ValueProps{
     packagId : number;
@@ -19,16 +19,16 @@ const initialState = {
 
 export const getWeeklyIncome = createAsyncThunk(
     'getWeeklyIncome',
-    async (value: ValueProps, thunkApi) => {
+    async (value, thunkApi) => {
         try{
-            const {packagId, page} = value;
-            const response = await baseURL.get(`/weekly/income?packagId=${packagId}&page=${page}`, {
+            const response = await baseURL.get(`/weekly/income`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
                 }
             })
-            return response.data.data;
+            console.log(response);
+            return response.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

@@ -13,11 +13,7 @@ const TransactionsTable = () => {
   const {income} = useAppSelector(state=> state.getDailyIncome);
   const {profile} = useAppSelector(state=> state.getProfile);
   const [value, setValue] = useState('')
-  // console.log(income)
-  // console.log(profile)
-  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const pageSize = 7;
   const [page, setPage] = useState(1)
 
   useEffect(()=>{
@@ -26,6 +22,7 @@ const TransactionsTable = () => {
 
 
   const handleGetValue=(data)=>{
+    console.log(data);
     setValue(data);
     setIsModalOpen(true)
   }
@@ -80,7 +77,7 @@ const TransactionsTable = () => {
   ];
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    setPage(page);
   };
 
   return (
@@ -112,9 +109,9 @@ const TransactionsTable = () => {
             "Subscription",
           ]}
           values={[
-            profile.fullName,
-            profile.email,
-            profile.mobile ? profile.mobile :"(480) 555-0103",
+            value?.user?.fullName,
+            value?.user?.email,
+            value?.user?.mobile ? value?.user?.mobile :"(480) 555-0103",
             "Premium",
           ]}
         />

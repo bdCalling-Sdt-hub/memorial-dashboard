@@ -2,6 +2,8 @@ import TransactionsTable from "../../components/Transactions/TransactionsTable";
 import Header from "../../layouts/Main/Header";
 import DailyIncomeCard from "../../components/DashboardHome/DailyIncomeCard";
 import TransactionsTableHeading from "../../components/Transactions/TransactionsTableHeading";
+import WeeklyIncomeTable from "../../components/Transactions/WeeklyIncomeTable";
+import MonthlyIncomeTable from "../../components/Transactions/MonthlyIncomeTable";
 
 const Transactions = () => {
   return (
@@ -13,7 +15,9 @@ const Transactions = () => {
       <div className="rounded-md p-4 mt-4  bg-white">
         <TransactionsTableHeading/>
         <div className="mt-3">
-          <TransactionsTable />
+          {/* <TransactionsTable /> */}
+          {/* <WeeklyIncomeTable/> */}
+          <MonthlyIncomeTable/>
         </div>
       </div>
     </>
