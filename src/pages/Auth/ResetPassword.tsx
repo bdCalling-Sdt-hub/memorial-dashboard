@@ -37,7 +37,7 @@ const ResetPassword = () => {
       .catch(error => {
         console.log(error)
       });
-  };
+    };
 
   return (
     <div className=" w-[342px] mx-auto">

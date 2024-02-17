@@ -13,22 +13,24 @@ const Login = () => {
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
-  if(isSuccess){
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Login Successfully",
-      showConfirmButton: false,
-      timer: 1500
-    }).then(() => {
-      navigate("/")
-    });
-  }
   
   const handleLogin=()=>{
     if(email && password){
       dispatch(login({email:email, password: password}))
+      .then(response => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          navigate("/")
+        });
+      })
+      .catch(error => {
+        console.log(error)
+      });
     }
   }
   return (
