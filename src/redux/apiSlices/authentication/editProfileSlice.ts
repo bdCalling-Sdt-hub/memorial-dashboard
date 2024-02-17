@@ -15,7 +15,6 @@ export const editProfile = createAsyncThunk(
     'editProfile',
     async (value, thunkApi) => {
         try{
-            console.log(token, value)
             const response = await baseURL.post(`/profile/edit/1?_method=PUT`, value, {
                 headers: {
                   "Content-Type": "application/json",

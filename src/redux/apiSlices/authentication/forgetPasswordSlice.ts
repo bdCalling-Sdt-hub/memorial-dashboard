@@ -17,9 +17,7 @@ export const forgetPassword = createAsyncThunk(
     'forgetPassword',
     async (email: IEmail, thunkApi) => {
         try{
-            console.log(email)
             const response = await baseURL.post(`/forget-pass`, email);
-            console.log(response)
             return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;

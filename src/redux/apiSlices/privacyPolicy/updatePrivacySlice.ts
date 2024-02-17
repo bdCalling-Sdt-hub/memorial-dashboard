@@ -14,14 +14,12 @@ export const UpdatePrivacy = createAsyncThunk(
     'updatePrivacy',
     async (value:string, thunkApi) => {
         try{
-            console.log(value);
             const response = await baseURL.post(`/update/privacy/`, value, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
                 }
             });
-            console.log(response?.data);
             return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;

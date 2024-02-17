@@ -111,7 +111,6 @@ const WorkersTable = () => {
   ];
 
   const handleView = (value: IUser) => {
-    console.log(value);
     setIsModalOpen(true);
   };
 

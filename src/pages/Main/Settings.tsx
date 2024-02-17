@@ -110,7 +110,6 @@ const Settings = () => {
     e.preventDefault();
     if(emails){
       dispatch(forgetPassword({email: emails})).then(response => {
-        console.log()
           Swal.fire({
             position: "center",
             icon: "success",

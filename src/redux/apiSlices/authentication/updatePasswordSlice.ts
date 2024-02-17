@@ -13,7 +13,6 @@ const initialState = {
 export const updatePassword = createAsyncThunk(
     'updatePassword',
     async (value, thunkApi) => {
-        console.log(value)
         try{
             const response = await baseURL.post(`/update-pass`, value, {
                 headers: {
@@ -21,7 +20,6 @@ export const updatePassword = createAsyncThunk(
                     authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             });
-            console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;

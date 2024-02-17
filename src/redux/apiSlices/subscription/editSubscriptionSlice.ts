@@ -19,7 +19,6 @@ export const editSubscription = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 }
             });
-            console.log(response?.data?.data)
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
@@ -41,7 +40,6 @@ export const editSubscriptionSlice = createSlice({
             state.loading= true
         }),
         builder.addCase(editSubscription.fulfilled, (state, action)=> {
-            console.log(action.payload.data)
             state.error= false,
             state.success= true,
             state.loading= false

@@ -143,7 +143,6 @@ const TransactionHistoryTable = () => {
       alert("cancel");
     } else {
       setIsModalOpen(true);
-      console.log(value);
     }
   };
 

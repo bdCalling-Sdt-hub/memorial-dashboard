@@ -70,7 +70,6 @@ const TransactionTable = () => {
   ];
 
   const handleGetValue=(data)=>{
-    console.log(data);
     setValue(data);
     setIsModalOpen(true)
   }

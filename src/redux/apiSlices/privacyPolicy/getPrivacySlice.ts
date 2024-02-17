@@ -20,7 +20,6 @@ export const getPrivacy = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 }
             });
-            console.log(response?.data);
             return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;

@@ -14,8 +14,7 @@ import { AllUser } from "../../redux/apiSlices/allUserSlice";
 const DashboardHome = () => {
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state=> state.allUser);
-  const {profile} = useAppSelector(state=> state.getProfile)
-  console.log(profile)
+  const {profile} = useAppSelector(state=> state.getProfile);
   useEffect(()=>{
     dispatch(AllUser(1));
   },[dispatch])

@@ -6,7 +6,6 @@ const BlockAccounts = ({ searchText }: { searchText: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
-  console.log(searchText);
 
   const data = [
     {

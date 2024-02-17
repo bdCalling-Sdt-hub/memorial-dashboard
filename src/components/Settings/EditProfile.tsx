@@ -17,7 +17,6 @@ const EditProfile = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {profile} = useAppSelector(state=> state.editProfile);
-    console.log(profile)
 
     const onChange = ({ fileList }) => {
         setImg(fileList[0].originFileObj);

@@ -14,7 +14,6 @@ export const storyStatus = createAsyncThunk(
     'story status',
     async (value: any, thunkApi) => {
         try{
-            console.log(value)
             const response = await baseURL.post(`/story/status`, value, {
                 headers: {
                     "Content-Type": "application/json",

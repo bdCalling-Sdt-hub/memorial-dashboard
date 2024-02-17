@@ -9,7 +9,6 @@ import ModelValue from '../../util/ModelValue';
 const MonthlyIncomeTable = () => {
     const dispatch = useAppDispatch();
     const {income} = useAppSelector(state=> state.getMonthlyIncome);
-    console.log(income);
     const [value, setValue] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [page, setPage] = useState(1);

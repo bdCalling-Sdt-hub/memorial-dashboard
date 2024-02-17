@@ -19,7 +19,6 @@ interface IProfile {
 const Profile: React.FC<IProfile> = () => {
   const dispatch = useAppDispatch();
   const {profile} = useAppSelector(state=> state.getProfile);
-  console.log(profile)
   
   useEffect(()=>{
     dispatch(getProfile())

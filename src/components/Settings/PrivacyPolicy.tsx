@@ -15,7 +15,6 @@ import Swal from "sweetalert2";
 const PrivacyPolicy = () => {
   const dispatch = useAppDispatch();
   const {privacy} = useAppSelector(state=> state.getPrivacy);
-  console.log(privacy);
   const editor = useRef(null);
   const [content, setContent] = useState("");
 

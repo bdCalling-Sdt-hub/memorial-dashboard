@@ -14,7 +14,6 @@ export const UpdateTermsCondition = createAsyncThunk(
     'updateTermsCondition',
     async (value:string, thunkApi) => {
         try{
-            console.log(value);
             const response = await baseURL.post(`/update/terms`, value, {
                 headers: {
                     "Content-Type": "application/json",
