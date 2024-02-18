@@ -5,13 +5,23 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useEffect } from "react";
 import { allPackage } from "../../redux/apiSlices/subscription/getPackageSlice";
 import { ISubscription } from "../../types/subscription.interface";
+import { deleteSubscription } from "../../redux/apiSlices/subscription/deleteSubscriptionSlice";
 
 const Subscription = () => {
     const dispatch = useAppDispatch();
     const { packages } = useAppSelector(state=> state.getPackage);
+
     useEffect(()=>{
         dispatch(allPackage());
     }, [dispatch]);
+
+
+    const handleDelete=(id:number)=>{
+        if(id){
+            dispatch(deleteSubscription(id));
+            dispatch(allPackage());
+        }
+    }
     
     return (
         <div className="">
@@ -27,6 +37,7 @@ const Subscription = () => {
                     {
                         packages?.map((item: ISubscription, index)=>(
                             <SubscriptionPlanCard
+                                handleDelete={handleDelete}
                                 id={item?.id}
                                 key={index}
                                 name={item.package_name}

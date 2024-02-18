@@ -29,13 +29,18 @@ import monthlyIncomeSlice from "./apiSlices/income/monthlyIncomeSlice";
 import getDashboardSlice from "./apiSlices/getDashboardSlice";
 import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 import getIncomeRationSlice from "./apiSlices/income/getIncomeRatioSlice";
+import deleteSubscriptionSlice from "./apiSlices/subscription/deleteSubscriptionSlice";
 
 export const store = configureStore({
   reducer: {
     allUser: allUserReducer,
     searchUser: searchUserSlice,
+
+    // subscription state start here
     getPackage: getPackageSlice,
     editSubscription: editSubscriptionSlice,
+    deleteSubscription: deleteSubscriptionSlice,
+    // subscription state end here
 
     // settings state start here
     getAbout: getAboutSlice,
