@@ -34,7 +34,8 @@ const UsersTable = () => {
       key: "username",
       render: (_: string, record: IUser) => (
         <p>{record?.user?.fullName}</p>
-      )
+      ),
+      onFilter: (value, record) => record.address.startsWith(value)
     },
     {
       title: "Email",
