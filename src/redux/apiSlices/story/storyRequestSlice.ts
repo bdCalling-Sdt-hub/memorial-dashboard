@@ -37,13 +37,13 @@ export const storyRequestSlice = createSlice({
     reducers: {},
     extraReducers: (builder) =>{
         builder.addCase(storyRequest.pending, (state)=> {
-            state.loading= true
+            state.loading= true;
         }),
         builder.addCase(storyRequest.fulfilled, (state, action)=> {
-            state.error= false,
-            state.success= true,
-            state.loading= false
-            state.story= action.payload
+            state.error= false;
+            state.success= true;
+            state.loading= false;
+            state.story= action.payload;
         }),
         builder.addCase(storyRequest.rejected, (state)=> {
             state.error= true,
