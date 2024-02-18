@@ -1,28 +1,31 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from "../../../Config";
-const token = localStorage.getItem('token');
+
+
 const initialState = {
     error: false,
     success: false,
     loading: false,
-    subscription: {},
+    profile: {},
   };
 
-export const editSubscription = createAsyncThunk(
-    'searchUser',
-    async (keyword: number, thunkApi) => {
+export const updateSubscription = createAsyncThunk(
+    'updateSubscription',
+    async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/edit/subscription/${keyword}`, {
+            console.log(value);
+            const response = await baseURL.post(`/update/subscription`, value, {
                 headers: {
                     "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             });
+            console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
-            const message = axiosError.message;
+            const message = axiosError?.message;
             return thunkApi.rejectWithValue(message);
         }
         
@@ -31,30 +34,30 @@ export const editSubscription = createAsyncThunk(
 
 
 
-export const editSubscriptionSlice = createSlice({
-    name: 'editSubscription',
+export const updateSubscriptionSlice = createSlice({
+    name: 'profile',
     initialState,
     reducers: {},
     extraReducers: (builder) =>{
-        builder.addCase(editSubscription.pending, (state)=> {
+        builder.addCase(updateSubscription.pending, (state)=> {
             state.loading= true
         }),
-        builder.addCase(editSubscription.fulfilled, (state, action)=> {
+        builder.addCase(updateSubscription.fulfilled, (state, action)=> {
             state.error= false,
             state.success= true,
             state.loading= false
-            state.subscription= action.payload.data
+            state.profile= action.payload;
         }),
-        builder.addCase(editSubscription.rejected, (state)=> {
+        builder.addCase(updateSubscription.rejected, (state)=> {
             state.error= true,
             state.success= false,
             state.loading= false
-            state.subscription= {}
+            state.profile= {}
         })
-    } 
+    }
 })
 
 // Action creators are generated for each case reducer function
 //export const { } = userSlice.actions
 
-export default editSubscriptionSlice.reducer;
+export default updateSubscriptionSlice.reducer

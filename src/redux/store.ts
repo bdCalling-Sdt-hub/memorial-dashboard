@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import allUserReducer from "./apiSlices/allUserSlice";
 import searchUserSlice from "./apiSlices/searchUserSlice";
-import editSubscriptionSlice from "./apiSlices/subscription/editSubscriptionSlice";
+import getSubscriptionSlice from "./apiSlices/subscription/getSubscriptionSlice";
 import getAboutSlice from "./apiSlices/about/getAboutSlice";
 import updateAboutSlice from "./apiSlices/about/updateAboutSlice";
 import getPrivacySlice from "./apiSlices/privacyPolicy/getPrivacySlice";
@@ -30,6 +30,7 @@ import getDashboardSlice from "./apiSlices/getDashboardSlice";
 import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 import getIncomeRationSlice from "./apiSlices/income/getIncomeRatioSlice";
 import deleteSubscriptionSlice from "./apiSlices/subscription/deleteSubscriptionSlice";
+import updateSubscriptionSlice from "./apiSlices/subscription/updateSubscriptionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -38,8 +39,9 @@ export const store = configureStore({
 
     // subscription state start here
     getPackage: getPackageSlice,
-    editSubscription: editSubscriptionSlice,
+    getSubscription: getSubscriptionSlice,
     deleteSubscription: deleteSubscriptionSlice,
+    updateSubscription: updateSubscriptionSlice,
     // subscription state end here
 
     // settings state start here
