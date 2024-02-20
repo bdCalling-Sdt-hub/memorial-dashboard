@@ -32,6 +32,7 @@ const Login = () => {
         console.log(error)
       });
     }
+    
   }
   return (
     <div className=" w-[342px] mx-auto">

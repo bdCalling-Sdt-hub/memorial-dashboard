@@ -31,6 +31,7 @@ import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 import getIncomeRationSlice from "./apiSlices/income/getIncomeRatioSlice";
 import deleteSubscriptionSlice from "./apiSlices/subscription/deleteSubscriptionSlice";
 import updateSubscriptionSlice from "./apiSlices/subscription/updateSubscriptionSlice";
+import getNotificationsSlice from "./apiSlices/getNotificationsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -81,7 +82,8 @@ export const store = configureStore({
     // income end here
 
     getDashboard : getDashboardSlice,
-    getRecentTransaction: getRecentTransactionSlice
+    getRecentTransaction: getRecentTransactionSlice,
+    getNotifications: getNotificationsSlice
   },
 });
 
