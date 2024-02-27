@@ -44,7 +44,7 @@ const Header = () => {
             open &&
             <div className="p-4 absolute border border-[#0071E3] rounded-b-[16px] z-20 w-[251px] h-[350px] top-8 right-4 bg-white">
               <div className="flex items-center justify-between">
-                <p className="text-[14px] font-semibold ">4 notifications</p>
+                <p className="text-[14px] font-semibold ">{notifications?.length} notifications</p>
                 <p className="text-[#0071E3] text-[10px] font-medium">Mark as read</p>
               </div>
               <div className="bg-[#0071E3] h-[1px] my-4 w-full"></div>

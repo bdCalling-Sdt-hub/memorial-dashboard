@@ -38,7 +38,7 @@ const Notifications = () => {
           {notifications?.map((notification, index) => (
             <div
               key={index}
-              className={` border border-[#0071E3] bg-white mt-6 h-[68px]  flex gap-3  mb-2 p-4 rounded-lg cursor-pointer`}
+              className={` border border-[#0071E3] bg-white mt-4 h-[68px]  flex gap-3  mb-2 p-4 rounded-lg cursor-pointer`}
             >
               <div className="w-[12px] mt-[7px] h-[12px] rounded-full bg-[#0071E3]"></div>
               <div>
