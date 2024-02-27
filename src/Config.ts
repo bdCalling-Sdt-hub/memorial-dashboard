@@ -6,4 +6,4 @@ import axios from "axios";
   headers: { "X-Custom-Header": "foobar" },
 })
 
-export default baseURL
+export default baseURL;

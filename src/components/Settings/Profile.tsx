@@ -7,22 +7,13 @@ import { HiOutlineMail } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { useEffect } from "react";
-import { getProfile } from "../../redux/apiSlices/authentication/getProfileSlice";
+import ImgConfig from "../../ImgConfig";
 
-interface IProfile {
-  isProfileEdit?: boolean;
-  setIsProfileEdit?: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const Profile: React.FC<IProfile> = () => {
-  const dispatch = useAppDispatch();
-  const {profile} = useAppSelector(state=> state.getProfile);
+const Profile = () => {
+
+  const profile = JSON.parse(localStorage.getItem('userInfo'));
   
-  useEffect(()=>{
-    dispatch(getProfile())
-  },[dispatch]);
   return (
     <div>
       <div className="flex items-end justify-end mb-11">
@@ -35,7 +26,7 @@ const Profile: React.FC<IProfile> = () => {
         
           {/* Banner */}
           <div className="h-[208px] bg-[#0071E3] rounded-xl py-8 px-6 mb-6 flex items-center gap-[54px]">
-              <img src={profile?.image ? profile?.image : person} width={144} height={144} alt="" />
+              <img className="rounded-full" src={`${ImgConfig}${profile?.image}`} width={144} height={144} alt="" />
               <div className="text-[#FFFFFF]">
                 {/* user name */}
                 <h1 className="text-3xl font-medium ">{profile?.fullName}</h1>

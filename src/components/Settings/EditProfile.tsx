@@ -2,48 +2,71 @@ import Header from "../../layouts/Main/Header";
 import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import person from "../../assets/Ellipse 610.png";
-import { Input, Form, Upload } from "antd";
+import { Input, Form} from "antd";
 import { HiOutlineMail, HiOutlineUser  } from "react-icons/hi";
 import { IoCallOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
-import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { useState } from "react";
-import { editProfile } from "../../redux/apiSlices/authentication/editProfileSlice";
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import {  useState } from "react";
+
+import ImgConfig from "../../ImgConfig";
 import baseURL from "../../Config";
+import Swal from "sweetalert2";
 
 
 const EditProfile = () => {
-    const [img, setImg] = useState();
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    const {profile} = useAppSelector(state=> state.editProfile);
-    console.log(baseURL?.defaults?.baseURL)
-    const onChange = ({ fileList }) => {
-        setImg(fileList[0].originFileObj);
+    const profile = JSON.parse(localStorage.getItem('userInfo'));
+    const [image, setImage] = useState(profile?.image ? `${ImgConfig}${profile?.image}` : person);
+    const [imgURL, setImgURL] = useState(image);
+    
+    const onChange = (e:any) => {
+        const file= e.target.files[0];
+        console.log(file)
+        const imgUrl = URL.createObjectURL(file);
+        setImgURL(imgUrl);
+        setImage(file)
     };
-
-    const handleUpdate=(values: any)=>{
+    
+    const handleUpdate=async(values: any)=>{
         const formData = new FormData();
         formData.append("fullName", values.fullName);
         formData.append("address", values.address);
         formData.append("mobile", values.mobile);
         formData.append("email", values.email);
-        formData.append("image", img);
-        dispatch(editProfile(formData)).then((response) => {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Profile Update Successfully",
-              showConfirmButton: false,
-              timer: 1500
-            })
-        })
-        .catch(error => {
-          console.log(error)
+        formData.append("image", image);
+        if(image){
+            formData.append("image", image);
+        }
+        const response = await baseURL.post(`/profile/edit/1?_method=PUT`, formData, {
+            headers: {
+              "Content-Type": 'multipart/form-data',
+              authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
         });
+        if(response?.data.status === 200){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Profile Update Successful",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(()=>{
+                location.reload();
+            })
+        };
+        localStorage.setItem('userInfo', JSON.stringify(response?.data?.data))
+        
     }
+
+    const initialFormValues = {
+        fullName: profile?.fullName,
+        email: profile?.email,
+        mobile: profile?.mobile,
+        image: profile?.image,
+        address: profile?.address,
+    };
+
+    
     return (
         <div>
             <div className="flex items-end justify-end mb-11">
@@ -56,35 +79,22 @@ const EditProfile = () => {
             </div>
             <div className="mt-6 bg-white rounded-xl  h-[728px] py-[84px]">
                 <div className="w-[350px]  mx-auto">
-                <Form 
-                        name="update_profile"
-                        onFinish={handleUpdate}
-                    >
+                    <img className="mx-auto rounded-full" src={imgURL} width={144} height={144} alt="" />    
+                    <label className="font-bold cursor-pointer text-[#0071E3] mt-2 block text-center" htmlFor="img">Change Photo</label>
+                    <input onChange={onChange} className="hidden" type="file" name="" id="img" />
+                <Form
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={initialFormValues}
+                    onFinish={handleUpdate}
+                >
                         <Form.Item>
-                            <img className="mx-auto" src={person} width={144} height={144} alt="" />
-                            <Upload
-                                listType="picture"
-                                maxCount={1}
-                                beforeUpload={() => false}
-                                onChange={onChange}
-                                style={{
-                                    textAlign: "center",
-                                    fontWeight: 500,
-                                    fontSize: "16px",
-                                    color: "#0071E3"
-                                }}
-                            >
-                                Change Photo
-                            </Upload>
+                            
                         </Form.Item>
-
-                    
-                        
                             <Form.Item  
                                 name="fullName"
                             >
                                 <Input
-                                   
                                     size="large"
                                     placeholder="Enter Your Full Name"
                                     prefix={<HiOutlineUser size={24} className="mr-2" color="#0071E3" />}

@@ -11,6 +11,7 @@ import Spinner from "../Spinner";
 const Notifications = () => {
   const dispatch = useAppDispatch();
   const { loading, notifications } = useAppSelector(state=> state.getNotifications);
+  console.log(notifications);
   useEffect(()=>{
     dispatch(getNotifications());
   }, [dispatch])
@@ -30,7 +31,7 @@ const Notifications = () => {
       {
         loading
         ?
-        <div className="h-[85vh] overflow-y-scroll w-full flex items-center justify-center">
+        <div className="h-[85vh] overflow-y-auto w-full flex items-center justify-center">
           <Spinner size="large"/>
         </div>
         :

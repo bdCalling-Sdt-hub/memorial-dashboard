@@ -6,7 +6,7 @@ import { PiBookOpenLight } from "react-icons/pi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiLogout } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/Logo.png";
+import logo from "../../assets/Property 1=Blue.png";
 
 interface SideProps {
   open: boolean;

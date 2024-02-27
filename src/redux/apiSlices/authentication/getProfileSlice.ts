@@ -20,6 +20,7 @@ export const getProfile = createAsyncThunk(
                   authorization: `Bearer ${token}`,
                 }
             });
+            console.log(response)
             return response?.data?.user;
         }catch(error){
             const axiosError = error as AxiosError;

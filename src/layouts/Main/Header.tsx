@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { getProfile } from "../../redux/apiSlices/authentication/getProfileSlice";
 import { getNotifications } from "../../redux/apiSlices/getNotificationsSlice";
 import moment from "moment";
-
+import ImgConfig from "../../ImgConfig";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -18,11 +18,13 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const {profile} = useAppSelector(state=> state.getProfile);
-  console.log(profile)
+  localStorage.setItem('userInfo', JSON.stringify(profile))
   
   useEffect(()=>{
     dispatch(getProfile())
   },[dispatch]);
+
+  
 
 
 
@@ -31,6 +33,10 @@ const Header = () => {
     dispatch(getNotifications());
   }, [dispatch]);
 
+
+  useEffect(()=>{
+    
+  },[])
   return (
     <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">
@@ -44,7 +50,7 @@ const Header = () => {
             open &&
             <div className="p-4 absolute border border-[#0071E3] rounded-b-[16px] z-20 w-[251px] h-[350px] top-8 right-4 bg-white">
               <div className="flex items-center justify-between">
-                <p className="text-[14px] font-semibold ">4 notifications</p>
+                <p className="text-[14px] font-semibold ">{notifications?.length} notifications</p>
                 <p className="text-[#0071E3] text-[10px] font-medium">Mark as read</p>
               </div>
               <div className="bg-[#0071E3] h-[1px] my-4 w-full"></div>
@@ -70,7 +76,7 @@ const Header = () => {
         </div>
         <Link className="flex items-center gap-3" to="/settings/profile">
           <img
-            src={profile?.image !== null ? profile?.image : "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"}
+            src={profile?.image  ? (`${ImgConfig}${profile?.image}`): "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"}
             width={48}
             height={48}
             className="rounded-full"
