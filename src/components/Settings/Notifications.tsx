@@ -30,7 +30,7 @@ const Notifications = () => {
       {
         loading
         ?
-        <div className="h-[85vh] w-full flex items-center justify-center">
+        <div className="h-[85vh] overflow-y-scroll w-full flex items-center justify-center">
           <Spinner size="large"/>
         </div>
         :

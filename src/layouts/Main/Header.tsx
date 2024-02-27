@@ -18,6 +18,7 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const {profile} = useAppSelector(state=> state.getProfile);
+  console.log(profile)
   
   useEffect(()=>{
     dispatch(getProfile())
@@ -30,7 +31,6 @@ const Header = () => {
     dispatch(getNotifications());
   }, [dispatch]);
 
-  console.log(notifications);
   return (
     <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">

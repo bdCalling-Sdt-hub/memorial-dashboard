@@ -11,13 +11,15 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useState } from "react";
 import { editProfile } from "../../redux/apiSlices/authentication/editProfileSlice";
 import Swal from "sweetalert2";
+import baseURL from "../../Config";
+
 
 const EditProfile = () => {
     const [img, setImg] = useState();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {profile} = useAppSelector(state=> state.editProfile);
-
+    console.log(baseURL?.defaults?.baseURL)
     const onChange = ({ fileList }) => {
         setImg(fileList[0].originFileObj);
     };
