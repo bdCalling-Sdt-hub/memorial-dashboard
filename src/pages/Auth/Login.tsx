@@ -18,15 +18,20 @@ const Login = () => {
     if(email && password){
       dispatch(login({email:email, password: password}))
       .then(response => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Login Successfully",
-          showConfirmButton: false,
-          timer: 1500
-        }).then(() => {
-          navigate("/")
-        });
+        console.log(response)
+        if(response?.payload.id){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Login Successfully",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            navigate("/")
+            location.reload();
+          });
+        }
+        
       })
       .catch(error => {
         console.log(error)
