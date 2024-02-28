@@ -19,7 +19,7 @@ const EditSubscription = () => {
     const subscription= JSON.parse(localStorage.getItem("subscription"));
     
     const { package_name, word_limit, image_limit, feature, duration, amount} = subscription;
-    const [changeFeature, setChangeFeature] =useState({});
+    /* const [changeFeature, setChangeFeature] =useState({});
     // const [packages, setPackage] =useState({});
     const [features, setFeature] =useState();
 
@@ -28,7 +28,7 @@ const EditSubscription = () => {
         const data = Object.values(changeFeature);
         const result = data.map(item => ({ feature: item }));
         setFeature(result);
-    }
+    } */
     
 
     useEffect(()=>{
@@ -72,9 +72,16 @@ const EditSubscription = () => {
         word_limit: word_limit,
         image_limit: image_limit,
         amount: amount,
-        features: features
-    };
-
+        features: JSON.parse(feature)?.map((item, index) => ({ [index]: item.feature }))
+    };    
+    /* // console.log(JSON.parse(feature)?.map(({ key, name }) => ({ [key]: name})))
+    console.log(JSON.parse(feature)?.map((( name, key ) => name))
+    const data = JSON.parse(feature).map(( name, key ) => {
+        console.log(name)
+        console.log(key)
+    })
+    */
+   console.log(JSON.parse(feature)?.map(( name, key ) => ({ [key]: name}))) 
     return (
         
                 <div>
@@ -212,24 +219,17 @@ const EditSubscription = () => {
                             
                                 
                             <div className="grid grid-cols-1 gap-4">
-                            <Form.List name="features">
-                                {() => (
+
+                            <Form.List name="features" key="features" >
+                                {(fields) => (
                                     <>
-                                    {JSON.parse(feature)?.map(({ key, name }) => (
-                                        <Form.Item
-                                            key={key}
-                                            name={[name?.feature, 'feature']}
-                                        >
-                                            <Input defaultValue={name?.feature} />
-                                        </Form.Item>
-                                    ))}
-                                    
+                                        {JSON.parse(feature)?.map(({ key, name, ...restField }) => (
+                                            console.log(key, name)
+                                        ))}
                                     </>
                                 )}
                             </Form.List>
 
-
-                                
                                 <div>
 
                                     {/* <Form> */}
