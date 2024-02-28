@@ -26,7 +26,7 @@ const EditProfile = () => {
         setImgURL(imgUrl);
         setImage(file)
     };
-    
+
     const handleUpdate=async(values: any)=>{
         const formData = new FormData();
         formData.append("fullName", values.fullName);
@@ -165,7 +165,7 @@ const EditProfile = () => {
                         <Form.Item>
                             <button type="submit" className="mt-11 w-full h-[56px] bg-[#0071E3] text-[18px] font-semibold text-white rounded-[8px]">Update Profile</button>
                         </Form.Item>
-                    </Form>  
+                </Form>  
                     
                 </div>
             </div>

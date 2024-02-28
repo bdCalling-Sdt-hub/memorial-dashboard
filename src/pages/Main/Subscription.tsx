@@ -37,11 +37,14 @@ const Subscription = () => {
                     {
                         packages?.map((item: ISubscription, index)=>(
                             <SubscriptionPlanCard
+                                item={item}
                                 handleDelete={handleDelete}
                                 id={item?.id}
                                 key={index}
                                 name={item.package_name}
                                 price={item.amount}
+                                image_limit={item.image_limit}
+                                word_limit={item.word_limit}
                                 feature={item.feature}
                             />
                         ))

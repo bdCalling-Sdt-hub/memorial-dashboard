@@ -1,2 +1,2 @@
-const baseURL= "http://192.168.10.35:8000"
+const baseURL= "http://103.145.138.53:8000"
 export default baseURL;

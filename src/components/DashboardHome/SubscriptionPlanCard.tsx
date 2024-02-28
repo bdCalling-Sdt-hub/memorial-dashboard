@@ -10,23 +10,32 @@ interface SubscriptionPlanCardProps{
     feature?: string[];
     id: number;
     handleDelete: ()=> void;
-
+    word_limit: number;
+    image_limit: number;
+    item: {};
 } 
 const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     name,
     price,
     feature,
     id,
-    handleDelete
+    handleDelete,
+    word_limit,
+    image_limit,
+    item
 }) => {
     const dispatch = useAppDispatch();
     const {subscription} = useAppSelector(state=> state.deleteSubscription);
-
+    const word =  {"feature": `Post Story in between ${word_limit} words`}
+    
     const handleId=(id:number)=>{
         if(id){
             handleDelete(id);
             // dispatch(deleteSubscription(id));
         }
+    }
+    const handleSave=(item)=>{
+        localStorage.setItem("subscription", JSON.stringify(item));
     }
     return (
         <div 
@@ -46,19 +55,21 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                 <PiCrownSimpleFill size={32} color="#FFC60B" /> <span className="text-[34px] font-semibold">{name}</span>
             </div>
             <h1 className="text-[#0071E3] text-center text-6 font-semibold">${price}/Month</h1>
-            {/* <h1 className="text-[#0071E3] text-center text-6 font-semibold">{featureValue}</h1> */}
+            <h1 className="text-[#0071E3] text-center  text-[30px] font-semibold">{image_limit} Photo Stories</h1>
             <div className="mt-[23px]">
                 {
-                    JSON.parse(feature)?.map((item:any, index)=>
+                    [...JSON.parse(feature),  word]?.map((item:any, index)=>
                     <div key={index} className="flex items-center gap-[10px] mb-4">
                         <FaCircleCheck size={24} color="#0071E3"/>
                         <p className="text-[#0071E3]">{item?.feature}</p>
                     </div>
                     )
                 }
+
                 <div className="flex items-center gap-4 justify-between">
                     <Link to={`/edit-subscription/${id}`} >
-                        <button 
+                        <button
+                            onClick={()=>handleSave(item)} 
                             className="
                                 w-[164px]
                                 h-[36px] 
