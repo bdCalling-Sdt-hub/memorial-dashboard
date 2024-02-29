@@ -1,31 +1,36 @@
-import {
-  IconMail,
-  IconMapPin,
-  IconPhone,
-  IconPlus,
-  IconUser,
-} from "@tabler/icons-react";
-import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import WorkersTable from "../../components/Workers/WorkersTable";
-import HeadingText from "../../util/HeadingText";
-import InputField from "../../util/InputField";
-import SearchField from "../../util/SearchField";
 import Header from "../../layouts/Main/Header";
 import { IoIosArrowDown } from "react-icons/io";
-import photo from "../../assets/Rectangle.png";
-import { Pagination } from 'antd';
 import UserStory from "../../components/Workers/UserStory";
 import StoryRequest from "../../components/Workers/StoryRequest";
+import baseURL from "../../Config";
 const Workers = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchText, setSearchText] = useState("");
   const [openDropdown, setOpenDropdown] = useState(false);
   const [Switch, setSwitch] = useState("user") ;
+  const [data, setData] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [categoryValue, setCategoryValue] = useState("All");
   const handleChange=(e:string)=>{
     setSwitch(e)
   }
+
+  useEffect(()=>{
+    async function getAPi(){
+      const response = await baseURL.get(`/show/category`,{
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        }
+      });
+      setData(response?.data?.data);
+    }
+    getAPi();
+  }, []);
   
+  const handleId=(value)=>{
+    setSelectedCategory(value?.id);
+    setCategoryValue(value?.category_name)
+  }
   
   return (
     <>
@@ -54,7 +59,7 @@ const Workers = () => {
             cursor-pointer
           "
         >
-          <span className="text-[12px]">Select by</span> 
+          <span className="text-[12px]"> { categoryValue ? categoryValue : "Select by" }</span> 
           <IoIosArrowDown size={16} />
           { 
             openDropdown 
@@ -76,31 +81,39 @@ const Workers = () => {
                 p-4
               "
             >
-              <div className="flex items-center gap-4 z-30">
-                <p className="w-[20px] h-[20px] rounded-full border border-[#0071E3]"></p>
+              <div onClick={()=>setSelectedCategory(0)} className="flex items-center gap-4 z-30">
+                <p className={`w-[20px] h-[20px] rounded-full border border-[#0071E3] ${selectedCategory === 0 ? "bg-blue-500" : "bg-white" } `}></p>
                 <p>All</p>
               </div>
+              {
+                (data)?.map((category, index)=>
+                  <div onClick={()=>handleId(category)}  key={index} className="flex items-center gap-2 z-30">
+                    <p
+                      
+                      className={`
+                      w-[20px] 
+                      h-[20px] 
+                      rounded-full 
+                      border border-[#0071E3]
+                      ${selectedCategory === category?.id? "bg-blue-500" : "bg-white"} 
+                    `}
+                    >
 
-              <div className="flex items-center gap-2 z-30">
-                <p className="w-[20px] h-[20px] rounded-full bg-[#0071E3] "></p>
-                <p>Individual</p>
-              </div>
+                    </p>
+                    <p>{category?.category_name}</p>
+                  </div>
+                
+                )
+
+
+              }
               
-              <div className="flex items-center gap-2 z-30">
-                <p className="w-[20px] h-[20px] rounded-full border border-[#0071E3]"></p>
-                <p>Soldiers</p>
-              </div>
-
-              <div className="flex items-center gap-2 z-30">
-                <p className="w-[20px] h-[20px] rounded-full border border-[#0071E3] "></p>
-                <p>Pets</p>
-              </div>
             </div>
           }
         </div>
       </div>
-      { Switch === "user" && <UserStory/>}
-      { Switch === "req" && <StoryRequest/>}
+      { Switch === "user" && <UserStory selectedCategory={selectedCategory} />}
+      { Switch === "req" && <StoryRequest />}
       
 
       {/* <div

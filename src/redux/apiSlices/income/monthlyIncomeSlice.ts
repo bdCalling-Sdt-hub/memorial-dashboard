@@ -5,8 +5,7 @@ const token = localStorage.getItem('token');
 
 
 interface ValueProps{
-    packagId : number;
-    page: number;
+    selectPackage : number;
 }
 
 const initialState = {
@@ -19,15 +18,26 @@ const initialState = {
 
 export const getMonthlyIncome = createAsyncThunk(
     'getMonthlyIncome',
-    async (value, thunkApi) => {
+    async (value: ValueProps, thunkApi) => {
         try{
-            const response = await baseURL.get(`/month/income`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`,
-                }
-            })
-            return response?.data?.monthly_income;
+            if(value?.selectPackage){
+                const response = await baseURL.get(`/month/income?packagId=${value?.selectPackage}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                return response?.data?.monthly_income;
+            }else{
+                const response = await baseURL.get(`/month/income?`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                return response?.data?.monthly_income;
+            }
+            
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

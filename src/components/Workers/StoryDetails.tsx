@@ -32,9 +32,7 @@ const StoryDetails = () => {
             <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6'>
                 <div className='flex items-center justify-between'>
                     <h1 className='text-6 font-semibold text-[#0071E3] mb-6'>{story?.story_title}</h1>
-                    <div className='w-10 h-10 rounded-lg bg-[#0071E3] flex items-center justify-center'>
-                        <HiVolumeUp size={24} color='#FFFFFF' />
-                    </div>
+                    
                 </div>
                 <p className='text-[#2B2A2A] text-[18px] font-normal'>{moment(story?.created_at).format('LT')}, {story?.death_date}</p>
                 <button className='w-[94px] h-[29px] rounded-[4px] bg-[#0071E3] text-white'>Indivisual</button>

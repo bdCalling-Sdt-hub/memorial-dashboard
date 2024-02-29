@@ -8,14 +8,13 @@ import { IStory } from "../../types/story.interface";
 import moment from "moment";
 
 
-const UserStory = () => {
+const UserStory = ({selectedCategory}: {selectedCategory: number}) => {
   const dispatch = useAppDispatch();
-  const [catId, setCatId] = useState(1);
   const [page, setPage] = useState(1)
   const {stories} = useAppSelector(state => state.getStories);
   useEffect(()=>{
-    dispatch(getStories({catId, page}));
-  },[dispatch, catId, page])
+    dispatch(getStories({selectedCategory, page}));
+  },[dispatch, selectedCategory, page])
     return (
         <div>
             <div className="grid grid-cols-2 gap-4 my-6">

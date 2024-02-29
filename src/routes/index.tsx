@@ -8,7 +8,6 @@ import Verify from "../pages/Auth/Verify";
 import DashboardHome from "../pages/Main/DashboardHome";
 import SettingDetail from "../pages/Main/SettingDetail";
 import Settings from "../pages/Main/Settings";
-// import TransactionHistory from "../pages/Main/TransactionHistory";
 import Transactions from "../pages/Main/Transactions";
 import Users from "../pages/Main/Users";
 import Workers from "../pages/Main/Workers";
@@ -16,6 +15,7 @@ import Subscription from "../pages/Main/Subscription";
 import NotFound from "../pages/NotFound";
 import EditSubscription from "../pages/Main/EditSubscription";
 import StoryDetails from "../components/Workers/StoryDetails";
+import AdminRoute from "../routes/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,40 +24,40 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <DashboardHome />,
+        element: <AdminRoute><DashboardHome /></AdminRoute> ,
       },
       {
         path: "/users",
-        element: <Users />,
+        element: <AdminRoute><Users /> </AdminRoute>,
       },
       {
         path: "/transactions",
-        element: <Transactions />,
+        element: <AdminRoute><Transactions /> </AdminRoute>,
       },
       {
         path: "/subscription",
-        element: <Subscription />,
+        element: <AdminRoute> <Subscription /></AdminRoute>,
       },
       {
         path: "/edit-subscription/:id",
-        element: <EditSubscription />,
+        element: <AdminRoute><EditSubscription /> </AdminRoute>,
       },
       {
         path: "/workers",
-        element: <Workers />,
+        element:<AdminRoute> <Workers /> </AdminRoute>,
       },
       {
         path: "/workers/:workerType/:id",
-        element: <StoryDetails />,
+        element: <AdminRoute><StoryDetails /> </AdminRoute>,
       },
 
       {
         path: "/settings",
-        element: <Settings />,
+        element: <AdminRoute><Settings /> </AdminRoute>,
       },
       {
         path: "/settings/:settingType",
-        element: <SettingDetail />,
+        element:  <AdminRoute><SettingDetail /></AdminRoute>,
       },
     ],
   },

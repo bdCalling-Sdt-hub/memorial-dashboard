@@ -5,7 +5,7 @@ const token = localStorage.getItem('token');
 
 
 interface ValueProps{
-    catId : number;
+    selectedCategory : number;
     page: number;
 }
 
@@ -21,8 +21,8 @@ export const getStories = createAsyncThunk(
     'getStories',
     async (value: ValueProps, thunkApi) => {
         try{
-            const {catId, page} = value;
-            const response = await baseURL.get(`/user/story?catId=${catId}&page=${page}`, {
+            const {selectedCategory, page} = value;
+            const response = await baseURL.get(`/user/story?catId=${selectedCategory}&page=${page}`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,

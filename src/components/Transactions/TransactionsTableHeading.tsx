@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
 import { IoIosArrowDown } from "react-icons/io"
 import HeadingText from "../../util/HeadingText"
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { allPackage } from "../../redux/apiSlices/subscription/getPackageSlice";
 interface  TransactionsTableHeadingProps{
   setChange : ()=> void;
+  setSelectPackage : ()=> void;
 }
 
 const TransactionsTableHeading:React.FC<TransactionsTableHeadingProps> = ({
-  setChange
+  setChange,
+  setSelectPackage
 }) => {
     const [openDropdown, setOpenDropdown] = useState(false);
     const [Switch, setSwitch] = useState("Daily") ;
@@ -22,6 +26,14 @@ const TransactionsTableHeading:React.FC<TransactionsTableHeadingProps> = ({
         `?${Switch}`
       )
     }, [Switch]);
+
+
+    const dispatch = useAppDispatch();
+    const {packages} = useAppSelector(state => state.getPackage);
+    useEffect(()=> {
+      dispatch(allPackage())
+    },[dispatch]);
+
     return (
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -51,7 +63,7 @@ const TransactionsTableHeading:React.FC<TransactionsTableHeadingProps> = ({
                   <div 
                     className="
                       absolute
-                      w-[96px] 
+                      w-[110px] 
                       h-[94px]
                     bg-white
                       rounded-b-[16px] 
@@ -64,9 +76,22 @@ const TransactionsTableHeading:React.FC<TransactionsTableHeadingProps> = ({
                       p-3
                     "
                   >
-                    <p className="text-[#2B2A2A] pb-2">Basic</p>
-                    <p className="text-[#0071E3] pb-2">Premium</p>
-                    <p className="text-[#E8B40A]">Gold</p>
+                    {
+                        packages?.map((item) =>
+                          <div key={item?.id}>
+                            <p 
+                              onClick={()=>setSelectPackage(item?.id)}
+                              className={`
+                                pb-2 cursor-pointer
+                                ${item?.package_name === "Quater Page" ? "text-[#2B2A2A]" :  item?.package_name === "Half Page" ? "text-[#0071E3]" : "text-[#E8B40A]"}
+                                
+                              `}
+                            >
+                              {item?.package_name}
+                            </p>
+                          </div>
+                        )
+                    }
                   </div>
                 }
               </div>

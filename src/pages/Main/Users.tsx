@@ -5,25 +5,21 @@ import SearchField from "../../util/SearchField";
 import { IoIosArrowDown } from "react-icons/io";
 import UserSubsciptionDetailsCard from "../../components/DashboardHome/UserSubsciptionDetailsCard";
 import Header from "../../layouts/Main/Header";
-import { AllUser } from "../../redux/apiSlices/allUserSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { searchUser } from "../../redux/apiSlices/searchUserSlice";
+import { allPackage } from "../../redux/apiSlices/subscription/getPackageSlice";
 
 const Users = () => {
   const dispatch = useAppDispatch();
-  
+  const {packages} = useAppSelector(state => state.getPackage);
   const [searchText, setSearchText] = useState('');
+  const [selectPackage, setSelectPackage] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
 
   useEffect(()=> {
-    dispatch(AllUser())
+    dispatch(allPackage())
   },[dispatch]);
 
-  useEffect(()=>{
-    if(searchText !== ''){
-      dispatch(searchUser(searchText))
-    }
-  },[dispatch, searchText])
+  
   
   return (
     <>
@@ -64,7 +60,7 @@ const Users = () => {
               <div 
                 className="
                   absolute
-                  w-[96px] 
+                  w-[110px] 
                   h-[94px]
                 bg-white
                   rounded-b-[16px] 
@@ -77,15 +73,29 @@ const Users = () => {
                   p-3
                 "
               >
-                <p className="text-[#2B2A2A] pb-2">Basic</p>
-                <p className="text-[#0071E3] pb-2">Premium</p>
-                <p className="text-[#E8B40A]">Gold</p>
+                {
+                  packages?.map((item) =>
+                    <div key={item?.id}>
+                      <p 
+                        onClick={()=>setSelectPackage(item?.id)}
+                        className={`
+                          pb-2 cursor-pointer
+                          ${item?.package_name === "Quater Page" ? "text-[#2B2A2A]" :  item?.package_name === "Half Page" ? "text-[#0071E3]" : "text-[#E8B40A]"}
+                          
+                        `}
+                      >
+                        {item?.package_name}
+                      </p>
+                    </div>
+                  )
+                }
+                
               </div>
             }
           </div>
         </div>
         <div className="mt-5">
-          <UsersTable />
+          <UsersTable searchText={searchText} selectPackage={selectPackage} />
         </div>
       </div>
     </>

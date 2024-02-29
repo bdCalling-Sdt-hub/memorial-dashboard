@@ -1,23 +1,41 @@
 import { Modal, Table } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { IUser } from "../../types/user.interface";
 import ModelValue from "../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
-import photo from "../../assets/Rectangle 14.jpg";
 import { AllUser } from "../../redux/apiSlices/allUserSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useReactToPrint } from "react-to-print";
+import ImgConfig from "../../ImgConfig";
+import { searchUser } from "../../redux/apiSlices/searchUserSlice";
 
-const UsersTable = () => {
+const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchText:string}) => {
+  const componentRef = useRef();
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
   const {users: search} = useAppSelector(state => state.searchUser);
   const [user, setUser] = useState<IUser>()
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [data, setData] = useState([]);
   
   useEffect(()=> {
-    dispatch(AllUser(currentPage))
-  },[dispatch, currentPage]);
+    dispatch(AllUser({currentPage, selectPackage}))
+  },[dispatch, currentPage, selectPackage, searchText === ""]);
+
+  useEffect(()=>{
+    if(searchText !== ''){
+      dispatch(searchUser(searchText))
+    }
+  },[dispatch, searchText]);
+
+  useEffect(()=>{
+    setData(users)
+  }, [users, search?.length === 0])
+
+  useEffect(()=>{
+    setData(search)
+  }, [search])
   
   const columns = [
     {
@@ -75,7 +93,6 @@ const UsersTable = () => {
 
   const handleView = (value: IUser) => {
     setUser(value);
-    console.log(value)
     setIsModalOpen(true);
   };
 
@@ -83,16 +100,20 @@ const UsersTable = () => {
     setCurrentPage(page);
   };
   
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    pageStyle: "",
+  });
   return (
     <>
       <Table
         columns={columns}
-        dataSource={users?.data}
+        dataSource={data?.data}
         pagination={{
-          pageSize: users?.per_page,
+          pageSize: data?.per_page,
           showSizeChanger: false,
-          total: users?.total,
-          current: users?.current_page,
+          total: data?.total,
+          current: data?.current_page,
           onChange: handlePageChange,
         }}
       />
@@ -102,38 +123,35 @@ const UsersTable = () => {
         onCancel={() => setIsModalOpen(false)}
         footer={[]}
         closeIcon
-      >
-        <ModelValue
-          title={"User Details"}
-          img={photo}
-          keys={[
-            "User name",
-            "User email ",
-            "Phone number",
-            "Address",
-            "Joining Date",
-          ]}
-          values={[
-            user?.user?.fullName as string,
-            user?.user?.email as string,
-            user?.user?.mobile ? user?.user?.mobile : "01756953936",
-            "Bangladesh",
-            user?.user?.currency as string,
-          ]}
-        />
-        <div className="flex  items-center mx-auto gap-2 mt-10">
-          {["Download", "Print"].map((item) => (
-            <button
-              key={item}
-              className={`py-3 text-[18px] font-semibold rounded-lg w-full ${
-                item === "Download"
-                  ? "bg-[#0071E3] text-white"
-                  : "border border-[#0071E3] text-[#0071E3]"
-              } `}
+      > 
+        <div ref={componentRef}>
+          <ModelValue
+            title={"User Details"}
+            img={`${ImgConfig}${user?.user?.image}`}
+            keys={[
+              "User name",
+              "User email ",
+              "Phone number",
+              "Address",
+              "Joining Date",
+            ]}
+            values={[
+              user?.user?.fullName as string,
+              user?.user?.email as string,
+              user?.user?.mobile ? user?.user?.mobile : "01756953936",
+              "Bangladesh",
+              user?.user?.currency as string,
+            ]}
+            />
+        </div>
+
+        <div className="w-full">
+            <button 
+            onClick={handlePrint}
+              className={`py-3 text-[18px] font-semibold rounded-lg w-full bg-[#0071E3] text-white `}
             >
-              {item}
+              Print
             </button>
-          ))}
         </div>
       </Modal>
     </>

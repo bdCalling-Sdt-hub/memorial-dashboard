@@ -3,13 +3,9 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const location = useLocation();
+  const user =  JSON.parse(localStorage.getItem('admin') as string);
 
-  const user = {
-    email: "siffahim25@gmail.com",
-    role: "admin",
-  };
-
-  if (user.email && user.role === "admin") {
+  if (user?.email && user?.userType === "ADMIN") {
     return children;
   }
   return <Navigate to="/auth/login" state={{ from: location }} />;

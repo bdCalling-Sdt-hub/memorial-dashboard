@@ -37,7 +37,8 @@ const UserSubsciptionDetailsCard= () => {
                             </div>
                             <div className=''>
                                 <h3 className='text-[#0071E3] font-medium text-[16px]'>{item?.package_name}</h3>
-                                <h1 className='font-medium text-[30px]'>{item?.story_count || item?.total_subscribers}</h1>
+                                <h1 className='font-medium text-[30px]'>{item?.story_count}</h1>
+                                <h1 className='font-medium text-[30px]'>{item?.total_subscribers}</h1>
                             </div>
                         </div>
                     </div>

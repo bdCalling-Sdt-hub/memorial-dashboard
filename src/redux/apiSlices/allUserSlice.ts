@@ -13,15 +13,26 @@ const initialState = {
 
 export const AllUser = createAsyncThunk(
     'AllUser',
-    async (value: number, thunkApi) => {
+    async ({selectPackage, currentPage}:{selectPackage: number, currentPage: number}, thunkApi) => {
         try{
-            const response = await baseURL.get(`/user/list?page=${value}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`,
-                }
-            });
-            return response?.data;
+            if(selectPackage){
+                const response = await baseURL.get(`/user/list?id=${selectPackage}&page=${currentPage}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                });
+                return response?.data;
+            }else{
+                const response = await baseURL.get(`/user/list?page=${currentPage}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                });
+                return response?.data;
+            }
+            
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

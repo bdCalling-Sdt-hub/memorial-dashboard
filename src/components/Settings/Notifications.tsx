@@ -16,7 +16,7 @@ const Notifications = () => {
     dispatch(getNotifications());
   }, [dispatch])
   return (
-    <div>
+    <div >
       <div className="flex items-end justify-end mb-11">
         <Header/>
       </div>
@@ -31,11 +31,11 @@ const Notifications = () => {
       {
         loading
         ?
-        <div className="h-[85vh] overflow-y-auto w-full flex items-center justify-center">
+        <div className="h-[85vh] w-full flex items-center justify-center">
           <Spinner size="large"/>
         </div>
         :
-        <>
+        <div className="h-[85vh] border overflow-y-scroll w-full pb-12">
           {notifications?.map((notification, index) => (
             <div
               key={index}
@@ -48,7 +48,7 @@ const Notifications = () => {
               </div>
             </div>
           ))}
-        </>
+        </div>
       }
       
 

@@ -1,15 +1,14 @@
 import { Modal, Table } from "antd";
 import { useState } from "react";
-// import { ITransaction } from "../../../types/transaction.interface";
 import ModelValue from "../../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
-import photo from "../../../assets/Rectangle 14.jpg"
 import moment from "moment";
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getRecentTransaction } from "../../../redux/apiSlices/getRecentTransactionSlice";
 import { useReactToPrint } from "react-to-print";
 import ImgConfig from "../../../ImgConfig"
+
 
 const TransactionTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { getWeeklyIncome } from '../../redux/apiSlices/income/weeklyIncomeSlice';
 import { Modal, Table } from 'antd';
 import moment from 'moment';
 import { LuEye } from 'react-icons/lu';
 import ModelValue from '../../util/ModelValue';
+import { useReactToPrint } from "react-to-print";
+import ImgConfig from "../../ImgConfig"
 
-const WeeklyIncomeTable = () => {
+const WeeklyIncomeTable = ({selectPackage}: {selectPackage: number}) => {
     const dispatch = useAppDispatch();
     const {income} = useAppSelector(state=> state.getWeeklyIncome);
     const {profile} = useAppSelector(state=> state.getProfile);
     const [value, setValue] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [page, setPage] = useState(1);
+    const componentRef = useRef();
 
 
     useEffect(()=>{
-        dispatch(getWeeklyIncome())
-    },[dispatch, page]);
+        dispatch(getWeeklyIncome({page, selectPackage}))
+    },[dispatch, page, selectPackage]);
     
     
     const handleGetValue=(data)=>{
@@ -68,6 +71,10 @@ const WeeklyIncomeTable = () => {
       const handlePageChange = (page: number) => {
         setPage(page);
       };
+      const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        pageStyle: "",
+      });
     
     return (
         <div>
@@ -89,7 +96,7 @@ const WeeklyIncomeTable = () => {
                 footer={[]}
             >
 
-
+                <div ref={componentRef}>
                 <ModelValue
                     title={"Weekly Details"}
                     keys={[
@@ -105,20 +112,16 @@ const WeeklyIncomeTable = () => {
                         value?.start_of_week + " " + "-" +  " " +   value.end_of_week
                     ]}
                 />
+                </div>
 
-                <div className="flex  items-center mx-auto gap-2 mt-10">
-                    {["Download", "Print"].map((item) => (
+                <div className="w-full">
                         <button
-                        key={item}
-                        className={`py-3 rounded-lg w-full ${
-                            item === "Download"
-                            ? "bg-[#0071E3] text-white"
-                            : "border border-[#0071E3] text-[#0071E3]"
-                        } `}
+                        onClick={handlePrint}
+                        className={`py-3 rounded-lg w-full 
+                            bg-[#0071E3] text-white`}
                         >
-                        {item}
+                        Print
                         </button>
-                    ))}
                 </div>
             </Modal>
         </div>

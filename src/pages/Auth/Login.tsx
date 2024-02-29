@@ -2,30 +2,27 @@ import { IconLock, IconMail } from "@tabler/icons-react";
 import { Input } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useAppDispatch } from "../../redux/hook";
 import { login } from "../../redux/apiSlices/authentication/loginSlice";
 import Swal from "sweetalert2";
 
 const Login = () => {
+  const navigate= useNavigate();
   const dispatch = useAppDispatch();
-  const {isSuccess, user} = useAppSelector(state=> state.login);
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  
   const handleLogin=()=>{
     if(email && password){
       dispatch(login({email:email, password: password}))
       .then(response => {
-        console.log(response)
         if(response?.payload.id){
+          localStorage.setItem('admin', JSON.stringify(response?.payload))
           Swal.fire({
             position: "center",
             icon: "success",
             title: "Login Successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           }).then(() => {
             navigate("/")
             location.reload();
@@ -38,7 +35,9 @@ const Login = () => {
             icon: "error",
             title: response?.error?.message,
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            imageWidth: 300,
+            imageHeight: 400,
           })
         }
         

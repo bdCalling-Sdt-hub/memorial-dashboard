@@ -20,13 +20,26 @@ export const getWeeklyIncome = createAsyncThunk(
     'getWeeklyIncome',
     async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/weekly/income`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`,
-                }
-            })
-            return response.data;
+            const {page, selectPackage} = value;
+            if(selectPackage){
+                const response = await baseURL.get(`/weekly/income?packagId=${selectPackage}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                return response.data;
+            }
+            else{
+                const response = await baseURL.get(`/weekly/income`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
+                    }
+                })
+                return response.data;
+            }
+            
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError?.message;

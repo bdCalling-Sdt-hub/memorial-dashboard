@@ -20,7 +20,7 @@ export const searchUser = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 }
             });
-            return response?.data?.data;
+            return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
             const message = axiosError.message;

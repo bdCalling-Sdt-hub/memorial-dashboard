@@ -3,7 +3,6 @@ import TransactionRatio from "../../components/DashboardHome/TransactionRatio";
 import TransactionStatus from "../../util/TransactionStatus";
 import Layer from "../../assets/Layer_1.png";
 import Header from "../../layouts/Main/Header";
-import users from "../../../public/db/users.json";
 import HeadingText from "../../util/HeadingText";
 import { Link } from "react-router-dom";
 import UserCard from "../../util/UserCard";

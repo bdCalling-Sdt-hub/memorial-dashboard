@@ -9,11 +9,16 @@ const initialState = {
     story: {},
   };
 
+interface Ivalue{
+    page: number;
+}
+
 export const storyRequest = createAsyncThunk(
     'searchUser',
-    async (page: number, thunkApi) => {
+    async (value:Ivalue, thunkApi) => {
+        
         try{
-            const response = await baseURL.get(`/story/request?page=${page}`, {
+            const response = await baseURL.get(`/story/request?page=${value?.page}`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,
