@@ -14,8 +14,7 @@ const Header = () => {
 
 
   const handleNavigate = (e:any)=>{
-    e.stopPropagation()
-    console.log("done")
+    e.stopPropagation();
     navigate('/settings/notifications');
   }
 
@@ -41,7 +40,7 @@ const Header = () => {
     <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">
         <div onClick={()=>setOpen(!open)} className="relative cursor-pointer w-[48px] flex items-center justify-center h-[48px] p-2 bg-white rounded-full">
-          <Badge style={{ background: "#0071E3", right: "-8px" }} count={notify?.length}>
+          <Badge style={{ background: "#0071E3", right: "-8px" }} count={notify?.length !== 0 ? notify?.length : 0}>
             <FiBell size={24} />
           </Badge>
 
@@ -50,7 +49,7 @@ const Header = () => {
             open &&
             <div className="p-4 absolute border border-[#0071E3]  rounded-b-[16px] z-20 w-[251px] h-[350px] top-8 right-4 bg-white">
               <div className="flex items-center justify-between">
-                <p className="text-[14px] font-semibold ">{notifications?.length} notifications</p>
+                <p className="text-[14px] font-semibold ">{notify?.length !== 0 ? notify?.length : 0} notifications</p>
                 <p className="text-[#0071E3] text-[10px] font-medium">Mark as read</p>
               </div>
               <div className="bg-[#0071E3] h-[1px] my-4 w-full"></div>
