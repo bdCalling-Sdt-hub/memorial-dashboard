@@ -7,6 +7,7 @@ import { storyStatus } from "../../redux/apiSlices/story/storyStatusSlice";
 import { IStory } from "../../types/story.interface";
 import moment from 'moment';
 import Spinner from "../Spinner";
+import ImgConfig from "../../ImgConfig"
 const StoryRequest = () => {
     const [page, setPage] = useState(1)
     const dispatch = useAppDispatch();
@@ -38,7 +39,7 @@ const StoryRequest = () => {
                                 story?.data?.map((story: IStory, index: number)=>(
                                 <div key={index} className="flex items-center justify-between w-full bg-white rounded-lg p-2 h-[116px]">
                                     <div className="flex items-center gap-6">
-                                        <img src={photo} width={100} height={100} alt="" />
+                                        <img src={`${ImgConfig}${story?.story_image[0]}`} style={{width: "100px", height: "100px", borderRadius: "8px"}}  alt="" />
                                         <div>
                                             <h3 className="text-[18px] mb-[4px] font-medium">{story?.story_title}</h3>
                                             <h4 className="text-[14px] font-normal">{moment(story?.created_at).format('LT')}</h4>

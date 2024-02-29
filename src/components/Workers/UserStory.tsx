@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import photo from "../../assets/Rectangle.png";
 import { Pagination } from 'antd';
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { getStories } from "../../redux/apiSlices/story/getStoriesSlice";
 import { IStory } from "../../types/story.interface";
 import moment from "moment";
-
+import ImgConfig from "../../ImgConfig"
 
 const UserStory = ({selectedCategory}: {selectedCategory: number}) => {
   const dispatch = useAppDispatch();
@@ -14,7 +13,8 @@ const UserStory = ({selectedCategory}: {selectedCategory: number}) => {
   const {stories} = useAppSelector(state => state.getStories);
   useEffect(()=>{
     dispatch(getStories({selectedCategory, page}));
-  },[dispatch, selectedCategory, page])
+  },[dispatch, selectedCategory, page]);
+  
     return (
         <div>
             <div className="grid grid-cols-2 gap-4 my-6">
@@ -22,7 +22,7 @@ const UserStory = ({selectedCategory}: {selectedCategory: number}) => {
           stories?.data?.map((story: IStory, index:number)=>(
             <Link key={index} to={`/workers/story-details/1`}>
               <div  className="flex items-center gap-6 w-full bg-white rounded-lg p-2">
-                  <img src={photo} width={100} height={100} alt="" />
+                  <img src={`${ImgConfig}${story?.story_image[0]}`}  style={{width: "100px", height: "100px", borderRadius: "8px"}} alt="" />
                   <div>
                     <h3 className="text-[18px] font-medium">{story?.description}</h3>
                     <h4 className="text-[14px] font-normal">{moment(story.created_at).format('LT')}</h4>

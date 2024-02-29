@@ -4,17 +4,37 @@ import Header from "../../layouts/Main/Header";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getNotifications } from "../../redux/apiSlices/getNotificationsSlice";
 import Spinner from "../Spinner";
+import { Pagination } from "antd";
+import baseURL from "../../Config";
 
 const Notifications = () => {
   const dispatch = useAppDispatch();
   const { loading, notifications } = useAppSelector(state=> state.getNotifications);
-  console.log(notifications);
+  const [page, setPage] = useState(1);
   useEffect(()=>{
-    dispatch(getNotifications());
-  }, [dispatch])
+    dispatch(getNotifications(page));
+  }, [dispatch, page, ])
+
+  const handlePageChange=(page)=>{
+    setPage(page);
+  }
+
+  const handleRead=async(id: any)=>{
+    if(id){
+      const response = await baseURL.get(`/read-notification?id=${id}`,{
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+      });
+      if(response?.data?.status === "success"){
+        dispatch(getNotifications(page));
+      }
+    }
+  }
   return (
     <div >
       <div className="flex items-end justify-end mb-11">
@@ -31,24 +51,41 @@ const Notifications = () => {
       {
         loading
         ?
-        <div className="h-[85vh] w-full flex items-center justify-center">
+        <div className="h-[75vh] w-full flex items-center justify-center">
           <Spinner size="large"/>
         </div>
         :
-        <div className="h-[85vh] border overflow-y-scroll w-full pb-12">
-          {notifications?.map((notification, index) => (
-            <div
-              key={index}
-              className={` border border-[#0071E3] bg-white mt-6 h-[68px]  flex gap-3  mb-2 p-4 rounded-lg cursor-pointer`}
-            >
-              <div className="w-[12px] mt-[7px] h-[12px] rounded-full bg-[#0071E3]"></div>
-              <div>
-                <h2 className="text-[14px] font-normal text-[#333333] pb-1">{notification?.data?.message}</h2>
-                <p className="text-[8px] font-normal text-[#9D9D9D]">{moment(notification?.data?.time).startOf('day').fromNow()}</p>
+        <div>
+          <div className="h-[75vh] border overflow-y-scroll w-full pb-12">
+            {notifications?.Notifications?.map((notification, index) => (
+              <div
+                onClick={()=>handleRead(notification?.id)}
+                key={index}
+                className={` border border-[#0071E3] bg-white mt-6 h-[68px]  flex gap-3  mb-2 p-4 rounded-lg cursor-pointer`}
+              >
+                <div 
+                  className={`w-[12px] mt-[7px] h-[12px] rounded-full ${notification?.read_at === null ? "bg-[#0071E3]" : "bg-white"} `}></div>
+                <div>
+                  <h2 className="text-[14px] font-normal text-[#333333] pb-1">{notification?.data?.message}</h2>
+                  <p className="text-[8px] font-normal text-[#9D9D9D]">{moment(notification?.data?.time).startOf('day').fromNow()}</p>
+                </div>
               </div>
+            ))}
+          </div>
+
+          <div className="flex items-end justify-end">
+              <Pagination 
+                defaultPageSize={notifications?.pagination?.per_page} 
+                defaultCurrent={notifications?.pagination?.current_page} 
+                total={notifications?.pagination?.total} 
+                onChange= {handlePageChange} 
+                /* 
+                */
+                
+                />
             </div>
-          ))}
         </div>
+
       }
       
 

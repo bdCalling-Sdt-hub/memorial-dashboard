@@ -10,10 +10,13 @@ import ImgConfig from "../../ImgConfig";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
+
   const handleNavigate = (e:any)=>{
     e.stopPropagation()
-    navigate('/settings/notifications')
+    console.log("done")
+    navigate('/settings/notifications');
   }
 
   const dispatch = useAppDispatch();
@@ -24,13 +27,10 @@ const Header = () => {
     dispatch(getProfile())
   },[dispatch]);
 
-  
-
-
-
   const { loading, notifications } = useAppSelector(state=> state.getNotifications);
+  const notify = notifications?.Notifications?.filter((item)=> item?.read_at === null);
   useEffect(()=>{
-    dispatch(getNotifications());
+    dispatch(getNotifications(1));
   }, [dispatch]);
 
 
@@ -41,26 +41,27 @@ const Header = () => {
     <div className="flex items-center justify-between w-fit">
       <div className="flex items-center gap-4">
         <div onClick={()=>setOpen(!open)} className="relative cursor-pointer w-[48px] flex items-center justify-center h-[48px] p-2 bg-white rounded-full">
-          <Badge style={{ background: "#0071E3", right: "-8px" }} count={notifications?.length}>
+          <Badge style={{ background: "#0071E3", right: "-8px" }} count={notify?.length}>
             <FiBell size={24} />
           </Badge>
 
           {/* notification dropdown start */}
           {
             open &&
-            <div className="p-4 absolute border border-[#0071E3] rounded-b-[16px] z-20 w-[251px] h-[350px] top-8 right-4 bg-white">
+            <div className="p-4 absolute border border-[#0071E3]  rounded-b-[16px] z-20 w-[251px] h-[350px] top-8 right-4 bg-white">
               <div className="flex items-center justify-between">
                 <p className="text-[14px] font-semibold ">{notifications?.length} notifications</p>
                 <p className="text-[#0071E3] text-[10px] font-medium">Mark as read</p>
               </div>
               <div className="bg-[#0071E3] h-[1px] my-4 w-full"></div>
               {
-                notifications?.slice(0,3).map((notification, index) => (
+                notifications?.Notifications?.slice(0,3).map((notification, index) => (
                   <div
+                    key={index}
                     key={index}
                     className="flex gap-3  mb-2 px-4 py-2 rounded-lg cursor-pointer"
                   >
-                    <div className="w-[12px] h-[12px] rounded-full bg-[#0071E3]"></div>
+                    <div className={`w-[12px] h-[12px] rounded-full ${notification?.read_at === null && "bg-[#0071E3]"}`}></div>
                     <div>
                       <h2 className="text-[10px] font-semibold text-[#333333]">{notification?.data?.message}</h2>
                       <p className="text-[8px] text-[#A1A1A1]">{moment(notification?.data?.time).startOf('day').fromNow()}</p>
@@ -68,7 +69,7 @@ const Header = () => {
                   </div>
                 ))
               }
-              <p className="text-[#0071E3] text-[18px] font-medium text-center " onClick={handleNavigate}>View all</p>
+              <p className="text-[#0071E3] absolute bottom-2 left-[35%] text-[18px] font-medium text-center " onClick={handleNavigate}>View all</p>
             </div>
           }
           {/* notification dropdown end */}

@@ -14,7 +14,12 @@ export const getStory = createAsyncThunk(
     'getStory',
     async (value: number, thunkApi) => {
         try{
-            const response = await baseURL.get(`/details/story/${value}`);
+            const response = await baseURL.get(`/details/story/${value}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
+            });
             return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;

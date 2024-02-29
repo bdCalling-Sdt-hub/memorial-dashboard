@@ -2,18 +2,17 @@ import React, { useEffect } from 'react'
 import Header from '../../layouts/Main/Header'
 import HeadingText from '../../util/HeadingText'
 import { RiArrowLeftSLine } from 'react-icons/ri'
-import { HiVolumeUp } from "react-icons/hi";
-import photo from "../../assets/Rectangle 178.png"
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { getStory } from '../../redux/apiSlices/story/getStoryDetailsSlice';
 import moment from 'moment';
 import IStory from "../../types/story.interface"
-
+import ImgConfig from "../../ImgConfig"
 const StoryDetails = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
     const { story }: { story: IStory } = useAppSelector(state=> state.getStoryDetails);
+    console.log(story)
     useEffect(()=>{
         if (id && !isNaN(parseInt(id))) {
             dispatch(getStory(parseInt(id)));
@@ -39,11 +38,11 @@ const StoryDetails = () => {
             
 
                 <div className='flex gap-2 mt-4 mb-[27px]'>
-                    <img src={photo} width={478} height={313} alt="" />
+                    <img src={`${ImgConfig}${story?.story_image[0]}`} width={478} height={313} alt="" />
                     <p className='text-[18px] font-normal'>{story?.description}</p>
                 </div>
 
-                <p className='text-[18px] font-normal'>Lorem ipsum dolor sit amet consectetur. Congue eget eget dignissim luctus placerat rutrum orci leo dignissim. Adipiscing volutpat nisi quis habitant platea. Ut eget suspendisse cursus a adipiscing. Orci rutrum nibh egestas scelerisque libero quis tincidunt dignissim.</p>
+                <p className='text-[18px] font-normal'>{story?.description}</p>
             </div>
         </div>
     )
