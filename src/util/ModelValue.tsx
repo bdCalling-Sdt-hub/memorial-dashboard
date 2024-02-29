@@ -4,15 +4,17 @@ const ModelValue = ({
   title = "",
   keys,
   values,
-  img
+  img,
+  // componentRef 
 }: {
   title?: string;
   keys: string[];
   values: (string | number)[];
-  img?:string;
+  // img?:string;
+  // componentRef: HTMLInputElement
 }) => {
   return (
-    <div className="mb-3">
+    <div className="mb-3" >
       <HeadingText color="#0071E3">{title}</HeadingText>
       {
         img && <img src={img} className="mt-4" width={96} height={69} alt="" />

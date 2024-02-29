@@ -5,15 +5,18 @@ import ModelValue from "../../../util/ModelValue";
 import { LuEye } from "react-icons/lu";
 import photo from "../../../assets/Rectangle 14.jpg"
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { getRecentTransaction } from "../../../redux/apiSlices/getRecentTransactionSlice";
+import { useReactToPrint } from "react-to-print";
+import ImgConfig from "../../../ImgConfig"
 
 const TransactionTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('')
   const {transactions} = useAppSelector(state=> state.getRecentTransaction);
+  const componentRef = useRef();
 
   useEffect(()=>{
     dispatch(getRecentTransaction())
@@ -74,7 +77,10 @@ const TransactionTable = () => {
     setIsModalOpen(true)
   }
 
-
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    pageStyle: "",
+  });
   return (
     <div>
       <Table 
@@ -90,9 +96,11 @@ const TransactionTable = () => {
         onCancel={() => setIsModalOpen(false)}
         footer={[]}
       >
+        <div ref={componentRef}>
         <ModelValue
+          
           title={"User details"}
-          img={photo}
+          img={`${ImgConfig}/${value?.user?.image}`}
           keys={[
             "User Name",
             "email",
@@ -118,20 +126,15 @@ const TransactionTable = () => {
             value?.amount
           ]}
         />
+        </div>
 
         <div className="flex  items-center mx-auto gap-2 mt-10">
-          {["Download", "Print"].map((item) => (
-            <button
-              key={item}
-              className={`py-3 rounded-lg w-full ${
-                item === "Download"
-                  ? "bg-[#0071E3] text-white"
-                  : "border border-[#0071E3] text-[#0071E3]"
-              } `}
+          <button
+            onClick={handlePrint}
+              className={`py-3 rounded-lg w-full bg-[#0071E3] text-white`}
             >
-              {item}
+              Print
             </button>
-          ))}
         </div>
       </Modal>
     </div>
