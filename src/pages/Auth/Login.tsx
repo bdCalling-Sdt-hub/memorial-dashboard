@@ -31,11 +31,18 @@ const Login = () => {
             location.reload();
           });
         }
+
+        if(response?.error?.message){
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: response?.error?.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
         
       })
-      .catch(error => {
-        console.log(error)
-      });
     }
     
   }

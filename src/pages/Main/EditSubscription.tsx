@@ -1,10 +1,10 @@
 import Header from "../../layouts/Main/Header"
 import HeadingText from "../../util/HeadingText"
 import { RiArrowLeftSLine } from "react-icons/ri";
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getSubscription } from "../../redux/apiSlices/subscription/getSubscriptionSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useAppDispatch } from "../../redux/hook";
 import { useParams } from "react-router-dom"
 import { Input, Form, Button } from 'antd';
 import { updateSubscription } from "../../redux/apiSlices/subscription/updateSubscriptionSlice";
@@ -15,21 +15,10 @@ import { CiCircleMinus  } from "react-icons/ci";
 const EditSubscription = () => {
     const dispatch = useAppDispatch();
     const { id } = useParams();
-    // const { subscription, loading } = useAppSelector(state=> state.getSubscription);
     const subscription= JSON.parse(localStorage.getItem("subscription"));
     
     const { package_name, word_limit, image_limit, feature, duration, amount} = subscription;
-    /* const [changeFeature, setChangeFeature] =useState({});
-    // const [packages, setPackage] =useState({});
-    const [features, setFeature] =useState();
 
-    const handleFeatureChange=(e: ChangeEvent<HTMLInputElement>)=>{
-        setChangeFeature(prev=>({...prev, [e.target.name]:e.target.value}));
-        const data = Object.values(changeFeature);
-        const result = data.map(item => ({ feature: item }));
-        setFeature(result);
-    } */
-    
 
     useEffect(()=>{
         if(id){
@@ -47,12 +36,12 @@ const EditSubscription = () => {
             word_limit: values?.word_limit,
             image_limit: values?.image_limit,
             amount: values?.amount,
-            feature: features
+            feature: JSON.stringify(values?.features?.map((item:any) => ({ feature: item })))
         }
-        if(value?.id && value?.package_name && value?.duration && value?.word_limit && value?.image_limit && value?.amount){
+        if(value?.id && value?.package_name && value?.duration && value?.word_limit && value?.image_limit && value?.amount && value?.feature){
             dispatch(updateSubscription(value)).then(response => {
-                console.log(response)
                 if(response.payload.message === "Package update success fully"){
+                    localStorage.setItem("subscription", JSON.stringify(response?.payload?.data));
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -72,16 +61,9 @@ const EditSubscription = () => {
         word_limit: word_limit,
         image_limit: image_limit,
         amount: amount,
-        features: JSON.parse(feature)?.map((item, index) => ({ [index]: item.feature }))
-    };    
-    /* // console.log(JSON.parse(feature)?.map(({ key, name }) => ({ [key]: name})))
-    console.log(JSON.parse(feature)?.map((( name, key ) => name))
-    const data = JSON.parse(feature).map(( name, key ) => {
-        console.log(name)
-        console.log(key)
-    })
-    */
-   console.log(JSON.parse(feature)?.map(( name, key ) => ({ [key]: name}))) 
+        features: JSON.parse(feature)?.map((item: any)=> item?.feature)
+    };
+    
     return (
         
                 <div>
@@ -219,134 +201,95 @@ const EditSubscription = () => {
                             
                                 
                             <div className="grid grid-cols-1 gap-4">
-
-                            <Form.List name="features" key="features" >
-                                {(fields) => (
-                                    <>
-                                        {JSON.parse(feature)?.map(({ key, name, ...restField }) => (
-                                            console.log(key, name)
-                                        ))}
-                                    </>
-                                )}
-                            </Form.List>
-
-                                <div>
-
-                                    {/* <Form> */}
-                                        <Form.List name="names" >
-                                            {
-                                            
-                                                (fields, { add, remove }) => (
-                                                    <>
-                                                        {
-                                                            fields.map((field, index) => (
+                                <Form.List name="features">
+                                    {
+                                        (fields, { add, remove }) => (
+                                            <>
+                                                {
+                                                    fields.map((field, index) => (
+                                                        <Form.Item
+                                                            required={false}
+                                                            key={field.key}
+                                                            initialValue={initialFormValues?.features[index]?.feature}
+                                                            className="w-full"
+                                                        >
+                                                            <div  className='flex items-center gap-[30px] w-full'>
                                                                 <Form.Item
-                                                                    required={false}
-                                                                    key={field.key}
-                                                                    className="w-full"
+                                                                    {...field}
+                                                                    validateTrigger={['onChange', 'onBlur']}
+                                                                    style={{marginBottom : 0}}
+                                                                    className='w-full'
                                                                 >
-                                                                    <Form.Item
-                                                                        {...field}
-                                                                        validateTrigger={['onChange', 'onBlur']} 
-                                                                        className="w-full "
-                                                                        style={{margin: 0}}
-                                                                    >
-                                                                        <div className="flex items-center gap-[30px]">
-                                                                            <Input
-                                                                                name={`feature${index + 7}`}
-                                                                                placeholder="Enter Feature" 
-                                                                                prefix={false}
-                                                                                onChange={handleFeatureChange}
-                                                                                style={{
-                                                                                    border: "1px solid #8ABEF2",
-                                                                                    height: "56px",
-                                                                                    background: "white",
-                                                                                    borderRadius: "8px",
-                                                                                    outline: "none",
-                                                                                    color: "black",
-                                                                                    fontSize: "18px",
-                                                                                    margin : 0
-                                                                                    
-                                                                                }}
-                                                                            />
-                                                                            <div>
-                                                                                {
-                                                                                    fields.length > 0 ? (
-                                                                                        <CiCircleMinus  size={44} color="#D7263D"
-                                                                                            onClick={() => remove(field.name)}
-                                                                                        />
-                                                                                    )
-                                                                                    : 
-                                                                                    null
-                                                                                }
-                                                                            </div>
-                                                                        </div>
-                                                                    </Form.Item>
-                                                                {/* <div className="w-[10%]">
+                                                                    <Input
+                                                                        style={{
+                                                                            width:"100%",
+                                                                            border: "1px solid #8ABEF2",
+                                                                            height: "56px",
+                                                                            background: "white",
+                                                                            borderRadius: "8px",
+                                                                            outline: "none",
+                                                                            color: "black",
+                                                                            fontSize: "18px"
+                                                                        }}
+                                                                    />
+                                                                </Form.Item>
+                                                                <div>
                                                                     {
                                                                         fields.length > 0 ? (
-                                                                            <CiCircleMinus  size={44} color="#D7263D"
+                                                                            <CiCircleMinus
+                                                                                size={44}
+                                                                                className="dynamic-delete-button cursor-pointer text-[#D7263D]"
                                                                                 onClick={() => remove(field.name)}
                                                                             />
-                                                                        )
+                                                                        ) 
                                                                         : 
                                                                         null
                                                                     }
-                                                                </div> */}
-                                                                </Form.Item>
-                                                            ))
-                                                        }
-                                                        <Form.Item>
-                                                            <Button
-                                                                
-                                                                onClick={() => add()}
-                                                                style={{
-                                                                width: '100%',
-                                                                }}
-                                                                icon={<PlusOutlined />}
-                                                                className="
-                                                                    h-[56px] 
-                                                                    cursor-pointer 
-                                                                    mt-4 
-                                                                    border
-                                                                    border-[#0071E3]
-                                                                    text-[#0071E3]
-                                                                    rounded-lg 
-                                                                    flex 
-                                                                    items-center 
-                                                                    justify-center 
-                                                                    text-lg 
-                                                                    font-semibold
-                                                                "
-                                                            >
-                                                                Add field
-                                                            </Button>
+                                                                </div>
+                                                            </div>
                                                         </Form.Item>
-                                                    </>
-                                                )
-                                            }
-                                        </Form.List>
-                                </div>
+                                                    ))
+                                                }
 
-
-                                <button onClick={handleSubmit} type="submit"
-                                        className="
-                                            h-[56px] 
-                                            cursor-pointer 
-                                            mt-4 
-                                            bg-[#0071E3]
-                                            text-white 
-                                            rounded-lg 
-                                            flex 
-                                            items-center 
-                                            justify-center 
-                                            text-lg 
-                                            font-semibold
-                                        "
-                                    >
-                                        Update Subscription
-                                </button>
-                            </div>
+                                                <Form.Item>
+                                                    <Button
+                                                        onClick={() => add()}
+                                                        style={{
+                                                            height: "56px",
+                                                            background: "transparent",
+                                                            borderRadius: "8px",
+                                                            border: "1px solid #0071E3",
+                                                            outline: "none",
+                                                            color: "#0071E3",
+                                                            fontSize: "18px",
+                                                            width: "100%",
+                                                        }}
+                                                        icon={<PlusOutlined />}
+                                                    >
+                                                        {initialFormValues.features[fields.length]?.feature || 'Add field'}
+                                                    </Button>
+                                                </Form.Item>
+                                            </>
+                                        )
+                                    }
+                                </Form.List>   
+                            </div>  
+                            <Form.Item  style={{marginBottom: 0}}>
+                                <Button
+                                    type="primary" htmlType="submit"
+                                    style={{
+                                        height: "56px",
+                                        background: "#0071E3",
+                                        borderRadius: "8px",
+                                        outline: "none",
+                                        color: "white",
+                                        fontSize: "18px",
+                                        width: "100%",
+                                    }}
+                                >
+                                    Update Subscription
+                                </Button>
+                            </Form.Item> 
                                 
                                 
                         </div>

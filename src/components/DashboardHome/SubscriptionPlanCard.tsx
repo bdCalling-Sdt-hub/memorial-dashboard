@@ -2,14 +2,11 @@ import { FaCircleCheck } from "react-icons/fa6"
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { PiCrownSimpleFill } from "react-icons/pi"
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { deleteSubscription } from "../../redux/apiSlices/subscription/deleteSubscriptionSlice";
 interface SubscriptionPlanCardProps{
     name: string;
     price: string;
     feature?: string[];
     id: number;
-    handleDelete: ()=> void;
     word_limit: number;
     image_limit: number;
     item: {};
@@ -19,21 +16,13 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     price,
     feature,
     id,
-    handleDelete,
     word_limit,
     image_limit,
     item
 }) => {
-    const dispatch = useAppDispatch();
-    const {subscription} = useAppSelector(state=> state.deleteSubscription);
+    
     const word =  {"feature": `Post Story in between ${word_limit} words`}
     
-    const handleId=(id:number)=>{
-        if(id){
-            handleDelete(id);
-            // dispatch(deleteSubscription(id));
-        }
-    }
     const handleSave=(item)=>{
         localStorage.setItem("subscription", JSON.stringify(item));
     }
@@ -66,13 +55,13 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                     )
                 }
 
-                <div className="flex items-center gap-4 justify-between">
+                <div className="w-full">
                     <Link to={`/edit-subscription/${id}`} >
                         <button
                             onClick={()=>handleSave(item)} 
                             className="
-                                w-[164px]
-                                h-[36px] 
+                                w-full
+                                h-[52px] 
                                 bg-[#0071E3] 
                                 text-[18px] 
                                 font-normal 
@@ -88,25 +77,6 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
                             <IoIosArrowRoundForward size={24} color="#FFFFFF" />
                         </button>
                     </Link>
-                    <button
-                        onClick={()=>handleId(id)}
-                        className="
-                            w-[164px]
-                            h-[36px]
-                            border 
-                            border-[#0071E3] 
-                            text-[18px] 
-                            font-normal 
-                            flex 
-                            items-center 
-                            justify-center 
-                            gap-[10px] 
-                            text-[#0071E3] 
-                            rounded-md
-                        "
-                    >
-                        Delete
-                    </button>
                 </div>
             </div>
         </div>

@@ -1,11 +1,10 @@
 import { HiUserGroup } from "react-icons/hi";
-import { IUser } from "../../types/user.interface";
 import { useAppSelector } from "../../redux/hook";
 
 
 
 const UserSubsciptionDetailsCard= () => {
-    const {users, packeages} = useAppSelector(state => state.allUser);
+    const {packeages} = useAppSelector(state => state.allUser);
     return (
         <div className='flex items-center justify-between'>
             {
@@ -38,7 +37,7 @@ const UserSubsciptionDetailsCard= () => {
                             </div>
                             <div className=''>
                                 <h3 className='text-[#0071E3] font-medium text-[16px]'>{item?.package_name}</h3>
-                                <h1 className='font-medium text-[30px]'>{item?.story_count}</h1>
+                                <h1 className='font-medium text-[30px]'>{item?.story_count || item?.total_subscribers}</h1>
                             </div>
                         </div>
                     </div>

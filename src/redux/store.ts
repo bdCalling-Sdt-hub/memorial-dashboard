@@ -29,7 +29,6 @@ import monthlyIncomeSlice from "./apiSlices/income/monthlyIncomeSlice";
 import getDashboardSlice from "./apiSlices/getDashboardSlice";
 import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 import getIncomeRationSlice from "./apiSlices/income/getIncomeRatioSlice";
-import deleteSubscriptionSlice from "./apiSlices/subscription/deleteSubscriptionSlice";
 import updateSubscriptionSlice from "./apiSlices/subscription/updateSubscriptionSlice";
 import getNotificationsSlice from "./apiSlices/getNotificationsSlice";
 
@@ -41,7 +40,6 @@ export const store = configureStore({
     // subscription state start here
     getPackage: getPackageSlice,
     getSubscription: getSubscriptionSlice,
-    deleteSubscription: deleteSubscriptionSlice,
     updateSubscription: updateSubscriptionSlice,
     // subscription state end here
 
