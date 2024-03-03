@@ -40,7 +40,7 @@ const ForgetPassword = () => {
         className="flex items-center text-[#0071E3] justify-start gap-4 mb-5 text-2xl font-medium"
       >
         {" "}
-        <IconChevronLeft size={28} /> Forget Password
+        <IconChevronLeft size={28} /> Forgot Password
       </Link>
 
       <p className="mb-[38px] text-base font-normal">
