@@ -83,7 +83,7 @@ const Login = () => {
         />
 
         <p className="text-end text-[#0071E3] text-lg font-semibold">
-          <Link to="/auth/forget-password">Forget Password?</Link>
+          <Link to="/auth/forget-password">Forgot Password?</Link>
         </p>
       </form>
 
