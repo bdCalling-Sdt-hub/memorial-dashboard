@@ -5,7 +5,9 @@ import { TbCrown } from "react-icons/tb";
 import { PiBookOpenLight } from "react-icons/pi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { HiLogout } from "react-icons/hi";
+import { IoMenuSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { RiAdminLine } from "react-icons/ri";
 import logo from "../../assets/another.png";
 
 interface SideProps {
@@ -13,8 +15,9 @@ interface SideProps {
 }
 
 const Sidebar: React.FC<SideProps> = () => {
+  const user = JSON.parse(localStorage.getItem("userInfo"));
   const { pathname } = useLocation();
-  const navigate= useNavigate()
+  const navigate= useNavigate();
 
   const linkItems = [
     {
@@ -42,6 +45,16 @@ const Sidebar: React.FC<SideProps> = () => {
       path: "/workers",
       icon: <PiBookOpenLight size={20} />,
     },
+    {
+      title: "Categories",
+      path: "/category",
+      icon: <IoMenuSharp size={20} />,
+    },
+      {
+        title: "Make Admin",
+        path: "/make-admin",
+        icon: <RiAdminLine size={20} />,
+      },
     {
       title: "Settings",
       path: "/settings",

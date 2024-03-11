@@ -8,7 +8,6 @@ import { getDashboard } from "../redux/apiSlices/getDashboardSlice";
 const TransactionStatus = () => {
   const dispatch = useAppDispatch();
   const {packeages} = useAppSelector(state=> state.getDashboard);
-  console.log(packeages)
   useEffect(()=>{
     dispatch(getDashboard());
   }, [dispatch]);

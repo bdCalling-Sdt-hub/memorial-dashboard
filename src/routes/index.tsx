@@ -17,6 +17,8 @@ import EditSubscription from "../pages/Main/EditSubscription";
 import StoryDetails from "../components/Workers/StoryDetails";
 import AdminRoute from "../routes/AdminRoute";
 import StoryRequestDetails from "../components/Workers/StoryRequestDetails";
+import Categories from "../pages/Main/Categories";
+import MakeAdmin from "../pages/Main/MakeAdmin";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <AdminRoute><Users /> </AdminRoute>,
+      },
+      {
+        path: "/category",
+        element: <AdminRoute><Categories /> </AdminRoute>,
       },
       {
         path: "/transactions",
@@ -59,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <AdminRoute><Settings /> </AdminRoute>,
+      },
+      {
+        path: "/make-admin",
+        element: <AdminRoute><MakeAdmin /> </AdminRoute>,
       },
       {
         path: "/settings/:settingType",
