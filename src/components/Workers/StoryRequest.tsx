@@ -8,6 +8,7 @@ import { IStory } from "../../types/story.interface";
 import moment from 'moment';
 import Spinner from "../Spinner";
 import ImgConfig from "../../ImgConfig"
+import { Link } from "react-router-dom";
 const StoryRequest = () => {
     const [page, setPage] = useState(1)
     const dispatch = useAppDispatch();
@@ -18,6 +19,11 @@ const StoryRequest = () => {
 
     const handleStoryStatus=(id: number)=>{
         dispatch(storyStatus({id: id, status: 1 as number}));
+        dispatch(storyRequest(page));
+    }
+
+    const handleStoryStatusReject=(id: number)=>{
+        dispatch(storyStatus({id: id, status: 2 as number}));
         dispatch(storyRequest(page));
     }
 
@@ -37,20 +43,22 @@ const StoryRequest = () => {
                         <div className="grid grid-cols-1 gap-6 ">
                             {
                                 story?.data?.map((story: IStory, index: number)=>(
-                                <div key={index} className="flex items-center justify-between w-full bg-white rounded-lg p-2 h-[116px]">
-                                    <div className="flex items-center gap-6">
-                                        <img src={`${ImgConfig}${story?.story_image[0]}`} style={{width: "100px", height: "100px", borderRadius: "8px"}}  alt="" />
-                                        <div>
-                                            <h3 className="text-[18px] mb-[4px] font-medium">{story?.story_title}</h3>
-                                            <h4 className="text-[14px] font-normal">{moment(story?.created_at).format('LT')}</h4>
-                                            <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
+                                    <Link key={index} to={`/workers/story-request-details/${story.id}`}>
+                                        <div key={index} className="flex items-center justify-between w-full bg-white rounded-lg p-2 h-[116px]">
+                                            <div className="flex items-center gap-6">
+                                                <img src={`${ImgConfig}${story?.story_image[0]}`} style={{width: "100px", height: "100px", borderRadius: "8px"}}  alt="" />
+                                                <div>
+                                                    <h3 className="text-[18px] mb-[4px] font-medium">{story?.story_title}</h3>
+                                                    <h4 className="text-[14px] font-normal">{moment(story?.created_at).format('LT')}</h4>
+                                                    <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <button onClick={()=>handleStoryStatusReject(story?.id)} className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
+                                                <button onClick={()=>handleStoryStatus(story?.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <button className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
-                                        <button onClick={()=>handleStoryStatus(story?.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
-                                    </div>
-                                </div>
+                                </Link>
                             ))
                             }
                         </div>

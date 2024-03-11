@@ -8,7 +8,7 @@ import { getDashboard } from "../redux/apiSlices/getDashboardSlice";
 const TransactionStatus = () => {
   const dispatch = useAppDispatch();
   const {packeages} = useAppSelector(state=> state.getDashboard);
-
+  console.log(packeages)
   useEffect(()=>{
     dispatch(getDashboard());
   }, [dispatch]);
@@ -19,7 +19,7 @@ const TransactionStatus = () => {
           key={index}
           className="bg-white h-[79px] flex items-center justify-center p-5 rounded-lg gap-5 text-center"
         >
-          { item?.category_name === "Veterian" &&   <img width={44} height={44} src={img2} alt="" />}
+          { item?.category_name === "Veteran" &&   <img width={44} height={44} src={img2} alt="" />}
           { item?.category_name === "Pets" &&   <img width={44} height={44} src={img3} alt="" />}
           { item?.category_name === "Individuals" &&   <img width={44} height={44} src={img1} alt="" />}
           {/* <img width={44} height={44} src={item.img} alt="" /> */}

@@ -16,6 +16,7 @@ import NotFound from "../pages/NotFound";
 import EditSubscription from "../pages/Main/EditSubscription";
 import StoryDetails from "../components/Workers/StoryDetails";
 import AdminRoute from "../routes/AdminRoute";
+import StoryRequestDetails from "../components/Workers/StoryRequestDetails";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/workers/:workerType/:id",
         element: <AdminRoute><StoryDetails /> </AdminRoute>,
+      },
+      {
+        path: "/workers/:workerType/:id",
+        element: <AdminRoute><StoryRequestDetails /> </AdminRoute>,
       },
 
       {
