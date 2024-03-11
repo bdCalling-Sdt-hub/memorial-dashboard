@@ -13,6 +13,7 @@ const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchT
   const componentRef = useRef();
   const dispatch = useAppDispatch();
   const {users} = useAppSelector(state => state.allUser);
+  console.log(users)
   const {users: search} = useAppSelector(state => state.searchUser);
   const [user, setUser] = useState<IUser>()
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +22,7 @@ const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchT
   
   useEffect(()=> {
     dispatch(AllUser({currentPage, selectPackage}))
-  },[dispatch, currentPage, selectPackage, searchText === ""]);
+  },[dispatch, currentPage, selectPackage]);
 
   useEffect(()=>{
     if(searchText !== ''){
@@ -31,7 +32,7 @@ const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchT
 
   useEffect(()=>{
     setData(users)
-  }, [users, search?.length === 0])
+  }, [users])
 
   useEffect(()=>{
     setData(search)
@@ -127,7 +128,7 @@ const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchT
         <div ref={componentRef}>
           <ModelValue
             title={"User Details"}
-            img={`${ImgConfig}${user?.user?.image}`}
+            img={ user?.user?.image ? `${ImgConfig}${user?.user?.image}`  : "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"}
             keys={[
               "User name",
               "User email ",

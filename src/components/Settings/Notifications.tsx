@@ -14,6 +14,7 @@ import Pusher from 'pusher-js';
 const Notifications = () => {
   const dispatch = useAppDispatch();
   const { loading, notifications } = useAppSelector(state=> state.getNotifications);
+  console.log(notifications)
   const [page, setPage] = useState(1);
   useEffect(()=>{
     dispatch(getNotifications(page));
@@ -80,7 +81,7 @@ const Notifications = () => {
                 <div 
                   className={`w-[12px] mt-[7px] h-[12px] rounded-full ${notification?.read_at === null ? "bg-[#0071E3]" : "bg-white"} `}></div>
                 <div>
-                  <h2 className="text-[14px] font-normal text-[#333333] pb-1">{notification?.data?.message}</h2>
+                  <h2 className="text-[14px] font-normal text-[#333333] pb-1">{notification?.data?.name}, {notification?.data?.message}</h2>
                   <p className="text-[8px] font-normal text-[#9D9D9D]">{moment(notification?.data?.time).startOf('day').fromNow()}</p>
                 </div>
               </div>

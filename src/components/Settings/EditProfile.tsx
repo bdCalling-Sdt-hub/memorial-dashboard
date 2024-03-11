@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 
 const EditProfile = () => {
     const profile = JSON.parse(localStorage.getItem('userInfo'));
-    const [image, setImage] = useState(profile?.image ? `${ImgConfig}${profile?.image}` : person);
+    const [image, setImage] = useState(profile?.image ? `${ImgConfig}${profile?.image}` : "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg");
     const [imgURL, setImgURL] = useState(image);
     
     const onChange = (e:any) => {
@@ -43,17 +43,18 @@ const EditProfile = () => {
               authorization: `Bearer ${localStorage.getItem('token')}`,
             }
         });
-        if(response?.data.status === 200){
+        console.log(response);
+        if(response?.status === 200){
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Profile Update Successful",
+                title: "Profile Updated Successfully",
                 showConfirmButton: false,
                 timer: 1500
             }).then(()=>{
                 location.reload();
             })
-        };
+        }
         localStorage.setItem('userInfo', JSON.stringify(response?.data?.data))
         
     }

@@ -61,7 +61,7 @@ const EditSubscription = () => {
         word_limit: word_limit,
         image_limit: image_limit,
         amount: amount,
-        features: JSON.parse(feature)?.map((item: any)=> item?.feature)
+        features: feature?.map((item: any)=> item?.feature)
     };
     
     return (
@@ -150,7 +150,7 @@ const EditSubscription = () => {
                                     </div>
 
                                     <div>
-                                        <p className="text-lg font-normal text-[#0071E3] mb-4">Word Limit</p>
+                                        <p className="text-lg font-normal text-[#0071E3] mb-4">Character Limit</p>
                                         <Form.Item name="word_limit" style={{marginBottom: 0}}>
                                             <Input
                                                 name='word_limit'

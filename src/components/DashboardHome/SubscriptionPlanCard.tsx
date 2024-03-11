@@ -16,12 +16,11 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     price,
     feature,
     id,
-    word_limit,
     image_limit,
     item
 }) => {
     
-    const word =  {"feature": `Post Story in between ${word_limit} words`}
+    
     
     const handleSave=(item)=>{
         localStorage.setItem("subscription", JSON.stringify(item));
@@ -47,7 +46,7 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
             <h1 className="text-[#0071E3] text-center  text-[30px] font-semibold">{image_limit} Photo Stories</h1>
             <div className="mt-[23px]">
                 {
-                    [...JSON.parse(feature),  word]?.map((item:any, index)=>
+                    feature?.map((item:any, index)=>
                     <div key={index} className="flex items-center gap-[10px] mb-4">
                         <FaCircleCheck size={24} color="#0071E3"/>
                         <p className="text-[#0071E3]">{item?.feature}</p>

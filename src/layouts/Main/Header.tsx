@@ -76,7 +76,7 @@ const Header = () => {
         </div>
         <Link className="flex items-center gap-3" to="/settings/profile">
           <img
-            src={profile?.image  ? (`${ImgConfig}${profile?.image}`): "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"}
+            src={profile?.image  ? (`${ImgConfig}${profile?.image}`): "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"}
             width={48}
             height={48}
             className="rounded-full"

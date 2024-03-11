@@ -26,7 +26,7 @@ const Profile = () => {
         
           {/* Banner */}
           <div className="h-[208px] bg-[#0071E3] rounded-xl py-8 px-6 mb-6 flex items-center gap-[54px]">
-              <img className="rounded-full" src={`${ImgConfig}${profile?.image}`} width={144} height={144} alt="" />
+              <img className="rounded-full" src={profile?.image ? `${ImgConfig}${profile?.image}` : "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" } width={144} height={144} alt="" />
               <div className="text-[#FFFFFF]">
                 {/* user name */}
                 <h1 className="text-3xl font-medium ">{profile?.fullName}</h1>

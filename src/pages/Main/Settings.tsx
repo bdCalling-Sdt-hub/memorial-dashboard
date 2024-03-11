@@ -61,7 +61,7 @@ const Settings = () => {
       path: "notification",
     },
     {
-      title: "subscription",
+      title: "Subscription",
       path: "hidden-fee",
     },
    

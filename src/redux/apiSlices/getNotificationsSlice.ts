@@ -20,7 +20,6 @@ export const getNotifications = createAsyncThunk(
                     authorization: `Bearer ${token}`,
                 }
             });
-            console.log(response);
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
