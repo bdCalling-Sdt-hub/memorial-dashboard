@@ -1,5 +1,5 @@
 import { IconChevronLeft, IconChevronRight, IconLock, IconMail } from "@tabler/icons-react";
-import {  Input, Modal, Switch } from "antd";
+import {  Input, Modal, Switch, Form, Button } from "antd";
 import { useState } from "react";
 import OTPInput from "react-otp-input";
 import {  useNavigate } from "react-router-dom";
@@ -22,6 +22,9 @@ const Settings = () => {
   const [changeAuth, setChangeAuth] = useState('');
   const [emails, setEmail] = useState('');
   const [resetAuth, setResetAuth] = useState('');
+  const [curPassErr, setCurPassErr] = useState("");
+  const [newPassErr, setNewPassErr] = useState("");
+  const [conPassErr, setConPassErr] = useState("");
 
   const handleChange = (e:any) => {
     setChangeAuth(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -82,30 +85,63 @@ const Settings = () => {
     
   ];
 
-  const handleChangePassword=(e:any)=>{
-    e.preventDefault();
+  const handleChangePassword=(values)=>{
+    console.log(values)
     const value = {
-      current_password: changeAuth.current_password,
-      new_password: changeAuth.new_password,
-      confirm_password: changeAuth.confirm_password,
+      current_password: values.current_password,
+      new_password: values.new_password,
+      confirm_password: values.confirm_password,
     }
-    dispatch(updatePassword(value)).then(response => {
-      if(response.payload.message){
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: response.payload.message,
-          showConfirmButton: false,
-          timer: 1500
-        }).then(()=>{
-          setIsModalOpen(false)
-        })
-      }
-    })
-    .catch(error => {
-      console.log(error)
-    });
+    console.log(value);
+    // dispatch(updatePassword(value))
+    // .then(response => {
+    //     console.log(response);
+    //     if(response.payload.message === "Your current password is wrong" || response.payload.errors.current_password){
+    //       setCurPassErr(response.payload.message || response.payload.errors.current_password[0]);
+    //       return;
+    //     }else{
+    //       setCurPassErr("")
+    //     }
+
+    //     if(response.payload.errors.new_password){
+    //       setNewPassErr(response.payload.errors.new_password[0]);
+    //       return;
+    //     }else{
+    //       setNewPassErr("")
+    //     }
+
+    //     if(response.payload.errors.confirm_password){
+    //       setConPassErr(response.payload.errors.confirm_password[0]);
+    //       return;
+    //     }else{
+    //       setConPassErr("")
+    //     }
+
+    //     /* if(response.type === "updatePassword/rejected"){
+    //       Swal.fire({
+    //         position: "center",
+    //         icon: "error",
+    //         title: response.payload,
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //       })
+    //     } */
+
+    //   if(response.type === "updatePassword/fulfilled"){
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "success",
+    //       title: response.payload.message,
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     }).then(()=>{
+    //       setIsModalOpen(false)
+    //     })
+    //   }
+    // })
   }
+
+
   const handleForgetPassword=(e)=>{
     e.preventDefault();
     if(emails){
@@ -198,6 +234,8 @@ const Settings = () => {
               </h2>
             </div>
           ))}
+
+
           <Modal
             title={
               <div
@@ -213,6 +251,7 @@ const Settings = () => {
             onCancel={() => setIsModalOpen(false)}
             footer={[]}
           >
+
             {modelTitle === "Set hidden fee percentage" && (
               <form>
                 <input
@@ -234,70 +273,122 @@ const Settings = () => {
             )}
 
             {modelTitle === "Change password" && (
-              <form className="w-full" onSubmit={handleChangePassword}>
-                <Input.Password
-                  size="large"
-                  onChange={handleChange}
-                  placeholder="Enter your password"
+              <Form  onFinish={handleChangePassword}>
+                <Form.Item 
                   name="current_password"
-                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
-                  style={{
-                    border: "1px solid #0071E3",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    marginBottom: "20px",
-                  }}
-                  bordered={false}
-                />
-                <Input.Password
-                  size="large"
-                  name="new_password"
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
-                  style={{
-                    border: "1px solid #0071E3",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    marginBottom: "20px",
-                  }}
-                  bordered={false}
-                />
+                  style={{marginBottom: "20px"}} 
+                  /* rules={[
+                    {
+                      required: true,
+                      message: "Please enter current password!",
+                    },
+                  ]} */
+                >
+                  <Input.Password
+                    size="large"
+                    // onChange={handleChange}
+                    placeholder="Enter your password"
+                    name="current_password"
+                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    style={{
+                      border: "1px solid #0071E3",
+                      height: "52px",
+                      background: "white",
+                      borderRadius: "8px",
+                      outline: "none",
+                    }}
+                    bordered={false}
+                  />
+                  {
+                    curPassErr &&
+                    <label htmlFor="" className="block text-red-500 mt-1">{curPassErr}</label>
+                  }  
+                  
+                </Form.Item>
+                
 
-                <Input.Password
-                  size="large"
+                <Form.Item 
+                  name="new_password"
+                  style={{marginBottom: "20px"}} 
+                  /* rules={[
+                    {
+                      required: true,
+                      message: "Please enter new password!",
+                    },
+                  ]} */
+                >
+                  <Input.Password
+                    size="large"
+                    // onChange={handleChange}
+                    placeholder="Enter your password"
+                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    style={{
+                      border: "1px solid #0071E3",
+                      height: "52px",
+                      background: "white",
+                      borderRadius: "8px",
+                      outline: "none",
+                    }}
+                    bordered={false}
+                  />
+                  {
+                    newPassErr &&
+                  <label htmlFor="" className="block text-red-500 mt-1">{newPassErr}</label>
+                  }
+                </Form.Item>
+                
+
+                <Form.Item 
                   name="confirm_password"
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                  prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
-                  style={{
-                    border: "1px solid #0071E3",
-                    height: "52px",
-                    background: "white",
-                    borderRadius: "8px",
-                    outline: "none",
-                    marginBottom: "20px",
-                  }}
-                  bordered={false}
-                />
+                  style={{marginBottom: "20px"}} 
+                  /* rules={[
+                    {
+                      required: true,
+                      message: "Please enter confirmed password!",
+                    },
+                  ]} */
+                >
+                  <Input.Password
+                    size="large"
+                    // name="confirm_password"
+                    // onChange={handleChange}
+                    placeholder="Enter your password"
+                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    style={{
+                      border: "1px solid #0071E3",
+                      height: "52px",
+                      background: "white",
+                      borderRadius: "8px",
+                      outline: "none",
+                    }}
+                    bordered={false}
+                  />
+                  {
+                    conPassErr &&
+                    <label htmlFor="" className="block text-red-500 mt-1">{conPassErr}</label>
+                  }
+                </Form.Item>
+                
                 <p className="text-end text-[#0071E3] font-medium">
                   <button onClick={() => setModelTitle("Forget password")}>
                     Forget Password
                   </button>
                 </p>
-
-                <button
-                  type="submit"
-                  className="bg-[#0071E3]
-                  text-white mt-5 py-3 rounded-lg w-full font-medium text-lg hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
-                >
-                  Change password
-                </button>
-              </form>
+                
+                <Form.Item>
+                  <Button
+                    block
+                    htmlType="submit"
+                    style={{
+                      height: "56px"
+                    }}
+                    className="bg-[#0071E3]
+                    text-white mt-5 py-3 rounded-lg w-full font-medium text-lg hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
+                  >
+                    Change password
+                  </Button>
+                </Form.Item>
+              </Form>
             )}
 
 
@@ -422,6 +513,8 @@ const Settings = () => {
                 </button>
               </form>
             )}
+
+
           </Modal>
     </div>
 

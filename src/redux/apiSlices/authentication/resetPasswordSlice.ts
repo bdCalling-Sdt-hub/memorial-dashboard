@@ -18,7 +18,7 @@ export const resetPassword = createAsyncThunk(
             return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;
-            const message = axiosError?.message;
+            const message = axiosError?.response?.data;
             return thunkApi.rejectWithValue(message);
         }
         

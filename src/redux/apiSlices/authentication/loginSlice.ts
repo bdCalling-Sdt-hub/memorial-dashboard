@@ -28,7 +28,7 @@ export const login = createAsyncThunk(
             return response?.data.user;
         }catch(error){
             const axiosError = error as AxiosError;
-            const message = axiosError?.message;
+            const message = axiosError?.response?.data?.message;
             return thunkApi.rejectWithValue(message);
         }
         

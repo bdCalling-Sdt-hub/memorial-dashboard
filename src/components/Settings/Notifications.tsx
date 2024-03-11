@@ -9,6 +9,7 @@ import { getNotifications } from "../../redux/apiSlices/getNotificationsSlice";
 import Spinner from "../Spinner";
 import { Pagination } from "antd";
 import baseURL from "../../Config";
+import Pusher from 'pusher-js';
 
 const Notifications = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,19 @@ const Notifications = () => {
       }
     }
   }
+
+  useEffect(()=>{
+    Pusher.logToConsole = true;
+        const pusher = new Pusher('ed3fa994e71a7b25af7e', {
+          cluster: 'ap2'
+        });
+        const channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data:any) {
+          alert(data);
+        });
+  }, []);
+
+
   return (
     <div >
       <div className="flex items-end justify-end mb-11">

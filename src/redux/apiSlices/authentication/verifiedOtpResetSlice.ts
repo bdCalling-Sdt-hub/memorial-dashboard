@@ -22,7 +22,7 @@ export const verifiedOtpReset = createAsyncThunk(
             return response?.data?.message;
         }catch(error){
             const axiosError = error as AxiosError;
-            const message = axiosError?.message;
+            const message = axiosError?.response.data.error;
             return thunkApi.rejectWithValue(message);
         }
         

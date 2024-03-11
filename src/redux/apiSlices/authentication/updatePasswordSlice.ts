@@ -23,7 +23,8 @@ export const updatePassword = createAsyncThunk(
             return response?.data;
         }catch(error){
             const axiosError = error as AxiosError;
-            const message = axiosError?.message;
+            const message = axiosError?.response?.data;
+            console.log(message);
             return thunkApi.rejectWithValue(message);
         }
         
