@@ -4,14 +4,18 @@ import { Button, Modal, Table } from 'antd';
 import Swal from 'sweetalert2';
 import baseURL from '../../Config';
 import { MdOutlineDelete } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from '../../redux/hook';
+import { AllAdmin } from '../../redux/apiSlices/adminSlice';
+import Spinner from '../../components/Spinner';
 
 const MakeAdmin = () => {
     const [openAddModel, setOpenAddModel] = useState(false);
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
-    const [admins, setAdmins] = useState([]);
     const [reFresh, setReFresh] = useState("");
+    const dispatch = useAppDispatch();
+    const {admins, loading} = useAppSelector(state=> state.allAdmin)
 
     const handleMakeAdmin=async(e)=>{
         e.preventDefault();
@@ -50,48 +54,53 @@ const MakeAdmin = () => {
     }
 
     useEffect(()=>{
-        async function getAPi(){
-          const response = await baseURL.get(`/show-admin`,{
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${localStorage.getItem('token')}`
+        dispatch(AllAdmin());
+    }, [dispatch]);
+
+
+
+    const handleDelete=async(value)=>{
+        console.log(value)
+        Swal.fire({
+            title: "Are you sure to delete this User?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            showCancelButton: "No",
+            confirmButtonText: "Yes",
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                const response = await baseURL.get(`/delete-admin/${value?.id}`,
+                    {
+                        headers: {
+                            authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                    }
+                )
+                if(response.status === 200){
+                    Swal.fire({
+                        position: "center",
+                        title: "Deleted!",
+                        text: "User Deleted Successfully",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false,
+                    }).then(()=>{
+                        dispatch(AllAdmin());
+                    })
+                }
+                        
             }
-          });
-          setAdmins(response?.data?.data);
-          console.log(response);
-        }
-        getAPi();
-    }, [reFresh !== ""]);
+        });
 
-
-
-    const data = [
-        {
-          key: '1',
-          name: 'Jusef',
-          email: "thejusefDada@gmail.com",
-          userType: 'ADMIN',
-        },
-        {
-          key: '2',
-          name: 'Jusef',
-          email: "thejusefDada@gmail.com",
-          userType: 'ADMIN',
-        },
-        {
-          key: '3',
-          name: 'Joe Black',
-          email: "thejusefDada@gmail.com",
-          userType: 'ADMIN',
-        },
-    ];
-
+    }
     const columns = [
         {
           title: 'Full Name',
           dataIndex: 'name',
           key: 'name',
-          render: (text) => <a>{text}</a>,
+          render: (_, record) => <p>{record?.fullName}</p>,
         },
         {
           title: 'Email',
@@ -106,11 +115,11 @@ const MakeAdmin = () => {
         {
           title: 'Action',
           key: 'action',
-          render: (_, record) => (
-            <MdOutlineDelete size={25} color='red'/>
+          render: (_, record:any) => (
+            <MdOutlineDelete onClick={()=>handleDelete(record)} className='cursor-pointer' size={25} color='red'/>
           ),
         },
-      ];
+    ];
     return (
         <div>
             <div className="flex items-end justify-end mb-11">
@@ -123,8 +132,16 @@ const MakeAdmin = () => {
                     </button>
                 </div>
             </div>
+            {
+                loading
+                ?
+                <div className="w-full h-[650px] flex items-center justify-center">
+                    <Spinner size="large" />
+                </div>
+                :
+                <Table columns={columns} dataSource={admins} pagination={false} />
+            }
 
-            <Table columns={columns} dataSource={data} pagination={false} />
 
 
             <Modal

@@ -31,10 +31,12 @@ import getRecentTransactionSlice from "./apiSlices/getRecentTransactionSlice";
 import getIncomeRationSlice from "./apiSlices/income/getIncomeRatioSlice";
 import updateSubscriptionSlice from "./apiSlices/subscription/updateSubscriptionSlice";
 import getNotificationsSlice from "./apiSlices/getNotificationsSlice";
+import adminSlice from "./apiSlices/adminSlice";
 
 export const store = configureStore({
   reducer: {
     allUser: allUserReducer,
+    allAdmin: adminSlice,
     searchUser: searchUserSlice,
 
     // subscription state start here

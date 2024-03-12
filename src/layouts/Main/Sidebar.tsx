@@ -50,11 +50,6 @@ const Sidebar: React.FC<SideProps> = () => {
       path: "/category",
       icon: <IoMenuSharp size={20} />,
     },
-      {
-        title: "Make Admin",
-        path: "/make-admin",
-        icon: <RiAdminLine size={20} />,
-      },
     {
       title: "Settings",
       path: "/settings",
@@ -62,6 +57,11 @@ const Sidebar: React.FC<SideProps> = () => {
     },
   ];
 
+  const admin = user?.userType === "SUPER ADMIN" && {
+    title: "Make Admin",
+    path: "/make-admin",
+    icon: <RiAdminLine size={20} />,
+  }
   const handleLogout=()=>{
     navigate('/auth/login')
     localStorage.removeItem("userInfo")
@@ -78,12 +78,15 @@ const Sidebar: React.FC<SideProps> = () => {
           <img src={logo} style={{height: "180px", borderRadius: "8px"}} width={320}   alt="logo" />
           <h2 className="italianno-regular   text-[#0071E3] text-lg text-center pt-3">Memorial Momnets Magagine</h2>
         </li>
-        {linkItems.map((item, index) => (
+        {[...linkItems, admin]?.map((item, index) => (
           <li
             key={index}
-            className={`text-[18px] px-4 py-3 ${
-              item.path === pathname ? "bg-[#0071E3] text-white" : "text-[#0071E3]"
-            } `}
+            className={`
+              text-[18px] 
+              px-4 
+              py-3 
+              ${item.path === pathname ? "bg-[#0071E3] text-white" : "text-[#0071E3]"} 
+            `}
           >
             <Link to={item.path} className="flex items-center gap-2">
               <div>{item.icon}</div>
