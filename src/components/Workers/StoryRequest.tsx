@@ -13,17 +13,19 @@ const StoryRequest = () => {
     const [page, setPage] = useState(1)
     const dispatch = useAppDispatch();
     const {story, loading} = useAppSelector(state => state.storyRequest);
+    console.log(story)
     useEffect(()=>{
         dispatch(storyRequest(page));
     },[dispatch, page]);
 
-    const handleStoryStatus=(id: number)=>{
-        dispatch(storyStatus({id: id, status: 1 as number}));
+    const handleStoryStatus=(id: number )=>{
+        dispatch(storyStatus({id: id, status: 1}));
         dispatch(storyRequest(page));
     }
 
-    const handleStoryStatusReject=(id: number)=>{
-        dispatch(storyStatus({id: id, status: 2 as number}));
+    const handleStoryStatusReject=(id: number )=>{
+        
+        dispatch(storyStatus({id: id, status: 2}));
         dispatch(storyRequest(page));
     }
 
@@ -42,23 +44,30 @@ const StoryRequest = () => {
                     <div className={`my-6 ${ story?.data?.length > 5 ? "overflow-y-scroll h-[650px]" : null}`}>
                         <div className="grid grid-cols-1 gap-6 ">
                             {
-                                story?.data?.map((story: IStory, index: number)=>(
-                                    <Link key={index} to={`/workers/story-request-details/${story.id}`}>
+                                story?.data?.map((item: IStory, index: number)=>(
+                                    // <Link key={index} to={`/workers/story-request-details/${item.id}`}
                                         <div key={index} className="flex items-center justify-between w-full bg-white rounded-lg p-2 h-[116px]">
+                                            <Link key={index} to={`/workers/story-request-details/${item.id}`}>
                                             <div className="flex items-center gap-6">
-                                                <img src={`${ImgConfig}${story?.story_image[0]}`} style={{width: "100px", height: "100px", borderRadius: "8px"}}  alt="" />
+                                                {
+                                                    item?.story_image
+                                                    &&
+                                                    <img src={`${ImgConfig}${item?.story_image[0]}` ? `${ImgConfig}${item?.story_image[0]}` : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} style={{width: "100px", height: "100px", borderRadius: "8px"}}  alt="" />
+                                                }
                                                 <div>
-                                                    <h3 className="text-[18px] mb-[4px] font-medium">{story?.story_title}</h3>
-                                                    <h4 className="text-[14px] font-normal">{moment(story?.created_at).format('LT')}</h4>
-                                                    <h4 className="text-[14px] font-normal">{story?.death_date}</h4>
+                                                    <h3 className="text-[18px] mb-[4px] font-medium">{item?.story_title}</h3>
+                                                    <h4 className="text-[14px] font-normal">{moment(item?.created_at).format('LT')}</h4>
+                                                    <h4 className="text-[14px] font-normal">{item?.death_date}</h4>
                                                 </div>
                                             </div>
+                                            </Link>
+                                            
                                             <div className="flex items-center gap-3">
-                                                <button onClick={()=>handleStoryStatusReject(story?.id)} className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
-                                                <button onClick={()=>handleStoryStatus(story?.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
+                                                <button onClick={()=>handleStoryStatusReject(item?.id)} className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
+                                                <button onClick={()=>handleStoryStatus(item?.id,)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
                                             </div>
                                         </div>
-                                </Link>
+                                // </Link>
                             ))
                             }
                         </div>

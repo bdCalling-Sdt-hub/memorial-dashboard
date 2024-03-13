@@ -198,8 +198,6 @@ const EditSubscription = () => {
 
                             {/* package feature */}
                             <p className="text-lg font-normal text-[#0071E3] mb-4">Package Feature</p>
-                            
-                                
                             <div className="grid grid-cols-1 gap-4">
                                 <Form.List name="features">
                                     {
@@ -273,7 +271,8 @@ const EditSubscription = () => {
                                         )
                                     }
                                 </Form.List>   
-                            </div>  
+                            </div> 
+                             
                             <Form.Item  style={{marginBottom: 0}}>
                                 <Button
                                     type="primary" htmlType="submit"

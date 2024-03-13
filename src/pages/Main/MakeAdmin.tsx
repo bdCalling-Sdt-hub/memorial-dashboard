@@ -60,7 +60,6 @@ const MakeAdmin = () => {
 
 
     const handleDelete=async(value)=>{
-        console.log(value)
         Swal.fire({
             title: "Are you sure to delete this User?",
             icon: "warning",

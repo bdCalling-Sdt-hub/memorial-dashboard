@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         element: <AdminRoute><StoryDetails /> </AdminRoute>,
       },
       {
-        path: "/workers/:workerType/:id",
+        path: "/workers/story-request-details/:id",
         element: <AdminRoute><StoryRequestDetails /> </AdminRoute>,
       },
 

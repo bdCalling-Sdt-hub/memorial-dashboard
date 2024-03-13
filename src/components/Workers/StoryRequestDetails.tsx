@@ -10,23 +10,27 @@ import { getStory } from "../../redux/apiSlices/story/getStoryDetailsSlice";
 import moment from "moment";
 import { storyStatus } from "../../redux/apiSlices/story/storyStatusSlice";
 
+
 const StoryRequestDetails = () => {
   const {id} = useParams();
   console.log(id)
   const dispatch = useAppDispatch();
     const { story, loading }: { story: IStory } = useAppSelector(state=> state.getStoryDetails);
+    console.log(story)
     console.log(story);
     useEffect(()=>{
       dispatch(getStory(id));
     }, [dispatch, id]);
 
   const handleStoryStatus=(id: number)=>{
-    dispatch(storyStatus({id: id, status: 1 as number}));
+    dispatch(storyStatus({id: id, status: 1 }));
   }
 
   const handleStoryStatusReject=(id: number)=>{
-    dispatch(storyStatus({id: id, status: 2 as number}));
+    dispatch(storyStatus({id: id, status: 2 }));
   }
+
+  const person = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
   return (
     <>
 
@@ -42,11 +46,11 @@ const StoryRequestDetails = () => {
                   <Header/>
                 </div>
                 <Link to="/workers">
-                  <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Details</HeadingText>
+                  <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Request Details</HeadingText>
                 </Link>
 
 
-                <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6'>
+                <div className='bg-white rounded-[16px] w-full h-[727px] p-6 mt-6 overflow-y-scroll'>
                         <div className='flex items-center justify-between'>
                             <h1 className='text-6 font-semibold text-[#0071E3] mb-6'>{story?.story_title}</h1>
                             
@@ -56,19 +60,24 @@ const StoryRequestDetails = () => {
                     
 
                         <div className='flex gap-2 mt-4 mb-[27px]'>
-                            <img src={`${ImgConfig}${story?.story_image[0]}`} width={478} height={313} alt="" />
+                          {
+                            story?.story_image &&
+                            <img style={{width : "478px", height: "313px"}} src={`${ImgConfig}${story?.story_image[0]}`}  alt="" />
+                          }
                             <p className='text-[18px] font-normal'>{story?.description}</p>
                         </div>
-                        <p className='text-[18px] font-normal'>{story?.description}</p>
-                        <br />
 
-                        <div className='flex gap-2 mt-4 mb-[27px]'>
-                            <img src={`${ImgConfig}${story?.story_image[1]}`} width={478} height={313} alt="" />
+                        <div className='flex gap-2'>
+                          {
+                            story?.story_image
+                            &&
+                            <img src={`${ImgConfig}${story?.story_image[1]}` ? `${ImgConfig}${story?.story_image[1]}` : person} style={{width : "478px", height: "313px"}} alt="" />
+                          }
                             <p className='text-[18px] font-normal'>{story?.description}</p>
                         </div>
-                  <div className="flex items-center gap-3 w-full mt-11">
-                    <button onClick={()=>handleStoryStatusReject(story?.id)} className={`w-[157px] h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
-                    <button onClick={()=>handleStoryStatus(story?.id)} className={`w-[157px] h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
+                  <div className="flex items-center gap-3 w-full mt-6">
+                    <button onClick={()=>handleStoryStatusReject(story?.id)} className={`w-full h-[36px] rounded-lg  border border-[#0071E3] text-[#0071E3] `}>Reject</button>
+                    <button onClick={()=>handleStoryStatus(story?.id)} className={`w-full h-[36px] rounded-lg bg-[#0071E3] text-white `}>Accept</button>
                   </div>
                 </div>
             </div>

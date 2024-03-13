@@ -5,6 +5,7 @@ import { getDashboard } from '../../redux/apiSlices/getDashboardSlice';
 import baseURL from "../../Config";
 import Swal from 'sweetalert2';
 import { Button, Modal } from 'antd';
+import Spinner from '../../components/Spinner';
 
 const Categories = () => {
     const [openAddModel, setOpenAddModel] = useState(false);
@@ -101,19 +102,30 @@ const Categories = () => {
                     </button>
                 </div>
             </div>
-            
-            <div className='flex items-center gap-6 mt-10'>
-                {
-                    categories?.map((item, index)=>
-                        <div key={index} className='bg-white border w-[211px] h-[95px] rounded-[8px] flex items-center justify-center'>
-                            <div className='w-full px-6'>
-                                <h2 className='text-center'>{item?.category_name}</h2>
-                                <button onClick={()=>setValue(item)}  className='w-full mt-4 bg-[#0071E3] rounded-[8px] py-1 px-3 text-white'>Edit</button>
+
+            {
+                categories?.length
+                ?
+                <div className='flex items-center gap-6 mt-10'>
+                    {
+                        categories?.map((item, index)=>
+                            <div key={index} className='bg-white border w-[211px] h-[95px] rounded-[8px] flex items-center justify-center'>
+                                <div className='w-full px-6'>
+                                    <h2 className='text-center'>{item?.category_name}</h2>
+                                    <button onClick={()=>setValue(item)}  className='w-full mt-4 bg-[#0071E3] rounded-[8px] py-1 px-3 text-white'>Edit</button>
+                                </div>
                             </div>
-                        </div>
-                    )
-                }
-            </div>
+                        )
+                    }
+                </div>
+                :
+                <div className="w-full h-[650px] flex items-center justify-center">
+                    <Spinner size="large" />
+                </div>
+           
+            }
+            
+            
 
 
             <Modal

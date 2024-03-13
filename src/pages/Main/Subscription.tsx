@@ -24,7 +24,7 @@ const Subscription = () => {
             <div className="flex items-end justify-end mb-11">
                 <Header/>
             </div>
-            <div className="bg-white h-[950px] rounded-[16px] p-6">
+            <div className="bg-white h-[950px] overflow-y-scroll pb-[200px] rounded-[16px] p-6">
             <HeadingText color="#0071E3"> Subscriptions</HeadingText>
 
                 {/* subscription card */}

@@ -18,7 +18,7 @@ const StoryDetails = () => {
         
         dispatch(getStory(id));
     }, [dispatch, id]);
-
+    const person = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
     return (
         <>
             {
@@ -36,7 +36,7 @@ const StoryDetails = () => {
                         <HeadingText color="#0071E3"> <RiArrowLeftSLine size={28} /> Story Details</HeadingText>
                     </Link>
 
-                    <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6'>
+                    <div className='bg-white rounded-[16px] h-[727px] p-6 mt-6 '>
                         <div className='flex items-center justify-between'>
                             <h1 className='text-6 font-semibold text-[#0071E3] mb-6'>{story?.story_title}</h1>
                             
@@ -46,11 +46,13 @@ const StoryDetails = () => {
                     
 
                         <div className='flex gap-2 mt-4 mb-[27px]'>
-                            <img src={`${ImgConfig}${story?.story_image[0]}`} width={478} height={313} alt="" />
+                            {
+                                story?.story_image
+                                &&
+                                <img style={{width: "478px", height: "313px"}} src={`${ImgConfig}${story?.story_image[0]}` ? `${ImgConfig}${story?.story_image[0]}` : person}  alt="" />
+                            }
                             <p className='text-[18px] font-normal'>{story?.description}</p>
                         </div>
-
-                        <p className='text-[18px] font-normal'>{story?.description}</p>
                     </div>
                 </div>
             }

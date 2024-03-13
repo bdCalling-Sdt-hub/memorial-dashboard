@@ -8,11 +8,12 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useReactToPrint } from "react-to-print";
 import ImgConfig from "../../ImgConfig";
 import { searchUser } from "../../redux/apiSlices/searchUserSlice";
+import Spinner from "../Spinner";
 
 const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchText:string}) => {
   const componentRef = useRef();
   const dispatch = useAppDispatch();
-  const {users} = useAppSelector(state => state.allUser);
+  const {users, loading} = useAppSelector(state => state.allUser);
   console.log(users)
   const {users: search} = useAppSelector(state => state.searchUser);
   const [user, setUser] = useState<IUser>()
@@ -105,19 +106,28 @@ const UsersTable = ({selectPackage, searchText}: {selectPackage: number, searchT
     content: () => componentRef.current,
     pageStyle: "",
   });
+  
   return (
     <>
-      <Table
-        columns={columns}
-        dataSource={data?.data}
-        pagination={{
-          pageSize: data?.per_page,
-          showSizeChanger: false,
-          total: data?.total,
-          current: data?.current_page,
-          onChange: handlePageChange,
-        }}
-      />
+      {
+        loading
+        ?
+        <div className="w-full h-[650px] flex items-center justify-center">
+          <Spinner size="large" />
+        </div>
+        :
+        <Table
+          columns={columns}
+          dataSource={data?.data} 
+          pagination={{
+            pageSize: data?.per_page,
+            showSizeChanger: false,
+            total: data?.total,
+            current: data?.current_page,
+            onChange: handlePageChange,
+          }}
+        />
+      }
       <Modal
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}

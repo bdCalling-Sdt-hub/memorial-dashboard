@@ -85,7 +85,7 @@ const Settings = () => {
     
   ];
 
-  const handleChangePassword=(values)=>{
+  const handleChangePassword=(values:any)=>{
     console.log(values)
     const value = {
       current_password: values.current_password,
@@ -277,12 +277,12 @@ const Settings = () => {
                 <Form.Item 
                   name="current_password"
                   style={{marginBottom: "20px"}} 
-                  /* rules={[
+                  rules={[
                     {
                       required: true,
                       message: "Please enter current password!",
                     },
-                  ]} */
+                  ]}
                 >
                   <Input.Password
                     size="large"
@@ -310,12 +310,12 @@ const Settings = () => {
                 <Form.Item 
                   name="new_password"
                   style={{marginBottom: "20px"}} 
-                  /* rules={[
+                  rules={[
                     {
                       required: true,
                       message: "Please enter new password!",
                     },
-                  ]} */
+                  ]}
                 >
                   <Input.Password
                     size="large"
@@ -341,12 +341,12 @@ const Settings = () => {
                 <Form.Item 
                   name="confirm_password"
                   style={{marginBottom: "20px"}} 
-                  /* rules={[
+                  rules={[
                     {
                       required: true,
                       message: "Please enter confirmed password!",
                     },
-                  ]} */
+                  ]}
                 >
                   <Input.Password
                     size="large"
@@ -376,17 +376,13 @@ const Settings = () => {
                 </p>
                 
                 <Form.Item>
-                  <Button
-                    block
-                    htmlType="submit"
-                    style={{
-                      height: "56px"
-                    }}
-                    className="bg-[#0071E3]
-                    text-white mt-5 py-3 rounded-lg w-full font-medium text-lg hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
-                  >
-                    Change password
-                  </Button>
+                <button
+                  type="submit"
+                  className="bg-[#0071E3]
+                  text-white mt-5 py-3 rounded-lg text-[16px] font-medium w-full hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
+                >
+                  UPDATE
+                </button>
                 </Form.Item>
               </Form>
             )}
