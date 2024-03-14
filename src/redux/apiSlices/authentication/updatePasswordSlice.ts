@@ -12,7 +12,7 @@ const initialState = {
 
 export const updatePassword = createAsyncThunk(
     'updatePassword',
-    async (value, thunkApi) => {
+    async (value:any, thunkApi) => {
         try{
             const response = await baseURL.post(`/update-pass`, value, {
                 headers: {

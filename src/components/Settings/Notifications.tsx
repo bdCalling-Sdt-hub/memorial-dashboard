@@ -70,7 +70,7 @@ const Notifications = () => {
         </div>
         :
         <div>
-          <div className="h-[75vh] border overflow-y-scroll w-full pb-12">
+          <div className="h-[75vh] border w-full pb-12">
             {notifications?.Notifications?.map((notification, index) => (
               <div
                 onClick={()=>handleRead(notification?.id)}

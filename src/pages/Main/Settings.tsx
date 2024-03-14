@@ -22,9 +22,9 @@ const Settings = () => {
   const [changeAuth, setChangeAuth] = useState('');
   const [emails, setEmail] = useState('');
   const [resetAuth, setResetAuth] = useState('');
-  const [curPassErr, setCurPassErr] = useState("");
-  const [newPassErr, setNewPassErr] = useState("");
-  const [conPassErr, setConPassErr] = useState("");
+  const [newPassError, setNewPassError] = useState("");
+  const [conPassError, setConPassError] = useState("");
+  const [curPassError, setCurPassError] = useState("");
 
   const handleChange = (e:any) => {
     setChangeAuth(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -86,59 +86,23 @@ const Settings = () => {
   ];
 
   const handleChangePassword=(values:any)=>{
-    console.log(values)
-    const value = {
-      current_password: values.current_password,
-      new_password: values.new_password,
-      confirm_password: values.confirm_password,
+
+    if(values?.current_password === values.new_password){
+      setNewPassError("The New password is semilar with old Password");
+    }else{
+      setNewPassError("")
     }
-    console.log(value);
-    // dispatch(updatePassword(value))
-    // .then(response => {
-    //     console.log(response);
-    //     if(response.payload.message === "Your current password is wrong" || response.payload.errors.current_password){
-    //       setCurPassErr(response.payload.message || response.payload.errors.current_password[0]);
-    //       return;
-    //     }else{
-    //       setCurPassErr("")
-    //     }
+    
+    if(values?.new_password !== values.confirm_password){
+      setConPassError("New Password and Confirm Password Doesn't Matched");
+    }else{
+      setConPassError("")
+    }
+    dispatch(updatePassword(values))
+     .then(response => {
+        console.log(response);
+      })
 
-    //     if(response.payload.errors.new_password){
-    //       setNewPassErr(response.payload.errors.new_password[0]);
-    //       return;
-    //     }else{
-    //       setNewPassErr("")
-    //     }
-
-    //     if(response.payload.errors.confirm_password){
-    //       setConPassErr(response.payload.errors.confirm_password[0]);
-    //       return;
-    //     }else{
-    //       setConPassErr("")
-    //     }
-
-    //     /* if(response.type === "updatePassword/rejected"){
-    //       Swal.fire({
-    //         position: "center",
-    //         icon: "error",
-    //         title: response.payload,
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //       })
-    //     } */
-
-    //   if(response.type === "updatePassword/fulfilled"){
-    //     Swal.fire({
-    //       position: "center",
-    //       icon: "success",
-    //       title: response.payload.message,
-    //       showConfirmButton: false,
-    //       timer: 1500
-    //     }).then(()=>{
-    //       setIsModalOpen(false)
-    //     })
-    //   }
-    // })
   }
 
 
@@ -273,23 +237,32 @@ const Settings = () => {
             )}
 
             {modelTitle === "Change password" && (
-              <Form  onFinish={handleChangePassword}>
-                <Form.Item 
+              <Form
+                name="normal_login"
+                className="login-form"
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={handleChangePassword}
+              >
+
+              <div style={{marginBottom: "16px"}}>
+                <label style={{display: "block", marginBottom: "5px" }}>
+                  Current Password
+                </label>
+                <Form.Item
+                  style={{marginBottom: 0}}
                   name="current_password"
-                  style={{marginBottom: "20px"}} 
                   rules={[
                     {
                       required: true,
-                      message: "Please enter current password!",
+                      message: "Please input your current password!",
                     },
                   ]}
                 >
                   <Input.Password
-                    size="large"
-                    // onChange={handleChange}
-                    placeholder="Enter your password"
-                    name="current_password"
-                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    placeholder="Enter Password"
+                    type="password"
                     style={{
                       border: "1px solid #0071E3",
                       height: "52px",
@@ -297,31 +270,26 @@ const Settings = () => {
                       borderRadius: "8px",
                       outline: "none",
                     }}
-                    bordered={false}
                   />
-                  {
-                    curPassErr &&
-                    <label htmlFor="" className="block text-red-500 mt-1">{curPassErr}</label>
-                  }  
-                  
                 </Form.Item>
-                
-
-                <Form.Item 
+                { curPassError && <label style={{display: "block", color: "red"}} htmlFor="error">{curPassError}</label>}
+              </div>
+  
+              <div style={{marginBottom: "16px"}}>
+                <label style={{display: "block", marginBottom: "5px" }} htmlFor="">New Password</label>
+                <Form.Item
                   name="new_password"
-                  style={{marginBottom: "20px"}} 
                   rules={[
                     {
                       required: true,
-                      message: "Please enter new password!",
+                      message: "Please input your new Password!",
                     },
                   ]}
+                  style={{marginBottom: 0}}
                 >
                   <Input.Password
-                    size="large"
-                    // onChange={handleChange}
-                    placeholder="Enter your password"
-                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    type="password"
+                    placeholder="Enter password"
                     style={{
                       border: "1px solid #0071E3",
                       height: "52px",
@@ -329,31 +297,28 @@ const Settings = () => {
                       borderRadius: "8px",
                       outline: "none",
                     }}
-                    bordered={false}
                   />
-                  {
-                    newPassErr &&
-                  <label htmlFor="" className="block text-red-500 mt-1">{newPassErr}</label>
-                  }
                 </Form.Item>
-                
-
-                <Form.Item 
+                { newPassError && <label style={{display: "block", color: "red"}} htmlFor="error">{newPassError}</label>}
+              </div>
+  
+              <div style={{marginBottom: "16px"}}>
+                <label style={{display: "block", marginBottom: "5px" }} htmlFor="email">
+                  Re-Type Password
+                </label>
+                <Form.Item
+                  style={{marginBottom: 0}}
                   name="confirm_password"
-                  style={{marginBottom: "20px"}} 
                   rules={[
                     {
                       required: true,
-                      message: "Please enter confirmed password!",
+                      message: "Please input your Re-type Password!",
                     },
                   ]}
                 >
                   <Input.Password
-                    size="large"
-                    // name="confirm_password"
-                    // onChange={handleChange}
-                    placeholder="Enter your password"
-                    prefix={<IconLock className="mr-2" size={24} color="#0071E3" />}
+                    type="password"
+                    placeholder="Enter password"
                     style={{
                       border: "1px solid #0071E3",
                       height: "52px",
@@ -361,30 +326,30 @@ const Settings = () => {
                       borderRadius: "8px",
                       outline: "none",
                     }}
-                    bordered={false}
                   />
-                  {
-                    conPassErr &&
-                    <label htmlFor="" className="block text-red-500 mt-1">{conPassErr}</label>
-                  }
                 </Form.Item>
-                
-                <p className="text-end text-[#0071E3] font-medium">
-                  <button onClick={() => setModelTitle("Forget password")}>
-                    Forget Password
-                  </button>
-                </p>
-                
-                <Form.Item>
-                <button
-                  type="submit"
-                  className="bg-[#0071E3]
-                  text-white mt-5 py-3 rounded-lg text-[16px] font-medium w-full hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
-                >
-                  UPDATE
+                { conPassError && <label style={{display: "block", color: "red"}} htmlFor="error">{conPassError}</label>}
+              </div>
+  
+  
+              <p className="text-end text-[#0071E3] font-medium">
+                <button onClick={() => setModelTitle("Forget password")}>
+                  Forget Password
                 </button>
-                </Form.Item>
-              </Form>
+              </p>
+  
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  block
+                  className="bg-[#0071E3]
+                  text-white mt-5 h-[52px] rounded-lg w-full font-medium text-lg hover:bg-white border hover:border-[#0071E3] hover:text-[#0071E3] duration-200"
+                >
+                  Confirm
+                </Button>
+              </Form.Item>
+            </Form>
             )}
 
 

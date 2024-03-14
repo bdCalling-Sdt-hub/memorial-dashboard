@@ -20,7 +20,6 @@ export const getStory = createAsyncThunk(
                     authorization: `Bearer ${localStorage.getItem('token')}`,
                 }
             });
-            console.log(response)
             return response?.data.data;
         }catch(error){
             const axiosError = error as AxiosError;
