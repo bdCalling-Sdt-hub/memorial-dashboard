@@ -8,7 +8,7 @@ import { HiLogout } from "react-icons/hi";
 import { IoMenuSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiAdminLine } from "react-icons/ri";
-import logo from "../../assets/another.png";
+import logo from "../../assets/logo3.png"
 
 interface SideProps {
   open: boolean;
@@ -75,8 +75,7 @@ const Sidebar: React.FC<SideProps> = () => {
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
-          <img src={logo} style={{height: "180px", borderRadius: "8px"}} width={320}   alt="logo" />
-          <h2 className="italianno-regular   text-[#0071E3] text-lg text-center pt-3">Memorial Momnets Magagine</h2>
+          <img src={logo}  alt="logo" />
         </li>
         {[...linkItems, admin]?.map((item, index) => (
           <li
