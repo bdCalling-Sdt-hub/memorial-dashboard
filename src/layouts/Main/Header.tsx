@@ -57,7 +57,6 @@ const Header = () => {
                 notifications?.Notifications?.slice(0,3).map((notification, index) => (
                   <div
                     key={index}
-                    key={index}
                     className="flex gap-3  mb-2 px-4 py-2 rounded-lg cursor-pointer"
                   >
                     <div className={`w-[12px] h-[12px] rounded-full ${notification?.read_at === null && "bg-[#0071E3]"}`}></div>

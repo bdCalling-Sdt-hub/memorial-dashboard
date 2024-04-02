@@ -59,13 +59,12 @@ const MakeAdmin = () => {
 
 
 
-    const handleDelete=async(value)=>{
+    const handleDelete=async(value:any)=>{
         Swal.fire({
             title: "Are you sure to delete this User?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
             showCancelButton: "No",
             confirmButtonText: "Yes",
         }).then(async(result) => {

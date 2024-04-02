@@ -75,7 +75,7 @@ const Sidebar: React.FC<SideProps> = () => {
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
-          <img src={logo}  alt="logo" />
+          <img src={logo} style={{width: "220px"}} alt="logo" />
         </li>
         {[...linkItems, admin]?.map((item, index) => (
           <li
