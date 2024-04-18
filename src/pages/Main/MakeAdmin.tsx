@@ -17,7 +17,7 @@ const MakeAdmin = () => {
     const dispatch = useAppDispatch();
     const {admins, loading} = useAppSelector(state=> state.allAdmin)
 
-    const handleMakeAdmin=async(e)=>{
+    const handleMakeAdmin=async(e:any)=>{
         e.preventDefault();
         const response = await baseURL.post(`/add-admin`, 
             {
@@ -98,7 +98,7 @@ const MakeAdmin = () => {
           title: 'Full Name',
           dataIndex: 'name',
           key: 'name',
-          render: (_, record) => <p>{record?.fullName}</p>,
+          render: (_: string, record: any) => <p>{record?.fullName}</p>,
         },
         {
           title: 'Email',
@@ -113,7 +113,7 @@ const MakeAdmin = () => {
         {
           title: 'Action',
           key: 'action',
-          render: (_, record:any) => (
+          render: (_:string, record:any) => (
             <MdOutlineDelete onClick={()=>handleDelete(record)} className='cursor-pointer' size={25} color='red'/>
           ),
         },
