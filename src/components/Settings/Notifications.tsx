@@ -1,4 +1,3 @@
-import HeadingText from "../../util/HeadingText";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import Header from "../../layouts/Main/Header";
 import { Link } from "react-router-dom";
