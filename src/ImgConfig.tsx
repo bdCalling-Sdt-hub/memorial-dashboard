@@ -1,2 +1,2 @@
-const baseURL= "http://188.166.254.156:8000"
+const baseURL= "http://server.memorialmoments.org"
 export default baseURL;
