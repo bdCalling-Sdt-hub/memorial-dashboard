@@ -15,6 +15,8 @@ const TransactionChart: React.FC<TransactionChartProps> = ({year}) => {
   useEffect(()=>{
     dispatch(getIncomeRation(year));
   }, [dispatch, year]);
+
+  
   return (
     <ResponsiveContainer width="100%" height={260}>
       <BarChart data={income} syncId="anyId">

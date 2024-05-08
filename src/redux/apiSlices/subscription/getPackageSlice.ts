@@ -14,7 +14,7 @@ export const allPackage = createAsyncThunk(
     'allPackage',
     async (value, thunkApi) => {
         try{
-            const response = await baseURL.get(`/package/show`, {
+            const response = await baseURL.get(`/show-package`, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${token}`,

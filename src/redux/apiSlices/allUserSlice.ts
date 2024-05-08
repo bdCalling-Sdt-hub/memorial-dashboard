@@ -22,7 +22,6 @@ export const AllUser = createAsyncThunk(
                         authorization: `Bearer ${token}`,
                     }
                 });
-                console.log(response);
                 return response?.data;
             }else{
                 const response = await baseURL.get(`/user/list?page=${currentPage}`, {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaCircleCheck } from "react-icons/fa6"
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { PiCrownSimpleFill } from "react-icons/pi"
@@ -22,7 +23,7 @@ const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     
     
     
-    const handleSave=(item)=>{
+    const handleSave=(item:any)=>{
         localStorage.setItem("subscription", JSON.stringify(item));
     }
     return (
