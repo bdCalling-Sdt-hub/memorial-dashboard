@@ -36,7 +36,7 @@ const Subscription = () => {
                                 key={index}
                                 name={item.package_name}
                                 price={item.amount}
-                                image_limit={item.image_limit}
+                                image_limit={item.image_limit }
                                 word_limit={item.word_limit}
                                 feature={item.feature}
                             />
