@@ -1,2 +1,2 @@
-const baseURL= "http://server.memorialmoments.org"
+const baseURL= "https://server.memorialmoments.org"
 export default baseURL;

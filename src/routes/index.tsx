@@ -19,6 +19,7 @@ import AdminRoute from "../routes/AdminRoute";
 import StoryRequestDetails from "../components/Workers/StoryRequestDetails";
 import Categories from "../pages/Main/Categories";
 import MakeAdmin from "../pages/Main/MakeAdmin";
+import Services from "../pages/Main/Services";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,9 @@ const router = createBrowserRouter([
       {
         path: "/make-admin",
         element: <AdminRoute><MakeAdmin /> </AdminRoute>,
+      },{
+        path: "/services",
+        element: <AdminRoute><Services /> </AdminRoute>,
       },
       {
         path: "/settings/:settingType",

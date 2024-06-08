@@ -45,7 +45,7 @@ const DashboardHome = () => {
             <div className="bg-[#8ABEF2] h-[1px] w-full mb-4"></div>
             <div className="grid grid-cols-1 gap-4 ">
               {
-                users?.data?.slice(0, 6).map((user, index) => (
+                users?.data?.slice(0, 6).map((user:any, index) => (
                 <UserCard key={index} user={user} />
                 ))
               }

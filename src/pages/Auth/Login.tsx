@@ -20,6 +20,7 @@ const Login = () => {
     if(email && password){
       dispatch(login({email:email, password: password}))
       .then(response => {
+        console.log(response)
         if(response?.payload.id){
           localStorage.setItem('admin', JSON.stringify(response?.payload))
           Swal.fire({

@@ -10,7 +10,7 @@ interface SubscriptionPlanCardProps{
     id: number;
     word_limit: number;
     image_limit: number;
-    item: {};
+    item: object;
 } 
 const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
     name,

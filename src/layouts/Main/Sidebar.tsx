@@ -9,6 +9,7 @@ import { IoMenuSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiAdminLine } from "react-icons/ri";
 import logo from "../../assets/logo3.png"
+import { MdOutlineMedicalServices } from "react-icons/md";
 
 interface SideProps {
   open: boolean;
@@ -51,6 +52,11 @@ const Sidebar: React.FC<SideProps> = () => {
       icon: <IoMenuSharp size={20} />,
     },
     {
+      title: "Services",
+      path: "/services",
+      icon: <MdOutlineMedicalServices size={20} />,
+    },
+    {
       title: "Settings",
       path: "/settings",
       icon: <IconSettings size={24} />,
@@ -88,8 +94,8 @@ const Sidebar: React.FC<SideProps> = () => {
             `}
           >
             <Link to={item.path} className="flex items-center gap-2">
-              <div>{item.icon}</div>
-              <div>{item.title}</div>
+              <div>{item?.icon}</div>
+              <div>{item?.title}</div>
             </Link>
           </li>
         ))}
