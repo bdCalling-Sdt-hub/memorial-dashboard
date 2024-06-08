@@ -169,11 +169,20 @@ const Services = ():React.JSX.Element => {
                     {
                         services?.map((service:any, index)=>{
                             return(
-                                <div key={index} className='border overflow-hidden group flex items-center justify-center w-fit h-fit relative rounded p-3 bg-white'>
+                                <div 
+                                    key={index} 
+                                    className='
+                                        border overflow-hidden group 
+                                        flex items-center justify-center 
+                                        w-[300px] h-[350px]
+                                        relative 
+                                        rounded p-3 bg-white
+                                    '
+                                >
                                     <div>
-                                        <img style={{width: 150, height: 150}} src={`${ImgConfig}/${service?.image}`} alt="" />
+                                        <img style={{width: 150, height: 150, margin:"0 auto"}} src={`${ImgConfig}/${service?.image}`} alt="" />
                                         <p className='my-3'>{service?.title}</p>
-                                        <p className=''>{service?.description}</p>
+                                        <p className=''>{service?.description?.slice(0, 100) + "..."}</p>
                                     </div>
                                     <div 
                                         className='
