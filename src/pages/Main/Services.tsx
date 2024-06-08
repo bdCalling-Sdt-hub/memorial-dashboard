@@ -180,7 +180,7 @@ const Services = ():React.JSX.Element => {
                                     '
                                 >
                                     <div>
-                                        <img style={{width: 150, height: 150, margin:"0 auto"}} src={`${ImgConfig}/${service?.image}`} alt="" />
+                                        <img style={{width: "100%", height: "100%", margin:"0 auto"}} src={`${ImgConfig}/${service?.image}`} alt="" />
                                         <p className='my-3'>{service?.title}</p>
                                         <p className=''>{service?.description?.slice(0, 100) + "..."}</p>
                                     </div>
