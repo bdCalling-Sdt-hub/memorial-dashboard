@@ -13,7 +13,7 @@ const UserCard = ({ user }: { user: IUser }) => {
     <div className="bg-[#E6F1FC] h-[57.5px] rounded-lg flex items-center gap-5 p-2">
       <img style={{width: "40px", height: "40px", borderRadius: "100%"}}  src={`${ImgConfig}${user?.user?.image}`} alt="" />
       <div>
-        <HeadingText>{name}</HeadingText>
+        <HeadingText>{name?.slice(0,15)+ "..."}</HeadingText>
       </div>
     </div>
   );

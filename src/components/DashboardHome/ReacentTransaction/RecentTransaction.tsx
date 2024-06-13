@@ -6,7 +6,7 @@ import TransactionTable from "./TransactionTable";
 const RecentTransaction = () => {
   
   return (
-    <div className="rounded-[12px] h-[450px] border p-4 mt-4  bg-white">
+    <div className="rounded-[12px] h-[400px] border p-4 mt-4  bg-white">
       <div className="flex items-center justify-between">
         <HeadingText>Recent Transactions</HeadingText>
         <Link to="/transactions">

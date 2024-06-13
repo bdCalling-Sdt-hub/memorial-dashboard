@@ -78,10 +78,11 @@ const Header = () => {
             src={profile?.image  ? (`${ImgConfig}${profile?.image}`): "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"}
             width={48}
             height={48}
+            style={{borderRadius: "100%"}}
             className="rounded-full"
           />
-          <div>
-            <h3 className="text-[#0071E3] font-medium text-[14px] text-center">{profile?.fullName}</h3>
+          <div >
+            <h3 className="text-[#0071E3] font-medium text-[14px] text-right">{profile?.fullName?.slice(0,15) + "..."}</h3>
             <p className="text-right font-semibold text-[14px]">{profile?.userType}</p>
           </div>
         </Link>

@@ -31,10 +31,12 @@ const DashboardHome = () => {
           <TransactionStatus />
           <TransactionRatio />
         </div>
-        <div className="w-[25%] grid grid-cols-1 gap-5">
+        
+        <div className="w-[25%] h-fit grid grid-cols-1 gap-4">
           <div className="flex items-end justify-end h-[48px]">
               <Header/>
           </div>
+
           <div className="bg-white h-[518px] p-4 rounded-md overflow-hidden">
             <div className="flex items-center justify-between mb-4">
               <HeadingText>Recent Users</HeadingText>
@@ -42,7 +44,7 @@ const DashboardHome = () => {
                 See All
               </Link>
             </div>
-            <div className="bg-[#8ABEF2] h-[1px] w-full mb-4"></div>
+            
             <div className="grid grid-cols-1 gap-4 ">
               {
                 users?.data?.slice(0, 6).map((user:any, index) => (

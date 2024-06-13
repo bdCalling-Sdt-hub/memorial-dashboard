@@ -77,7 +77,7 @@ const Sidebar: React.FC<SideProps> = () => {
 
   return (
     <div
-      className={`${"col-span-3"} bg-[white] h-[calc(100vh-40px)]  rounded-lg py-6 duration-300 transition-all`}
+      className={`${"col-span-3"} bg-[white] h-[calc(100vh-40px)]  overflow-y-auto  rounded-lg py-6 duration-300 transition-all`}
     >
       <ul className="flex gap-3 flex-col h-full">
         <li className="mx-auto space-y-2 mb-5">
