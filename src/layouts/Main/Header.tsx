@@ -76,10 +76,7 @@ const Header = () => {
         <Link className="flex items-center gap-3" to="/settings/profile">
           <img
             src={profile?.image  ? (`${ImgConfig}${profile?.image}`): "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"}
-            width={48}
-            height={48}
-            style={{borderRadius: "100%"}}
-            className="rounded-full"
+            style={{  width: "48px", height: "48px", borderRadius: "100%"}}
           />
           <div >
             <h3 className="text-[#0071E3] font-medium text-[14px] text-right">{profile?.fullName?.slice(0,15) + "..."}</h3>
